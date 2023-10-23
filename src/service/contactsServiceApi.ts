@@ -1,18 +1,19 @@
 import initialState from 'redux/initialState';
+import { IContact, ICredentials } from 'types/types';
 
 class ContactsServiceApi {
-  #BASE_URL = 'https://connections-api.herokuapp.com';
-  #TOKEN = initialState.auth.token;
+  private BASE_URL = 'https://connections-api.herokuapp.com';
+  private TOKEN = initialState.auth.token;
 
   get token() {
-    return this.#TOKEN;
+    return this.TOKEN;
   }
 
   set token(newToken) {
-    this.#TOKEN = newToken;
+    this.TOKEN = newToken;
   }
 
-  registerUser(data) {
+  registerUser(data: ICredentials) {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -21,12 +22,12 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.#BASE_URL}/users/signup`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/users/signup`, options).then((response) =>
       response.json()
     );
   }
 
-  loginUser(data, signal) {
+  loginUser(data: ICredentials, signal: AbortSignal) {
     const options = {
       signal,
       method: 'POST',
@@ -36,7 +37,7 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.#BASE_URL}/users/login`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/users/login`, options).then((response) =>
       response.json()
     );
   }
@@ -46,11 +47,11 @@ class ContactsServiceApi {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: `Bearer ${this.#TOKEN}`,
+        Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.#BASE_URL}/users/logout`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/users/logout`, options).then((response) =>
       response.json()
     );
   }
@@ -60,26 +61,26 @@ class ContactsServiceApi {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: `Bearer ${this.#TOKEN}`,
+        Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.#BASE_URL}/users/current`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/users/current`, options).then((response) =>
       response.json()
     );
   }
 
-  fetchContacts(signal) {
+  fetchContacts(signal: AbortSignal) {
     const options = {
       signal,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: `Bearer ${this.#TOKEN}`,
+        Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.#BASE_URL}/contacts`, options).then((response) => {
+    return fetch(`${this.BASE_URL}/contacts`, options).then((response) => {
       if (!response.ok) {
         throw new Error('Loading contacts failed');
       }
@@ -87,17 +88,17 @@ class ContactsServiceApi {
     });
   }
 
-  addContact(data) {
+  addContact(data: IContact) {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: `Bearer ${this.#TOKEN}`,
+        Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.#BASE_URL}/contacts`, options).then((response) => {
+    return fetch(`${this.BASE_URL}/contacts`, options).then((response) => {
       if (!response.ok) {
         throw new Error('Adding a contact failed');
       }
@@ -105,16 +106,16 @@ class ContactsServiceApi {
     });
   }
 
-  deleteContact(id) {
+  deleteContact(id: string) {
     const options = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: `Bearer ${this.#TOKEN}`,
+        Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.#BASE_URL}/contacts/${id}`, options).then(
+    return fetch(`${this.BASE_URL}/contacts/${id}`, options).then(
       (response) => {
         if (!response.ok) {
           throw new Error('Deleting a contact failed');
@@ -124,17 +125,17 @@ class ContactsServiceApi {
     );
   }
 
-  updateContact({ id, data }) {
+  updateContact({ id, data }: { id: string; data: IContact }) {
     const options = {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: `Bearer ${this.#TOKEN}`,
+        Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.#BASE_URL}/contacts/${id}`, options).then(
+    return fetch(`${this.BASE_URL}/contacts/${id}`, options).then(
       (response) => {
         if (!response.ok) {
           throw new Error('Contact update failed');

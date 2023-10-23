@@ -7,7 +7,7 @@ import {
   updateContact,
 } from './operations';
 import { logoutUser } from 'redux/auth/operations';
-import { IContactsInitialState } from 'types/types';
+import { IContactsInitialState, IError } from 'types/types';
 
 const contactsState: IContactsInitialState = initialState.contacts;
 
@@ -65,7 +65,7 @@ const contactsSlice = createSlice({
         (state, { payload }) => ({
           ...state,
           isLoading: false,
-          error: payload,
+          error: payload?.message as string,
         })
       );
   },

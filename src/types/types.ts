@@ -48,7 +48,7 @@ export interface IContactsInitialState {
   items: IContact[];
   isLoading: boolean;
   isLoaded: boolean;
-  error: null | string;
+  error: string | null;
 }
 
 export interface IAuthInitialState {
@@ -67,3 +67,7 @@ export interface IInitialState {
 }
 
 export type Message = string;
+
+export interface IError {
+  message: string;
+}
