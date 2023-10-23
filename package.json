@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-08-phonebook",
+  "name": "phonebook-with-typescript",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sili41995.github.io/goit-react-hw-08-phonebook/",
+  "homepage": "https://sili41995.github.io/phonebook-with-typescript/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
