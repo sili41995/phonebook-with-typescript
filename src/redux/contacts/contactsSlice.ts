@@ -7,7 +7,7 @@ import {
   updateContact,
 } from './operations';
 import { logoutUser } from 'redux/auth/operations';
-import { IContactsInitialState, IError } from 'types/types';
+import { IContactsInitialState } from 'types/types';
 
 const contactsState: IContactsInitialState = initialState.contacts;
 
