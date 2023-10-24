@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkphonebook_with_typescript=self.webpackChunkphonebook_with_typescript||[]).push([[70],{5070:function(n,e,t){t.r(e),t.d(e,{default:function(){return u}});var r,i=t(168),p=t(6088).Z.div(r||(r=(0,i.Z)(["\n  display: flex;\n  flex-direction: column;\n  gap: ","px;\n"])),(function(n){return n.theme.primaryGap})),c=t(3329),u=function(n){var e=n.children;return(0,c.jsx)(p,{children:e})}}}]);
+//# sourceMappingURL=70.30c8fbdc.chunk.js.map
