@@ -1,9 +1,9 @@
-import { MouseEvent } from 'react';
+import { FC, MouseEvent } from 'react';
 import { Link } from './ActionLink.styled';
 import { IProps } from './ActionLink.types';
 import { makeBlur } from 'utils';
 
-const ActionLink = ({ link, children, btnType }: IProps) => {
+const ActionLink: FC<IProps> = ({ link, children, btnType }) => {
   const onBtnClick = (e: MouseEvent<HTMLAnchorElement>) => {
     makeBlur(e.currentTarget);
   };

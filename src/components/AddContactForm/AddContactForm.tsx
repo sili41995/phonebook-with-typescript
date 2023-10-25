@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { HiPhone } from 'react-icons/hi';
 import { FaUser } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
@@ -15,8 +15,9 @@ import { IconBtnType } from 'constants/iconBtnType';
 import { BtnType } from 'constants/btnType';
 import { IContact } from 'types/types';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { PagesPath } from 'constants/pagesPath';
 
-const AddContactForm = () => {
+const AddContactForm: FC = () => {
   const contacts = useAppSelector(selectContacts);
   const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
@@ -27,14 +28,14 @@ const AddContactForm = () => {
     reset,
   } = useForm<IContact>();
   const location = useLocation();
-  const goBackLink = location.state?.from || '/';
+  const goBackLink = location.state?.from || PagesPath.homePath;
 
   useEffect(() => {
     errors.name && toasts.errorToast('Name is required');
     errors.number && toasts.errorToast('Phone is required');
   }, [errors]);
 
-  const handleFormSubmit: SubmitHandler<IContact> = (data: IContact): void => {
+  const handleFormSubmit: SubmitHandler<IContact> = (data) => {
     const contactName = data.name;
     const isContact = contacts.some(
       ({ name }: IContact) => name === contactName

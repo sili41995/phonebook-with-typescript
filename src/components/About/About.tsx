@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { Message } from './About.styled';
 
-const About = () => (
+const About: FC = () => (
   <Message>
     This application was created to demonstrate my skills to potential employers
     skills in working with HTML, CSS, JavaScript, React, React Router, and Redux
