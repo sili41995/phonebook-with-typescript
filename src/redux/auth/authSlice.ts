@@ -1,7 +1,7 @@
-import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
 import { loginUser, logoutUser, refreshUser, registerUser } from './operations';
-import { IAuthInitialState, UserWithToken, IUser } from 'types/types';
+import { IAuthInitialState } from 'types/types';
 
 const authState: IAuthInitialState = initialState.auth;
 
