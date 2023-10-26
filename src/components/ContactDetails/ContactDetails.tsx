@@ -16,7 +16,7 @@ import { PagesPath } from 'constants/pagesPath';
 import DefaultMessage from 'components/DefaultMessage';
 
 const ContactDetails = () => {
-  const [editContact, setEditContact] = useState(false);
+  const [editContact, setEditContact] = useState<boolean>(false);
   const isLoading = useAppSelector(selectIsLoading);
   const id = useParams()[PagesPath.dynamicParam];
   const deleteContact = useDeleteContact();

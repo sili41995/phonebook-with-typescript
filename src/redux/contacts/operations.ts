@@ -1,55 +1,63 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import contactsServiceApi from 'service/contactsServiceApi';
-import { IContact, IError } from 'types/types';
+import { IContact } from 'types/types';
 
 export const fetchContacts = createAsyncThunk<
   IContact[],
   undefined,
-  { rejectValue: IError }
+  { rejectValue: string }
 >('contacts/fetchAll', async (_, { rejectWithValue, signal }) => {
   try {
     const contacts = await contactsServiceApi.fetchContacts(signal);
     return contacts;
   } catch (error) {
-    return rejectWithValue(error as IError);
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    }
   }
 });
 
 export const addContact = createAsyncThunk<
   IContact,
   IContact,
-  { rejectValue: IError }
+  { rejectValue: string }
 >('contacts/addContact', async (contact, { rejectWithValue }) => {
   try {
     const response = await contactsServiceApi.addContact(contact);
     return response;
   } catch (error) {
-    return rejectWithValue(error as IError);
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    }
   }
 });
 
 export const deleteContact = createAsyncThunk<
   IContact,
   string,
-  { rejectValue: IError }
+  { rejectValue: string }
 >('contacts/deleteContact', async (id, { rejectWithValue }) => {
   try {
     const response = await contactsServiceApi.deleteContact(id);
     return response;
   } catch (error) {
-    return rejectWithValue(error as IError);
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    }
   }
 });
 
 export const updateContact = createAsyncThunk<
   IContact,
   { data: IContact; id: string },
-  { rejectValue: IError }
+  { rejectValue: string }
 >('contacts/updateContact', async (data, { rejectWithValue }) => {
   try {
     const response = await contactsServiceApi.updateContact(data);
     return response;
   } catch (error) {
-    return rejectWithValue(error as IError);
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    }
   }
 });

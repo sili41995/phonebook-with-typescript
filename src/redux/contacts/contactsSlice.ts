@@ -65,7 +65,7 @@ const contactsSlice = createSlice({
         (state, { payload }) => ({
           ...state,
           isLoading: false,
-          error: payload?.message as string,
+          error: payload as string,
         })
       );
   },

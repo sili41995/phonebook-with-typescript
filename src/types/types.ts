@@ -67,7 +67,3 @@ export interface IInitialState {
 }
 
 export type Message = string;
-
-export interface IError {
-  message: string;
-}

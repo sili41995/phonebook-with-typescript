@@ -11,26 +11,20 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(
-        registerUser.fulfilled,
-        (state, { payload }: PayloadAction<UserWithToken>) => ({
-          ...state,
-          isLoading: false,
-          user: { ...payload.user },
-          token: payload.token,
-          isLoggedIn: true,
-        })
-      )
-      .addCase(
-        loginUser.fulfilled,
-        (state, { payload }: PayloadAction<UserWithToken>) => ({
-          ...state,
-          isLoading: false,
-          user: { ...payload.user },
-          token: payload.token,
-          isLoggedIn: true,
-        })
-      )
+      .addCase(registerUser.fulfilled, (state, { payload }) => ({
+        ...state,
+        isLoading: false,
+        user: { ...payload.user },
+        token: payload.token,
+        isLoggedIn: true,
+      }))
+      .addCase(loginUser.fulfilled, (state, { payload }) => ({
+        ...state,
+        isLoading: false,
+        user: { ...payload.user },
+        token: payload.token,
+        isLoggedIn: true,
+      }))
       .addCase(logoutUser.fulfilled, () => ({
         ...initialState.auth,
       }))
@@ -39,16 +33,13 @@ const authSlice = createSlice({
         isLoading: true,
         isRefreshing: true,
       }))
-      .addCase(
-        refreshUser.fulfilled,
-        (state, { payload }: PayloadAction<IUser>) => ({
-          ...state,
-          isLoading: false,
-          user: { name: payload.name, email: payload.email },
-          isLoggedIn: true,
-          isRefreshing: false,
-        })
-      )
+      .addCase(refreshUser.fulfilled, (state, { payload }) => ({
+        ...state,
+        isLoading: false,
+        user: { name: payload.name, email: payload.email },
+        isLoggedIn: true,
+        isRefreshing: false,
+      }))
       .addCase(refreshUser.rejected, (state) => ({
         ...state,
         isLoading: false,

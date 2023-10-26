@@ -7,7 +7,7 @@ import { useAppSelector } from 'hooks/redux';
 import { IProps } from './PublicRoute.types';
 
 export const PublicRoute = ({ element, restricted = false }: IProps) => {
-  const isFirstRenderRef = useRef(true);
+  const isFirstRenderRef = useRef<boolean>(true);
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const location = useLocation();
   const shouldRedirect = isLoggedIn && restricted;

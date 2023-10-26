@@ -22,7 +22,7 @@ import { IconBtnType } from 'constants/iconBtnType';
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState<ICredentials | null>(null);
-  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const {
