@@ -61,7 +61,7 @@ export interface IAuthInitialState {
   error: string | null;
 }
 
-export interface IUserWithToken {
+export interface IAuthResponse {
   user: IUser;
   token: string;
   keyValue?: string;

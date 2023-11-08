@@ -1,15 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
 import contactsServiceApi from 'service/contactsServiceApi';
-import {
-  ICredentials,
-  IInitialState,
-  IUser,
-  IUserWithToken,
-} from 'types/types';
+import { ICredentials, IInitialState, IUser, IAuthResponse } from 'types/types';
 
 export const registerUser = createAsyncThunk<
-  IUserWithToken,
+  IAuthResponse,
   ICredentials,
   { rejectValue: string }
 >(
@@ -20,6 +15,7 @@ export const registerUser = createAsyncThunk<
   ) => {
     try {
       const response = await contactsServiceApi.registerUser(credentials);
+      console.log(response);
       if (response.keyValue) {
         throw new Error('This user is already registered');
       }
@@ -34,7 +30,7 @@ export const registerUser = createAsyncThunk<
 );
 
 export const loginUser = createAsyncThunk<
-  IUserWithToken,
+  IAuthResponse,
   ICredentials,
   { rejectValue: string }
 >(

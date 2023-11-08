@@ -1,5 +1,5 @@
 import initialState from 'redux/initialState';
-import { IContact, ICredentials, IUserWithToken } from 'types/types';
+import { IAuthResponse, IContact, ICredentials } from 'types/types';
 
 class ContactsServiceApi {
   private BASE_URL = 'https://connections-api.herokuapp.com';
@@ -13,7 +13,7 @@ class ContactsServiceApi {
     this.TOKEN = newToken;
   }
 
-  registerUser(data: ICredentials): Promise<IUserWithToken> {
+  registerUser(data: ICredentials): Promise<IAuthResponse> {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -27,7 +27,7 @@ class ContactsServiceApi {
     );
   }
 
-  loginUser(data: ICredentials, signal: AbortSignal): Promise<IUserWithToken> {
+  loginUser(data: ICredentials, signal: AbortSignal): Promise<IAuthResponse> {
     const options = {
       signal,
       method: 'POST',
@@ -56,7 +56,7 @@ class ContactsServiceApi {
     );
   }
 
-  refreshUser(): Promise<IUserWithToken> {
+  refreshUser(): Promise<IAuthResponse> {
     const options = {
       method: 'GET',
       headers: {
