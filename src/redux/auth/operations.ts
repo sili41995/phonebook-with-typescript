@@ -15,7 +15,6 @@ export const registerUser = createAsyncThunk<
   ) => {
     try {
       const response = await contactsServiceApi.registerUser(credentials);
-      console.log(response);
       if (response.keyValue) {
         throw new Error('This user is already registered');
       }
@@ -66,7 +65,6 @@ export const logoutUser = createAsyncThunk<
   async (_, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
       const response = await contactsServiceApi.logoutUser();
-      console.log(response);
       if (response.message) {
         throw new Error(response.message);
       }

@@ -30,7 +30,6 @@ const PrivateLinks = () => {
         navigate(PagesPath.homePath);
       })
       .catch((error) => {
-        console.log(error);
         toasts.errorToast(error);
       });
   };
