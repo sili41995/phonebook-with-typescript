@@ -20,7 +20,7 @@ const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<ICredentials>();
   const pageLink = `/${PagesPath.loginPath}`;
@@ -30,19 +30,24 @@ const RegisterForm = () => {
       .unwrap()
       .then(() => {
         toasts.successToast('Hello, my friend!');
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
       });
   };
 
   useEffect(() => {
-    errors.name && toasts.errorToast('Username is required');
-    errors.email && toasts.errorToast('Email is required');
-    errors.password &&
-      toasts.errorToast(
-        errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 7 characters'
-      );
-  }, [errors]);
+    if (isSubmitting) {
+      errors.name && toasts.errorToast('Username is required');
+      errors.email && toasts.errorToast('Email is required');
+      errors.password &&
+        toasts.errorToast(
+          errors.password.type === 'required'
+            ? 'Password is required'
+            : 'Password minimum length is 7 characters'
+        );
+    }
+  }, [errors, isSubmitting]);
 
   return (
     <>

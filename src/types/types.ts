@@ -20,6 +20,7 @@ export interface ICredentials {
   name?: string;
   password: string;
   email: string;
+  keyValue?: string;
 }
 
 export interface IUser {
@@ -57,9 +58,15 @@ export interface IAuthInitialState {
   isLoggedIn: boolean;
   isRefreshing: boolean;
   isLoading: boolean;
+  error: string | null;
 }
 
-export type UserWithToken = Pick<IAuthInitialState, 'user' | 'token'>;
+export interface IUserWithToken {
+  user: IUser;
+  token: string;
+  keyValue?: string;
+  message?: string;
+}
 
 export interface IInitialState {
   contacts: IContactsInitialState;

@@ -28,14 +28,16 @@ const EditForm = ({ setEditContact }: IProps) => {
   const { name, number } = getContactInfo(targetContact);
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<IContact>();
 
   useEffect(() => {
-    errors.name && toasts.errorToast('Name is required');
-    errors.number && toasts.errorToast('Phone is required');
-  }, [errors]);
+    if (isSubmitting) {
+      errors.name && toasts.errorToast('Name is required');
+      errors.number && toasts.errorToast('Phone is required');
+    }
+  }, [errors, isSubmitting]);
 
   const handleFormSubmit: SubmitHandler<IContact> = (data) => {
     if (id) {

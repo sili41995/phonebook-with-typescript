@@ -1,5 +1,5 @@
 import initialState from 'redux/initialState';
-import { IContact, ICredentials } from 'types/types';
+import { IContact, ICredentials, IUserWithToken } from 'types/types';
 
 class ContactsServiceApi {
   private BASE_URL = 'https://connections-api.herokuapp.com';
@@ -13,7 +13,7 @@ class ContactsServiceApi {
     this.TOKEN = newToken;
   }
 
-  registerUser(data: ICredentials) {
+  registerUser(data: ICredentials): Promise<IUserWithToken> {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -27,7 +27,7 @@ class ContactsServiceApi {
     );
   }
 
-  loginUser(data: ICredentials, signal: AbortSignal) {
+  loginUser(data: ICredentials, signal: AbortSignal): Promise<IUserWithToken> {
     const options = {
       signal,
       method: 'POST',
@@ -42,7 +42,7 @@ class ContactsServiceApi {
     );
   }
 
-  logoutUser() {
+  logoutUser(): Promise<{ message?: string }> {
     const options = {
       method: 'POST',
       headers: {
@@ -56,7 +56,7 @@ class ContactsServiceApi {
     );
   }
 
-  refreshUser() {
+  refreshUser(): Promise<IUserWithToken> {
     const options = {
       method: 'GET',
       headers: {
@@ -70,7 +70,7 @@ class ContactsServiceApi {
     );
   }
 
-  fetchContacts(signal: AbortSignal) {
+  fetchContacts(signal: AbortSignal): Promise<IContact[]> {
     const options = {
       signal,
       method: 'GET',
@@ -88,7 +88,7 @@ class ContactsServiceApi {
     });
   }
 
-  addContact(data: IContact) {
+  addContact(data: IContact): Promise<IContact> {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -106,7 +106,7 @@ class ContactsServiceApi {
     });
   }
 
-  deleteContact(id: string) {
+  deleteContact(id: string): Promise<IContact> {
     const options = {
       method: 'DELETE',
       headers: {
@@ -125,7 +125,13 @@ class ContactsServiceApi {
     );
   }
 
-  updateContact({ id, data }: { id: string; data: IContact }) {
+  updateContact({
+    id,
+    data,
+  }: {
+    id: string;
+    data: IContact;
+  }): Promise<IContact> {
     const options = {
       method: 'PATCH',
       body: JSON.stringify(data),

@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import { SlLogout } from 'react-icons/sl';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GrAddCircle } from 'react-icons/gr';
@@ -27,6 +28,10 @@ const PrivateLinks = () => {
       .then(() => {
         toasts.successToast('Goodbye!');
         navigate(PagesPath.homePath);
+      })
+      .catch((error) => {
+        console.log(error);
+        toasts.errorToast(error);
       });
   };
 

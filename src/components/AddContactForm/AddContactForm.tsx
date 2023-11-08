@@ -23,7 +23,7 @@ const AddContactForm: FC = () => {
   const dispatch = useAppDispatch();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm<IContact>();
@@ -31,9 +31,11 @@ const AddContactForm: FC = () => {
   const goBackLink = location.state?.from || PagesPath.homePath;
 
   useEffect(() => {
-    errors.name && toasts.errorToast('Name is required');
-    errors.number && toasts.errorToast('Phone is required');
-  }, [errors]);
+    if (isSubmitting) {
+      errors.name && toasts.errorToast('Name is required');
+      errors.number && toasts.errorToast('Phone is required');
+    }
+  }, [errors, isSubmitting]);
 
   const handleFormSubmit: SubmitHandler<IContact> = (data) => {
     const contactName = data.name;

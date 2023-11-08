@@ -27,7 +27,7 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     watch,
   } = useForm<ICredentials>();
@@ -41,9 +41,14 @@ const LoginForm = () => {
   useEffect(() => {
     if (credentials) {
       const promise = dispatch(loginUser(credentials));
-      promise.unwrap().then(() => {
-        toasts.successToast('Hello, my friend!');
-      });
+      promise
+        .unwrap()
+        .then(() => {
+          toasts.successToast('Hello, my friend!');
+        })
+        .catch((error) => {
+          toasts.errorToast(error);
+        });
 
       return () => {
         promise.abort();
@@ -52,14 +57,16 @@ const LoginForm = () => {
   }, [credentials, dispatch]);
 
   useEffect(() => {
-    errors.email && toasts.errorToast('Email is required');
-    errors.password &&
-      toasts.errorToast(
-        errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 7 characters'
-      );
-  }, [errors]);
+    if (isSubmitting) {
+      errors.email && toasts.errorToast('Email is required');
+      errors.password &&
+        toasts.errorToast(
+          errors.password.type === 'required'
+            ? 'Password is required'
+            : 'Password minimum length is 7 characters'
+        );
+    }
+  }, [isSubmitting, errors]);
 
   const onSubmit: SubmitHandler<ICredentials> = (data) => {
     setCredentials(data);

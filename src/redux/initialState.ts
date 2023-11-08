@@ -13,6 +13,7 @@ const initialState: IInitialState = {
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
+    error: null,
   },
 };
 
