@@ -1,24 +1,28 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
 import contactsServiceApi from 'service/contactsServiceApi';
-import { ICredentials, IInitialState, IUser, IAuthResponse } from 'types/types';
-
-export const registerUser = createAsyncThunk<
+import {
+  IInitialState,
+  IUser,
+  ISignInResponse,
   IAuthResponse,
-  ICredentials,
+} from 'types/types';
+
+export const signUpUser = createAsyncThunk<
+  IAuthResponse,
+  IUser,
   { rejectValue: string }
 >(
-  'auth/registerUser',
+  'auth/signUpUser',
   async (
-    credentials: ICredentials,
+    credentials: IUser,
     { rejectWithValue }: { rejectWithValue: Function }
   ) => {
     try {
-      const response = await contactsServiceApi.registerUser(credentials);
-      if (response.keyValue) {
+      const response = await contactsServiceApi.signUpUser(credentials);
+      if (response instanceof Error) {
         throw new Error('This user is already registered');
       }
-      contactsServiceApi.token = response.token;
       return response;
     } catch (error) {
       if (error instanceof Error) {
@@ -28,25 +32,25 @@ export const registerUser = createAsyncThunk<
   }
 );
 
-export const loginUser = createAsyncThunk<
-  IAuthResponse,
-  ICredentials,
+export const signInUser = createAsyncThunk<
+  ISignInResponse,
+  IUser,
   { rejectValue: string }
 >(
-  'auth/loginUser',
+  'auth/signInUser',
   async (
-    credentials: ICredentials,
+    credentials: IUser,
     {
       rejectWithValue,
       signal,
     }: { rejectWithValue: Function; signal: AbortSignal }
   ) => {
     try {
-      const response = await contactsServiceApi.loginUser(credentials, signal);
-      if (!response.token) {
+      const response = await contactsServiceApi.signInUser(credentials, signal);
+      if (response instanceof Error) {
         throw new Error('Wrong username or password');
       }
-      contactsServiceApi.token = response.token;
+      contactsServiceApi.token = response.token as string;
       return response;
     } catch (error) {
       if (error instanceof Error) {
@@ -56,15 +60,15 @@ export const loginUser = createAsyncThunk<
   }
 );
 
-export const logoutUser = createAsyncThunk<
-  undefined,
+export const signOutUser = createAsyncThunk<
+  IAuthResponse,
   undefined,
   { rejectValue: string }
 >(
-  'auth/logoutUser',
+  'auth/signOutUser',
   async (_, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
-      const response = await contactsServiceApi.logoutUser();
+      const response = await contactsServiceApi.signOutUser();
       if (response.message) {
         throw new Error(response.message);
       }
@@ -79,7 +83,7 @@ export const logoutUser = createAsyncThunk<
 );
 
 export const refreshUser = createAsyncThunk<
-  IUser,
+  IAuthResponse,
   undefined,
   { rejectValue: string }
 >(
@@ -99,7 +103,7 @@ export const refreshUser = createAsyncThunk<
     try {
       contactsServiceApi.token = token;
       const response = await contactsServiceApi.refreshUser();
-      if (response.message) {
+      if (response instanceof Error) {
         throw new Error(response.message);
       }
       return response;

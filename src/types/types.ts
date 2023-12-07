@@ -1,48 +1,29 @@
-export type PagesPath = {
-  homePath: '/';
-  contactsPath: 'contacts';
-  aboutPath: 'about';
-  registerPath: 'register';
-  loginPath: 'login';
-  contactDetailsPath: 'contact-details';
-  addNewContactPath: 'contacts/new-contact';
-  contactPath: 'contact';
-  newContactPath: 'new-contact';
-  dynamicParam: 'id';
-};
-
-export type AuthPages = Pick<
-  PagesPath,
-  'homePath' | 'registerPath' | 'loginPath'
->;
-
-export interface ICredentials {
-  name?: string;
-  password: string;
-  email: string;
-  keyValue?: string;
-}
-
-export interface IUser {
-  name: string | null;
-  email: string | null;
-  lastName?: string;
-  avatar?: string;
-  dateOfBirth?: string;
-  phoneNumber?: string;
-  location?: string;
-}
-
 export interface IContact {
   id: string;
   name: string;
-  number: string;
-  avatar?: string;
-  role?: string;
+  phone: string;
   email?: string;
-  chat?: string;
+  role?: string;
   description?: string;
-  userAvatar?: string;
+  tgUsername?: string;
+  favorite: boolean;
+  avatar?: string;
+}
+
+export interface IUser {
+  name?: string | null;
+  lastName?: string | null;
+  password?: string;
+  email: string | null;
+  phone?: string | null;
+  location?: string | null;
+  dateOfBirth?: string | null;
+  token?: string;
+  avatar: string | null;
+}
+
+export interface IAuthResponse extends IUser {
+  message: string;
 }
 
 export interface IContactsInitialState {
@@ -61,16 +42,14 @@ export interface IAuthInitialState {
   error: string | null;
 }
 
-export interface IAuthResponse {
-  user: IUser;
-  token: string;
-  keyValue?: string;
-  message?: string;
+export interface IInitialState {
+  // contacts: IContactsInitialState;
+  auth: IAuthInitialState;
 }
 
-export interface IInitialState {
-  contacts: IContactsInitialState;
-  auth: IAuthInitialState;
+export interface ISignInResponse {
+  token: string;
+  user: IUser;
 }
 
 export type Message = string;

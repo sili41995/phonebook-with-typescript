@@ -1,8 +1,8 @@
 import initialState from 'redux/initialState';
-import { IAuthResponse, IContact, ICredentials } from 'types/types';
+import { IAuthResponse, IContact, IUser } from 'types/types';
 
 class ContactsServiceApi {
-  private BASE_URL = 'https://connections-api.herokuapp.com';
+  private BASE_URL = 'https://contacts-rest-api-dvg7.onrender.com/api/';
   private TOKEN = initialState.auth.token;
 
   get token() {
@@ -13,7 +13,7 @@ class ContactsServiceApi {
     this.TOKEN = newToken;
   }
 
-  registerUser(data: ICredentials): Promise<IAuthResponse> {
+  signUpUser(data: IUser): Promise<IUser | Error> {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -22,12 +22,12 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/users/signup`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/auth/signup`, options).then((response) =>
       response.json()
     );
   }
 
-  loginUser(data: ICredentials, signal: AbortSignal): Promise<IAuthResponse> {
+  signInUser(data: IUser, signal: AbortSignal): Promise<IUser | Error> {
     const options = {
       signal,
       method: 'POST',
@@ -37,12 +37,12 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/users/login`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/auth/signin`, options).then((response) =>
       response.json()
     );
   }
 
-  logoutUser(): Promise<{ message?: string }> {
+  signOutUser(): Promise<{ message?: string }> {
     const options = {
       method: 'POST',
       headers: {
@@ -51,12 +51,12 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/users/logout`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/auth/signout`, options).then((response) =>
       response.json()
     );
   }
 
-  refreshUser(): Promise<IAuthResponse> {
+  refreshUser(): Promise<IUser | Error> {
     const options = {
       method: 'GET',
       headers: {
@@ -65,7 +65,7 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/users/current`, options).then((response) =>
+    return fetch(`${this.BASE_URL}/auth/current`, options).then((response) =>
       response.json()
     );
   }

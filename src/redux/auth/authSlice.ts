@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
-import { loginUser, logoutUser, refreshUser, registerUser } from './operations';
+import { refreshUser, signInUser, signOutUser, signUpUser } from './operations';
 import { IAuthInitialState } from 'types/types';
 
 const authState: IAuthInitialState = initialState.auth;
@@ -11,21 +11,20 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.fulfilled, (state, { payload }) => ({
+      .addCase(signUpUser.fulfilled, (state, { payload }) => ({
+        ...state,
+        isLoading: false,
+        user: { ...payload },
+        isLoggedIn: true,
+      }))
+      .addCase(signInUser.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
         user: { ...payload.user },
         token: payload.token,
         isLoggedIn: true,
       }))
-      .addCase(loginUser.fulfilled, (state, { payload }) => ({
-        ...state,
-        isLoading: false,
-        user: { ...payload.user },
-        token: payload.token,
-        isLoggedIn: true,
-      }))
-      .addCase(logoutUser.fulfilled, () => ({
+      .addCase(signOutUser.fulfilled, () => ({
         ...initialState.auth,
       }))
       .addCase(refreshUser.pending, (state) => ({
@@ -36,7 +35,7 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        user: { name: payload.name, email: payload.email },
+        user: { ...payload },
         isLoggedIn: true,
         isRefreshing: false,
       }))
@@ -46,11 +45,15 @@ const authSlice = createSlice({
         isRefreshing: false,
       }))
       .addMatcher(
-        isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending),
-        (state) => ({ ...state, isLoading: true, error: null })
+        isAnyOf(signUpUser.pending, signInUser.pending, signOutUser.pending),
+        (state) => ({
+          ...state,
+          isLoading: true,
+          error: null,
+        })
       )
       .addMatcher(
-        isAnyOf(registerUser.rejected, loginUser.rejected, logoutUser.rejected),
+        isAnyOf(signUpUser.rejected, signInUser.rejected, signOutUser.rejected),
         (state, { payload }) => ({
           ...state,
           isLoading: false,

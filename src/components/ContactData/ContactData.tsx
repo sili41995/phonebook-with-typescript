@@ -1,6 +1,6 @@
-import { HiOutlinePhone } from 'react-icons/hi';
-import { IoMdMail } from 'react-icons/io';
-import { RiChat1Line } from 'react-icons/ri';
+// import { HiOutlinePhone } from 'react-icons/hi';
+// import { IoMdMail } from 'react-icons/io';
+// import { RiChat1Line } from 'react-icons/ri';
 import {
   InfoDesc,
   InfoData,
@@ -8,19 +8,19 @@ import {
   Field,
   InfoWrap,
 } from './ContactData.styled';
-import ActionLink from 'components/ActionLink';
-import { getContactInfo, getPhoneNumber } from 'utils';
-import { useTargetContact } from 'hooks';
-import { IconBtnType } from 'constants/iconBtnType';
+// import ActionLink from 'components/ActionLink';
+// import { getContactInfo, getPhoneNumber } from 'utils';
+// import { useTargetContact } from 'hooks';
+// import { IconBtnType } from 'constants/iconBtnType';
 
 const ContactData = () => {
-  const targetContact = useTargetContact();
-  const { number, email, chat } = getContactInfo(targetContact);
-  const phoneNumber = getPhoneNumber(number);
+  // const targetContact = useTargetContact();
+  // const { number, email, chat } = getContactInfo(targetContact);
+  // const phoneNumber = getPhoneNumber(number);
 
   return (
     <Container>
-      <Field>
+      {/* <Field>
         <InfoWrap>
           <InfoDesc>Phone number</InfoDesc>
           <InfoData>{number}</InfoData>
@@ -49,7 +49,7 @@ const ContactData = () => {
         >
           <RiChat1Line />
         </ActionLink>
-      </Field>
+      </Field> */}
     </Container>
   );
 };

@@ -10,17 +10,28 @@ import { refreshUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { PagesPath } from 'constants/pagesPath';
 
-const RegisterPage = lazy(() => import('pages/RegisterPage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
+const SignUpPage = lazy(() => import('pages/SignUpPage'));
+const SignInPage = lazy(() => import('pages/SignInPage'));
 const AboutPage = lazy(() => import('pages/AboutPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 const ContactData = lazy(() => import('components/ContactData'));
 const AddContactForm = lazy(() => import('components/AddContactForm'));
 const ContactDetails = lazy(() => import('components/ContactDetails'));
-const ContactModalForm = lazy(() => import('components/ContactModalForm'));
+const ModalForm = lazy(() => import('components/ModalForm'));
 const ContactDescription = lazy(() => import('components/ContactDescription'));
 const PrivateRoute = lazy(() => import('components/PrivateRoute'));
+
+const {
+  homePath,
+  newContactPath,
+  signInPath,
+  signUpPath,
+  aboutPath,
+  contactsPath,
+  dynamicParam,
+  contactPath,
+} = PagesPath;
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -35,42 +46,36 @@ const App = () => {
   ) : (
     <>
       <Routes>
-        <Route path={PagesPath.homePath} element={<SharedLayout />}>
+        <Route path={homePath} element={<SharedLayout />}>
           <Route
             index
-            element={<PublicRoute restricted element={<LoginPage />} />}
+            element={<PublicRoute restricted element={<SignInPage />} />}
           />
           <Route
-            path={PagesPath.loginPath}
-            element={<PublicRoute restricted element={<LoginPage />} />}
+            path={signInPath}
+            element={<PublicRoute restricted element={<SignInPage />} />}
           />
           <Route
-            path={PagesPath.registerPath}
-            element={<PublicRoute restricted element={<RegisterPage />} />}
+            path={signUpPath}
+            element={<PublicRoute restricted element={<SignUpPage />} />}
           />
           <Route
-            path={PagesPath.aboutPath}
+            path={aboutPath}
             element={<PublicRoute element={<AboutPage />} />}
           />
-          <Route
-            path={PagesPath.contactsPath}
+          {/* <Route
+            path={contactsPath}
             element={<PrivateRoute element={<ContactsPage />} />}
           >
-            <Route
-              path={`${PagesPath.contactDetailsPath}/:${PagesPath.dynamicParam}`}
-              element={<ContactDetails />}
-            >
-              <Route path={PagesPath.contactPath} element={<ContactData />} />
-              <Route
-                path={PagesPath.aboutPath}
-                element={<ContactDescription />}
-              />
+            <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
+              <Route path={contactPath} element={<ContactData />} />
+              <Route path={aboutPath} element={<ContactDescription />} />
             </Route>
             <Route
-              path={PagesPath.newContactPath}
-              element={<ContactModalForm children={<AddContactForm />} />}
+              path={newContactPath}
+              element={<ModalForm children={<AddContactForm />} />}
             />
-          </Route>
+          </Route> */}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

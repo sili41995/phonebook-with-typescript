@@ -1,30 +1,30 @@
-import { Suspense } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+// import { Suspense } from 'react';
+// import { Outlet, useLocation } from 'react-router-dom';
 import { Container, Header, Main, Section } from './SharedLayout.styled';
-import Navigation from 'components/Navigation';
-import Loader from 'components/Loader';
-import { setAuthPageBackgroundColor, isContactsPage } from 'utils';
+// import Navigation from 'components/Navigation';
+// import Loader from 'components/Loader';
+// import { setAuthPageBackgroundColor, isContactsPage } from 'utils';
 
 const SharedLayout = () => {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
-  setAuthPageBackgroundColor(pathname);
+  // setAuthPageBackgroundColor(pathname);
 
   return (
     <>
       <Header>
-        <Container>
+        {/* <Container>
           <Navigation />
-        </Container>
+        </Container> */}
       </Header>
       <Main>
-        <Section>
+        {/* <Section>
           <Container isContactsPage={isContactsPage(pathname)}>
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
           </Container>
-        </Section>
+        </Section> */}
       </Main>
     </>
   );
