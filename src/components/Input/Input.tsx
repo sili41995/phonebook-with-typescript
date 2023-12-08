@@ -1,12 +1,38 @@
 import { FC } from 'react';
 import { Container, StyledInput } from './Input.styled';
-// import IconButton from 'components/IconButton';
+import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
+import Positions from 'constants/positions';
 
-const Input: FC<IProps> = ({ settings, inputWrap, ...otherProps }) => {
+const Input: FC<IProps> = ({
+  settings,
+  inputWrap,
+  action,
+  btnIcon,
+  btnType,
+  ...otherProps
+}) => {
   const input = <StyledInput {...settings} {...otherProps} />;
 
-  const inputWithWrap = <Container>{input}</Container>;
+  const inputWithWrap = (
+    <Container>
+      {input}
+      {btnType && (
+        <IconButton
+          onBtnClick={action}
+          btnType={btnType}
+          position={Positions.absolute}
+          top="center"
+          right={0}
+          height={35}
+          width={44}
+          inputWrap
+        >
+          {btnIcon}
+        </IconButton>
+      )}
+    </Container>
+  );
 
   return inputWrap ? inputWithWrap : input;
 };
@@ -18,7 +44,7 @@ const Input: FC<IProps> = ({ settings, inputWrap, ...otherProps }) => {
 //       btnType,
 //       children,
 //       action,
-//       right = 0,
+//
 //       ...props
 //     },
 //     ref
@@ -31,11 +57,11 @@ const Input: FC<IProps> = ({ settings, inputWrap, ...otherProps }) => {
 //         {btnType && (
 //           <IconButton
 //             position="absolute"
-//             top="center"
+//
 //             right={right}
 //             btnType={btnType}
-//             width={44}
-//             height={35}
+//
+//
 //             onBtnClick={action}
 //             inputWrap
 //           >

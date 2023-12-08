@@ -8,29 +8,29 @@ import Toast from 'components/Toast';
 import { selectIsRefreshing } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { PagesPath } from 'constants/pagesPath';
+import PagesPath from 'constants/pagesPath';
 
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage'));
 const AboutPage = lazy(() => import('pages/AboutPage'));
-const ContactsPage = lazy(() => import('pages/ContactsPage'));
+// const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
-const ContactData = lazy(() => import('components/ContactData'));
-const AddContactForm = lazy(() => import('components/AddContactForm'));
-const ContactDetails = lazy(() => import('components/ContactDetails'));
-const ModalForm = lazy(() => import('components/ModalForm'));
-const ContactDescription = lazy(() => import('components/ContactDescription'));
-const PrivateRoute = lazy(() => import('components/PrivateRoute'));
+// const ContactData = lazy(() => import('components/ContactData'));
+// const AddContactForm = lazy(() => import('components/AddContactForm'));
+// const ContactDetails = lazy(() => import('components/ContactDetails'));
+// const ModalForm = lazy(() => import('components/ModalForm'));
+// const ContactDescription = lazy(() => import('components/ContactDescription'));
+// const PrivateRoute = lazy(() => import('components/PrivateRoute'));
 
 const {
   homePath,
-  newContactPath,
+  // newContactPath,
   signInPath,
   signUpPath,
   aboutPath,
-  contactsPath,
-  dynamicParam,
-  contactPath,
+  // contactsPath,
+  // dynamicParam,
+  // contactPath,
 } = PagesPath;
 
 const App = () => {

@@ -1,4 +1,4 @@
-import { FormTypes } from 'constants/formTypes';
+import FormTypes from 'constants/formTypes';
 
 const setInputMaxWidth = (formType: FormTypes) => {
   switch (formType) {

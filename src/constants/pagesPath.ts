@@ -1,4 +1,4 @@
-export enum PagesPath {
+enum PagesPath {
   homePath = '/',
   contactsPath = 'contacts',
   aboutPath = 'about',
@@ -9,3 +9,5 @@ export enum PagesPath {
   newContactPath = 'new-contact',
   dynamicParam = 'id',
 }
+
+export default PagesPath;

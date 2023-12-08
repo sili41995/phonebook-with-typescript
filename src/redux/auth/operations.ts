@@ -6,16 +6,17 @@ import {
   IUser,
   ISignUpCredentials,
   ISignInRes,
+  ICredentials,
 } from 'types/types';
 
 export const signUpUser = createAsyncThunk<
   IUser,
-  ISignUpCredentials,
+  FormData,
   { rejectValue: string }
 >(
   'auth/signUpUser',
   async (
-    credentials: ISignUpCredentials,
+    credentials: FormData,
     { rejectWithValue }: { rejectWithValue: Function }
   ) => {
     try {
@@ -31,12 +32,12 @@ export const signUpUser = createAsyncThunk<
 
 export const signInUser = createAsyncThunk<
   ISignInRes,
-  IUser,
+  ICredentials,
   { rejectValue: string }
 >(
   'auth/signInUser',
   async (
-    credentials: IUser,
+    credentials: ICredentials,
     {
       rejectWithValue,
       signal,

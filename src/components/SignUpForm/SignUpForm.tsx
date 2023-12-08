@@ -6,17 +6,17 @@ import { AiFillLock } from 'react-icons/ai';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Message, Title } from './SignUpForm.styled';
-import { getUserData, toasts } from 'utils';
+import { filterEmptyFields, getCredentialsFormData, toasts } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';
 import { signUpUser } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/auth/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
-import { PagesPath } from 'constants/pagesPath';
-import { FormTypes } from 'constants/formTypes';
-import { IconSizes } from 'constants/iconSizes';
-import { InputTypes } from 'constants/inputTypes';
+import PagesPath from 'constants/pagesPath';
+import FormTypes from 'constants/formTypes';
+import IconSizes from 'constants/iconSizes';
+import InputTypes from 'constants/inputTypes';
 import regEx from 'constants/regEx';
 
 const SignUpForm = () => {
@@ -31,9 +31,10 @@ const SignUpForm = () => {
   const signInPageLink = `/${PagesPath.signInPath}`;
 
   const onSubmit: SubmitHandler<ISignUpCredentials> = (data) => {
-    const userData = getUserData(data);
-    console.log(userData);
-    dispatch(signUpUser(userData))
+    const userData = filterEmptyFields<ISignUpCredentials>(data);
+    const formData = getCredentialsFormData(userData);
+
+    dispatch(signUpUser(formData))
       .unwrap()
       .then(() => {
         toasts.successToast('User has been successfully registered');
@@ -71,6 +72,15 @@ const SignUpForm = () => {
       <Title>sign up</Title>
       <Message>Welcome to Phonebook!</Message>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          settings={{ ...register('avatar') }}
+          accept="image/png, image/jpeg, image/jpg"
+          type={InputTypes.file}
+          placeholder="First name"
+          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
+        />
         <Input
           settings={{ ...register('name', { required: true }) }}
           type={InputTypes.text}
@@ -113,7 +123,7 @@ const SignUpForm = () => {
           settings={{
             ...register('password', { required: true, minLength: 6 }),
           }}
-          type={InputTypes.password}
+          type={InputTypes.text}
           placeholder="Password"
           icon={<AiFillLock size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}

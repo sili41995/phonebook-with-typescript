@@ -4,7 +4,7 @@ import PrivateLinks from 'components/PrivateLinks';
 import PublicLinks from 'components/PublicLinks';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { useAppSelector } from 'hooks/redux';
-import { PagesPath } from 'constants/pagesPath';
+import PagesPath from 'constants/pagesPath';
 
 const NavigationBar = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);

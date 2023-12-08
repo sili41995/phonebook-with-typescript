@@ -4,12 +4,13 @@ export interface ICredentials {
 }
 
 export interface ISignUpCredentials extends ICredentials {
+  [key: string]: string | FileList | undefined;
   name: string;
-  avatar?: string;
-  phone?: string;
-  lastName?: string;
-  location?: string;
-  dateOfBirth?: string;
+  avatar: FileList;
+  phone: string;
+  lastName: string;
+  location: string;
+  dateOfBirth: string;
 }
 
 export interface IUser {

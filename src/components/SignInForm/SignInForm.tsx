@@ -1,119 +1,133 @@
-// import { MdEmail } from 'react-icons/md';
-// import {
-//   AiFillLock,
-//   AiOutlineEye,
-//   AiOutlineEyeInvisible,
-// } from 'react-icons/ai';
-// import { useEffect, useState } from 'react';
-// import { SubmitHandler, useForm } from 'react-hook-form';
-// import 'react-toastify/dist/ReactToastify.css';
+import { MdEmail } from 'react-icons/md';
+import {
+  AiFillLock,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from 'react-icons/ai';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Message, Title, Image } from './SignInForm.styled';
-// import defaultAvatar from '../default-signin-avatar.png';
-// import { toasts } from 'utils';
-// import AuthFormMessage from 'components/AuthFormMessage';
-// import Input from 'components/Input';
-// import { selectIsLoading } from 'redux/auth/selectors';
-// import { loginUser } from 'redux/auth/operations';
-// import { useAppDispatch, useAppSelector } from 'hooks/redux';
-// import { ICredentials } from 'types/types';
-// import { PagesPath } from 'constants/pagesPath';
-// import { FormType } from 'constants/formType';
-// import { IconBtnType } from 'constants/iconBtnType';
+import defaultAvatar from 'images/default-signin-avatar.png';
+import { toasts } from 'utils';
+import AuthFormMessage from 'components/AuthFormMessage';
+import Input from 'components/Input';
+import { selectIsLoading } from 'redux/auth/selectors';
+import { signInUser } from 'redux/auth/operations';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { selectUser } from 'redux/auth/selectors';
+import InputTypes from 'constants/inputTypes';
+import IconSizes from 'constants/iconSizes';
+import FormTypes from 'constants/formTypes';
+import { ICredentials } from 'types/types';
+import IconBtnType from 'constants/iconBtnType';
+import PagesPath from 'constants/pagesPath';
 
 const SignInForm = () => {
-  // const [credentials, setCredentials] = useState<ICredentials | null>(null);
-  // const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  // const isLoading = useAppSelector(selectIsLoading);
-  // const dispatch = useAppDispatch();
-  // const {
-  //   register,
-  //   formState: { errors, isSubmitting },
-  //   handleSubmit,
-  //   watch,
-  // } = useForm<ICredentials>();
-  // const watchPassword = watch('password');
-  // const pageLink = `/${PagesPath.registerPath}`;
+  const user = useAppSelector(selectUser);
+  const [credentials, setCredentials] = useState<ICredentials | null>(null);
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+  const isLoading = useAppSelector(selectIsLoading);
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    watch,
+  } = useForm<ICredentials>();
+  const passwordInputType = isShowPassword
+    ? InputTypes.text
+    : InputTypes.password;
+  const watchPassword = watch('password');
+  const passwordBtnIcon =
+    Boolean(watchPassword) &&
+    (isShowPassword ? (
+      <AiOutlineEyeInvisible size={IconSizes.secondaryIconSize} />
+    ) : (
+      <AiOutlineEye size={IconSizes.secondaryIconSize} />
+    ));
+  const signUpPageLink = `/${PagesPath.signUpPath}`;
 
-  // const toggleIsShowPassword = () => {
-  //   setIsShowPassword((prevState) => !prevState);
-  // };
+  const toggleIsShowPassword = () => {
+    setIsShowPassword((prevState) => !prevState);
+  };
 
-  // useEffect(() => {
-  //   if (credentials) {
-  //     const promise = dispatch(loginUser(credentials));
-  //     promise
-  //       .unwrap()
-  //       .then(() => {
-  //         toasts.successToast('Hello, my friend!');
-  //       })
-  //       .catch((error) => {
-  //         toasts.errorToast(error);
-  //       });
+  useEffect(() => {
+    if (credentials) {
+      const promise = dispatch(signInUser(credentials));
+      promise
+        .unwrap()
+        .then(() => {
+          toasts.successToast('Hello, my friend!');
+        })
+        .catch((error) => {
+          toasts.errorToast(error);
+        });
 
-  //     return () => {
-  //       promise.abort();
-  //     };
-  //   }
-  // }, [credentials, dispatch]);
+      return () => {
+        promise.abort();
+      };
+    }
+  }, [credentials, dispatch]);
 
-  // useEffect(() => {
-  //   if (isSubmitting) {
-  //     errors.email && toasts.errorToast('Email is required');
-  //     errors.password &&
-  //       toasts.errorToast(
-  //         errors.password.type === 'required'
-  //           ? 'Password is required'
-  //           : 'Password minimum length is 7 characters'
-  //       );
-  //   }
-  // }, [isSubmitting, errors]);
+  useEffect(() => {
+    errors.email &&
+      toasts.errorToast(
+        errors.email.type === 'required'
+          ? 'Email is required'
+          : 'Email must be letters, digits, dot and @'
+      );
+    errors.password &&
+      toasts.errorToast(
+        errors.password.type === 'required'
+          ? 'Password is required'
+          : 'Password minimum length is 6 characters'
+      );
+  }, [isSubmitting, errors]);
 
-  // const onSubmit: SubmitHandler<ICredentials> = (data) => {
-  //   setCredentials(data);
-  // };
+  const onSubmit: SubmitHandler<ICredentials> = (data) => {
+    setCredentials(data);
+  };
+
+  const greetings = `Welcome to Phonebook${user.name ? `, ${user.name}` : ''}!`;
 
   return (
     <>
       <Title>log in</Title>
-      <Message>Welcome to Phonebook!</Message>
-      {/* <Image src={defaultAvatar} alt="user avatar" />
+      <Message>{greetings}</Message>
+      <Image src={user.avatar ?? defaultAvatar} alt="user avatar" />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           settings={{ ...register('email', { required: true }) }}
-          type="email"
+          type={InputTypes.email}
           placeholder="Email"
-          inputType={FormType.authForm}
-          autoFocus
+          icon={<MdEmail size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
           inputWrap
-          fieldIcon={<MdEmail />}
-          fieldIconSize={20}
+          autoFocus
         />
         <Input
           settings={{
-            ...register('password', { required: true, minLength: 7 }),
+            ...register('password', { required: true, minLength: 6 }),
           }}
-          type={isShowPassword ? 'text' : 'password'}
+          type={passwordInputType}
           placeholder="Password"
-          inputType={FormType.authForm}
-          children={
-            watchPassword &&
-            (isShowPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />)
-          }
-          btnType={IconBtnType.toggleShowPassword}
-          action={toggleIsShowPassword}
+          icon={<AiFillLock size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
           inputWrap
-          fieldIcon={<AiFillLock />}
-          fieldIconSize={20}
+          btnType={IconBtnType.toggleShowPassword}
+          btnIcon={passwordBtnIcon}
+          action={toggleIsShowPassword}
         />
         <AuthFormMessage
-          action={'Sign up'}
-          pageLink={pageLink}
-          message={"if you don't have an account yet"}
+          action="Sign up"
+          pageLink={signUpPageLink}
+          message="if you don't have an account yet"
         />
         <Button disabled={isLoading} type="submit">
-          Log in
+          Sign in
         </Button>
-      </Form> */}
+      </Form>
     </>
   );
 };

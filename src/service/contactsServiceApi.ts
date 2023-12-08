@@ -1,5 +1,11 @@
 import initialState from 'redux/initialState';
-import { IContact, ISignInRes, ISignUpCredentials, IUser } from 'types/types';
+import {
+  IContact,
+  ICredentials,
+  ISignInRes,
+  ISignUpCredentials,
+  IUser,
+} from 'types/types';
 
 class ContactsServiceApi {
   private BASE_URL = 'https://contacts-rest-api-dvg7.onrender.com/api';
@@ -13,13 +19,10 @@ class ContactsServiceApi {
     this.TOKEN = newToken;
   }
 
-  signUpUser(data: ISignUpCredentials): Promise<IUser> {
+  signUpUser(data: FormData): Promise<IUser> {
     const options = {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      body: data,
     };
 
     return fetch(`${this.BASE_URL}/auth/signup`, options)
@@ -32,7 +35,7 @@ class ContactsServiceApi {
       });
   }
 
-  signInUser(data: IUser, signal: AbortSignal): Promise<ISignInRes> {
+  signInUser(data: ICredentials, signal: AbortSignal): Promise<ISignInRes> {
     const options = {
       signal,
       method: 'POST',

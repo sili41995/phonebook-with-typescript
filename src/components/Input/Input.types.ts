@@ -1,7 +1,8 @@
 import { ChangeEvent, ReactElement, ReactNode } from 'react';
 // import { IconBtnType } from 'constants/iconBtnType';
-import { FormTypes } from 'constants/formTypes';
-import { InputTypes } from 'constants/inputTypes';
+import FormTypes from 'constants/formTypes';
+import InputTypes from 'constants/inputTypes';
+import IconBtnType from 'constants/iconBtnType';
 
 export interface IProps {
   settings: object;
@@ -11,15 +12,17 @@ export interface IProps {
   formType: FormTypes;
   inputWrap: boolean;
   autoFocus?: boolean;
+  btnType?: IconBtnType;
+  btnIcon?: ReactElement | boolean;
+  action?: () => void;
+  accept?: string;
   // value?: string;
   // defaultValue?: string;
-  // btnType?: IconBtnType;
   // children?: ReactNode;
   // right?: number;
   // position?: string;
   // fieldIconSize?: number;
   // inputType?: FormType;
-  // action?: () => void;
   // onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
