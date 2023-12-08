@@ -4,25 +4,22 @@ import contactsServiceApi from 'service/contactsServiceApi';
 import {
   IInitialState,
   IUser,
-  ISignInResponse,
-  IAuthResponse,
+  ISignUpCredentials,
+  ISignInRes,
 } from 'types/types';
 
 export const signUpUser = createAsyncThunk<
-  IAuthResponse,
   IUser,
+  ISignUpCredentials,
   { rejectValue: string }
 >(
   'auth/signUpUser',
   async (
-    credentials: IUser,
+    credentials: ISignUpCredentials,
     { rejectWithValue }: { rejectWithValue: Function }
   ) => {
     try {
       const response = await contactsServiceApi.signUpUser(credentials);
-      if (response instanceof Error) {
-        throw new Error('This user is already registered');
-      }
       return response;
     } catch (error) {
       if (error instanceof Error) {
@@ -33,7 +30,7 @@ export const signUpUser = createAsyncThunk<
 );
 
 export const signInUser = createAsyncThunk<
-  ISignInResponse,
+  ISignInRes,
   IUser,
   { rejectValue: string }
 >(
@@ -50,7 +47,7 @@ export const signInUser = createAsyncThunk<
       if (response instanceof Error) {
         throw new Error('Wrong username or password');
       }
-      contactsServiceApi.token = response.token as string;
+      contactsServiceApi.token = response.token;
       return response;
     } catch (error) {
       if (error instanceof Error) {
@@ -61,7 +58,7 @@ export const signInUser = createAsyncThunk<
 );
 
 export const signOutUser = createAsyncThunk<
-  IAuthResponse,
+  undefined,
   undefined,
   { rejectValue: string }
 >(
@@ -83,7 +80,7 @@ export const signOutUser = createAsyncThunk<
 );
 
 export const refreshUser = createAsyncThunk<
-  IAuthResponse,
+  IUser,
   undefined,
   { rejectValue: string }
 >(

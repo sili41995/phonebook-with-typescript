@@ -1,8 +1,8 @@
 import initialState from 'redux/initialState';
-import { IAuthResponse, IContact, IUser } from 'types/types';
+import { IContact, ISignInRes, ISignUpCredentials, IUser } from 'types/types';
 
 class ContactsServiceApi {
-  private BASE_URL = 'https://contacts-rest-api-dvg7.onrender.com/api/';
+  private BASE_URL = 'https://contacts-rest-api-dvg7.onrender.com/api';
   private TOKEN = initialState.auth.token;
 
   get token() {
@@ -13,7 +13,7 @@ class ContactsServiceApi {
     this.TOKEN = newToken;
   }
 
-  signUpUser(data: IUser): Promise<IUser | Error> {
+  signUpUser(data: ISignUpCredentials): Promise<IUser> {
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -22,12 +22,17 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/auth/signup`, options).then((response) =>
-      response.json()
-    );
+    return fetch(`${this.BASE_URL}/auth/signup`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
   }
 
-  signInUser(data: IUser, signal: AbortSignal): Promise<IUser | Error> {
+  signInUser(data: IUser, signal: AbortSignal): Promise<ISignInRes> {
     const options = {
       signal,
       method: 'POST',
@@ -37,9 +42,14 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/auth/signin`, options).then((response) =>
-      response.json()
-    );
+    return fetch(`${this.BASE_URL}/auth/signin`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
   }
 
   signOutUser(): Promise<{ message?: string }> {
@@ -51,12 +61,17 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/auth/signout`, options).then((response) =>
-      response.json()
-    );
+    return fetch(`${this.BASE_URL}/auth/signout`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
   }
 
-  refreshUser(): Promise<IUser | Error> {
+  refreshUser(): Promise<IUser> {
     const options = {
       method: 'GET',
       headers: {
@@ -65,9 +80,14 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/auth/current`, options).then((response) =>
-      response.json()
-    );
+    return fetch(`${this.BASE_URL}/auth/current`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
   }
 
   fetchContacts(signal: AbortSignal): Promise<IContact[]> {

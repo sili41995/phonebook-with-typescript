@@ -11,11 +11,7 @@ const initialState: IInitialState = {
     user: {
       name: null,
       email: null,
-      lastName: null,
-      phone: null,
-      location: null,
       avatar: null,
-      dateOfBirth: null,
     },
     token: null,
     isLoggedIn: false,

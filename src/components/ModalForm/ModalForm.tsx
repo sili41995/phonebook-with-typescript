@@ -1,6 +1,9 @@
+import { FC } from 'react';
 import { Container } from './ModalForm.styled';
 import { IProps } from './ModalForm.types';
 
-const ModalForm = ({ children }: IProps) => <Container>{children}</Container>;
+const ModalForm: FC<IProps> = ({ children, formType }) => (
+  <Container formType={formType}>{children}</Container>
+);
 
 export default ModalForm;

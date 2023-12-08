@@ -1,98 +1,151 @@
-// import { useEffect } from 'react';
-// import { FaUser } from 'react-icons/fa';
-// import { MdEmail } from 'react-icons/md';
-// import { AiFillLock } from 'react-icons/ai';
-// import { SubmitHandler, useForm } from 'react-hook-form';
-// import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
+import { MdEmail, MdPhone } from 'react-icons/md';
+import { AiFillLock } from 'react-icons/ai';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Message, Title } from './SignUpForm.styled';
-// import { toasts } from 'utils';
-// import AuthFormMessage from 'components/AuthFormMessage';
-// import Input from 'components/Input';
-// import { registerUser } from 'redux/auth/operations';
-// import { selectIsLoading } from 'redux/auth/selectors';
-// import { useAppDispatch, useAppSelector } from 'hooks/redux';
-// import { ICredentials } from 'types/types';
-// import { PagesPath } from 'constants/pagesPath';
-// import { FormType } from 'constants/formType';
+import { getUserData, toasts } from 'utils';
+import AuthFormMessage from 'components/AuthFormMessage';
+import Input from 'components/Input';
+import { signUpUser } from 'redux/auth/operations';
+import { selectIsLoading } from 'redux/auth/selectors';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { ISignUpCredentials } from 'types/types';
+import { PagesPath } from 'constants/pagesPath';
+import { FormTypes } from 'constants/formTypes';
+import { IconSizes } from 'constants/iconSizes';
+import { InputTypes } from 'constants/inputTypes';
+import regEx from 'constants/regEx';
 
 const SignUpForm = () => {
-  // const isLoading = useAppSelector(selectIsLoading);
-  // const dispatch = useAppDispatch();
-  // const {
-  //   register,
-  //   formState: { errors, isSubmitting },
-  //   handleSubmit,
-  // } = useForm<ICredentials>();
-  // const pageLink = `/${PagesPath.loginPath}`;
+  const navigate = useNavigate();
+  const isLoading = useAppSelector(selectIsLoading);
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm<ISignUpCredentials>();
+  const signInPageLink = `/${PagesPath.signInPath}`;
 
-  // const onSubmit: SubmitHandler<ICredentials> = (data) => {
-  //   dispatch(registerUser(data))
-  //     .unwrap()
-  //     .then(() => {
-  //       toasts.successToast('Hello, my friend!');
-  //     })
-  //     .catch((error) => {
-  //       toasts.errorToast(error);
-  //     });
-  // };
+  const onSubmit: SubmitHandler<ISignUpCredentials> = (data) => {
+    const userData = getUserData(data);
+    console.log(userData);
+    dispatch(signUpUser(userData))
+      .unwrap()
+      .then(() => {
+        toasts.successToast('User has been successfully registered');
+        navigate(signInPageLink);
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
+      });
+  };
 
-  // useEffect(() => {
-  //   if (isSubmitting) {
-  //     errors.name && toasts.errorToast('Username is required');
-  //     errors.email && toasts.errorToast('Email is required');
-  //     errors.password &&
-  //       toasts.errorToast(
-  //         errors.password.type === 'required'
-  //           ? 'Password is required'
-  //           : 'Password minimum length is 7 characters'
-  //       );
-  //   }
-  // }, [errors, isSubmitting]);
+  useEffect(() => {
+    errors.name && toasts.errorToast('First name is required');
+    errors.email &&
+      toasts.errorToast(
+        errors.email.type === 'required'
+          ? 'Email is required'
+          : 'Email must be letters, digits, dot and @'
+      );
+    errors.password &&
+      toasts.errorToast(
+        errors.password.type === 'required'
+          ? 'Password is required'
+          : 'Password minimum length is 6 characters'
+      );
+    errors.phone &&
+      toasts.errorToast(
+        'Phone number must be digits and can start with character +'
+      );
+    errors.dateOfBirth &&
+      toasts.errorToast('Date of birth must be in DD-MM-YYYY format');
+  }, [errors, isSubmitting]);
 
   return (
     <>
       <Title>sign up</Title>
       <Message>Welcome to Phonebook!</Message>
-      {/* <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           settings={{ ...register('name', { required: true }) }}
-          type="text"
-          placeholder="Username"
-          inputType={FormType.authForm}
-          autoFocus
+          type={InputTypes.text}
+          placeholder="First name"
+          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
           inputWrap
-          fieldIcon={<FaUser />}
-          fieldIconSize={20}
+          autoFocus
         />
         <Input
-          settings={{ ...register('email', { required: true }) }}
-          type="email"
-          placeholder="Email"
-          inputType={FormType.authForm}
+          settings={{ ...register('lastName') }}
+          type={InputTypes.text}
+          placeholder="Last name"
+          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
           inputWrap
-          fieldIcon={<MdEmail />}
-          fieldIconSize={20}
+        />
+        <Input
+          settings={{ ...register('phone', { pattern: regEx.phoneRegEx }) }}
+          type={InputTypes.text}
+          placeholder="Phone"
+          icon={<MdPhone size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
         />
         <Input
           settings={{
-            ...register('password', { required: true, minLength: 7 }),
+            ...register('email', {
+              required: true,
+              pattern: regEx.emailRegEx,
+            }),
           }}
-          type="password"
-          placeholder="Password"
-          inputType={FormType.authForm}
+          type={InputTypes.email}
+          placeholder="Email"
+          icon={<MdEmail size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
           inputWrap
-          fieldIcon={<AiFillLock />}
-          fieldIconSize={20}
+        />
+        <Input
+          settings={{
+            ...register('password', { required: true, minLength: 6 }),
+          }}
+          type={InputTypes.password}
+          placeholder="Password"
+          icon={<AiFillLock size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
+        />
+        <Input
+          settings={{ ...register('location') }}
+          type={InputTypes.text}
+          placeholder="Location"
+          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
+        />
+        <Input
+          settings={{
+            ...register('dateOfBirth', { pattern: regEx.dateOfBirthRegEx }),
+          }}
+          type={InputTypes.text}
+          placeholder="Date of birth"
+          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
         />
         <AuthFormMessage
-          action={'Log in'}
-          pageLink={pageLink}
-          message={'if you have an account'}
+          action="Sign in"
+          pageLink={signInPageLink}
+          message="if you have an account"
         />
         <Button disabled={isLoading} type="submit">
           Enlist
         </Button>
-      </Form> */}
+      </Form>
     </>
   );
 };
