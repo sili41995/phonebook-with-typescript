@@ -7,12 +7,12 @@ import {
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Button, Message, Title, Image } from './SignInForm.styled';
+import { Form, Message, Title, Image } from './SignInForm.styled';
 import defaultAvatar from 'images/default-signin-avatar.png';
 import { toasts } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
+import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
 import Input from 'components/Input';
-import { selectIsLoading } from 'redux/auth/selectors';
 import { signInUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { selectUser } from 'redux/auth/selectors';
@@ -29,7 +29,6 @@ const SignInForm = () => {
   const user = useAppSelector(selectUser);
   const [credentials, setCredentials] = useState<ICredentials | null>(null);
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -126,9 +125,7 @@ const SignInForm = () => {
           pageLink={signUpPageLink}
           message="if you don't have an account yet"
         />
-        <Button disabled={isLoading} type="submit">
-          Sign in
-        </Button>
+        <AuthFormBtn title="Sign in" />
       </Form>
     </>
   );

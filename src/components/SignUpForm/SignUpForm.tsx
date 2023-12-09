@@ -10,7 +10,7 @@ import {
   FaEnvelope,
 } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Button, Message, Title } from './SignUpForm.styled';
+import { Form, Message, Title } from './SignUpForm.styled';
 import {
   filterEmptyFields,
   getCredentialsFormData,
@@ -19,9 +19,9 @@ import {
 } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';
+import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
 import { signUpUser } from 'redux/auth/operations';
-import { selectIsLoading } from 'redux/auth/selectors';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
 import {
   PagePaths,
@@ -34,7 +34,6 @@ import {
 const SignUpForm = () => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
   const navigate = useNavigate();
-  const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -177,9 +176,7 @@ const SignUpForm = () => {
           pageLink={signInPageLink}
           message="if you have an account"
         />
-        <Button disabled={isLoading} type="submit">
-          Enlist
-        </Button>
+        <AuthFormBtn title="Enlist" />
       </Form>
     </>
   );

@@ -5,7 +5,7 @@ import Loader from 'components/Loader';
 import SharedLayout from 'components/SharedLayout';
 import GlobalStyles from 'components/GlobalStyles';
 import Toast from 'components/Toast';
-import { selectIsRefreshing } from 'redux/auth/selectors';
+import { selectIsRefreshing, selectToken } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { PagePaths } from 'constants/index';
@@ -36,10 +36,15 @@ const {
 const App = () => {
   const dispatch = useAppDispatch();
   const isRefreshing = useAppSelector(selectIsRefreshing);
+  const token = useAppSelector(selectToken);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
+
     dispatch(refreshUser());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return isRefreshing ? (
     <Loader />
