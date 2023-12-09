@@ -3,6 +3,8 @@ import { Container, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
 import Positions from 'constants/positions';
+import InputTypes from 'constants/inputTypes';
+import image from 'images/default-signup-avatar.png';
 
 const Input: FC<IProps> = ({
   settings,
@@ -10,9 +12,20 @@ const Input: FC<IProps> = ({
   action,
   btnIcon,
   btnType,
+  type,
+  imageRef,
   ...otherProps
 }) => {
-  const input = <StyledInput {...settings} {...otherProps} />;
+  const input = <StyledInput type={type} {...settings} {...otherProps} />;
+
+  if (type === InputTypes.file) {
+    return (
+      <label>
+        <img src={image} alt="asd" ref={imageRef} />
+        {input}
+      </label>
+    );
+  }
 
   const inputWithWrap = (
     <Container>

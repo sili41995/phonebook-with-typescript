@@ -1,6 +1,6 @@
 import FormTypes from 'constants/formTypes';
 
-const setInputHeight = (formType: FormTypes) => {
+const setInputHeight = (formType: FormTypes | undefined) => {
   switch (formType) {
     case FormTypes.filter:
       return '100%';

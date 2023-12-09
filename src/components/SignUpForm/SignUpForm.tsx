@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { MdEmail, MdPhone } from 'react-icons/md';
@@ -6,7 +6,12 @@ import { AiFillLock } from 'react-icons/ai';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Message, Title } from './SignUpForm.styled';
-import { filterEmptyFields, getCredentialsFormData, toasts } from 'utils';
+import {
+  filterEmptyFields,
+  getCredentialsFormData,
+  onChangeAvatar,
+  toasts,
+} from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';
 import { signUpUser } from 'redux/auth/operations';
@@ -27,8 +32,19 @@ const SignUpForm = () => {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
+    watch,
   } = useForm<ISignUpCredentials>();
   const signInPageLink = `/${PagesPath.signInPath}`;
+  const watchAvatar = watch('password');
+  const userAvatarRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    console.log(watchAvatar);
+  }, [watchAvatar]);
+
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeAvatar({ e, ref: userAvatarRef });
+  };
 
   const onSubmit: SubmitHandler<ISignUpCredentials> = (data) => {
     const userData = filterEmptyFields<ISignUpCredentials>(data);
@@ -75,11 +91,9 @@ const SignUpForm = () => {
         <Input
           settings={{ ...register('avatar') }}
           accept="image/png, image/jpeg, image/jpg"
+          onChange={onChangeInput}
           type={InputTypes.file}
-          placeholder="First name"
-          icon={<FaUser size={IconSizes.secondaryIconSize} />}
-          formType={FormTypes.authForm}
-          inputWrap
+          imageRef={userAvatarRef}
         />
         <Input
           settings={{ ...register('name', { required: true }) }}

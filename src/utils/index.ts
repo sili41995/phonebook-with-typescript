@@ -24,3 +24,4 @@ export { default as toasts } from 'utils/toasts';
 export { default as setIconHoverEffect } from 'utils/setIconHoverEffect';
 export { default as filterEmptyFields } from 'utils/filterEmptyFields';
 export { default as getCredentialsFormData } from 'utils/getCredentialsFormData';
+export { default as onChangeAvatar } from 'utils/onChangeAvatar';

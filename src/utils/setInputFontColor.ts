@@ -1,7 +1,7 @@
 import FormTypes from 'constants/formTypes';
 import theme from 'constants/theme';
 
-const setInputFontColor = (formType: FormTypes) => {
+const setInputFontColor = (formType: FormTypes | undefined) => {
   switch (formType) {
     case FormTypes.filter:
       return theme.colors.whiteColor;

@@ -1,7 +1,7 @@
 import FormTypes from 'constants/formTypes';
 import theme from 'constants/theme';
 
-const setInputPadding = (formType: FormTypes) => {
+const setInputPadding = (formType: FormTypes | undefined) => {
   switch (formType) {
     case FormTypes.filter:
       return `
