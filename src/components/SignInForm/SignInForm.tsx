@@ -16,12 +16,14 @@ import { selectIsLoading } from 'redux/auth/selectors';
 import { signInUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { selectUser } from 'redux/auth/selectors';
-import InputTypes from 'constants/inputTypes';
-import IconSizes from 'constants/iconSizes';
-import FormTypes from 'constants/formTypes';
 import { ICredentials } from 'types/types';
-import IconBtnType from 'constants/iconBtnType';
-import PagesPath from 'constants/pagesPath';
+import {
+  InputTypes,
+  IconSizes,
+  FormTypes,
+  IconBtnType,
+  PagePaths,
+} from 'constants/index';
 
 const SignInForm = () => {
   const user = useAppSelector(selectUser);
@@ -46,7 +48,7 @@ const SignInForm = () => {
     ) : (
       <AiOutlineEye size={IconSizes.secondaryIconSize} />
     ));
-  const signUpPageLink = `/${PagesPath.signUpPath}`;
+  const signUpPageLink = `/${PagePaths.signUpPath}`;
 
   const toggleIsShowPassword = () => {
     setIsShowPassword((prevState) => !prevState);

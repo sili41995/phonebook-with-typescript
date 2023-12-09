@@ -4,12 +4,12 @@ import PrivateLinks from 'components/PrivateLinks';
 import PublicLinks from 'components/PublicLinks';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { useAppSelector } from 'hooks/redux';
-import PagesPath from 'constants/pagesPath';
+import { PagePaths } from 'constants/index';
 
 const NavigationBar = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const contactsPagePath = `/${PagesPath.contactsPath}`;
-  const aboutPagePath = `/${PagesPath.aboutPath}`;
+  const contactsPagePath = `/${PagePaths.contactsPath}`;
+  const aboutPagePath = `/${PagePaths.aboutPath}`;
 
   return (
     <NavContainer>

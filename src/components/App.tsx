@@ -8,7 +8,7 @@ import Toast from 'components/Toast';
 import { selectIsRefreshing } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import PagesPath from 'constants/pagesPath';
+import { PagePaths } from 'constants/index';
 
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage'));
@@ -31,7 +31,7 @@ const {
   // contactsPath,
   // dynamicParam,
   // contactPath,
-} = PagesPath;
+} = PagePaths;
 
 const App = () => {
   const dispatch = useAppDispatch();

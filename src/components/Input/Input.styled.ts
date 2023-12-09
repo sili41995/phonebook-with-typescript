@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import FormTypes  from 'constants/formTypes';
+import { FormTypes } from 'constants/index';
 import {
   setInputMaxWidth,
   setInputHeight,
@@ -48,4 +48,21 @@ export const StyledInput = styled.input`
     transition: color ${({ theme }) => theme.transitionDurationAndFunc};
     color: ${({ theme }) => theme.colors.primaryColor};
   }
+`;
+
+export const Label = styled.label`
+  margin-left: auto;
+  margin-right: auto;
+  & input {
+    position: fixed;
+    transform: scale(0);
+  }
+`;
+
+export const Image = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+
+  cursor: pointer;
 `;

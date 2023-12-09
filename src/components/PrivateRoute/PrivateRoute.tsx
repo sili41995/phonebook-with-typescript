@@ -1,7 +1,6 @@
 // import { Navigate, useLocation } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 // import { selectIsLoggedIn, selectIsRefreshing } from 'redux/auth/selectors';
-// import { PagesPath } from 'constants/pagesPath';
 import { IProps } from './PrivateRoute.types';
 
 const PrivateRoute = ({ element }: IProps) => {

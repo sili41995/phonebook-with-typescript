@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import FormTypes from 'constants/formTypes';
+import { FormTypes } from 'constants/index';
 import { IStyledProps } from './ModalForm.types';
 
 export const Container = styled.div`

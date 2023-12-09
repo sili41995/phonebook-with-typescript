@@ -1,13 +1,12 @@
 import { ChangeEvent, RefObject } from 'react';
 
-const onChangeAvatar = ({
-  e,
-  ref,
-}: {
+interface IFuncProps {
   e: ChangeEvent<HTMLInputElement>;
   ref: RefObject<HTMLImageElement>;
-}) => {
-  if (e.target.files === null) {
+}
+
+const onChangeAvatar = ({ e, ref }: IFuncProps): void => {
+  if (!e.target.files?.length) {
     return;
   }
 

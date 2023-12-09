@@ -1,4 +1,4 @@
-import FormTypes from 'constants/formTypes';
+import { FormTypes } from 'constants/index';
 import { ReactNode } from 'react';
 
 export interface IProps {

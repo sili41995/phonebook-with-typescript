@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { Container, StyledInput } from './Input.styled';
+import { Container, Image, Label, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
-import Positions from 'constants/positions';
-import InputTypes from 'constants/inputTypes';
+import { Positions, InputTypes } from 'constants/index';
 import image from 'images/default-signup-avatar.png';
 
 const Input: FC<IProps> = ({
@@ -14,22 +13,24 @@ const Input: FC<IProps> = ({
   btnType,
   type,
   imageRef,
+  icon,
   ...otherProps
 }) => {
   const input = <StyledInput type={type} {...settings} {...otherProps} />;
 
   if (type === InputTypes.file) {
     return (
-      <label>
-        <img src={image} alt="asd" ref={imageRef} />
+      <Label>
+        <Image src={image} alt="user avatar" ref={imageRef} />
         {input}
-      </label>
+      </Label>
     );
   }
 
   const inputWithWrap = (
     <Container>
       {input}
+      {icon}
       {btnType && (
         <IconButton
           onBtnClick={action}
@@ -49,43 +50,5 @@ const Input: FC<IProps> = ({
 
   return inputWrap ? inputWithWrap : input;
 };
-
-// const Input = forwardRef<HTMLInputElement, IProps>(
-//   (
-//     {
-//       inputWrap,
-//       btnType,
-//       children,
-//       action,
-//
-//       ...props
-//     },
-//     ref
-//   ) => {
-//     const input = <StyledInput ref={ref} {...settings} {...props} />;
-//     const inputWithWrap = (
-//       <Container {...props}>
-//         {input}
-//         {fieldIcon}
-//         {btnType && (
-//           <IconButton
-//             position="absolute"
-//
-//             right={right}
-//             btnType={btnType}
-//
-//
-//             onBtnClick={action}
-//             inputWrap
-//           >
-//             {children}
-//           </IconButton>
-//         )}
-//       </Container>
-//     );
-
-//     ;
-//   }
-// );
 
 export default Input;

@@ -1,9 +1,14 @@
-import { ChangeEvent, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa';
-import { MdEmail, MdPhone } from 'react-icons/md';
-import { AiFillLock } from 'react-icons/ai';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import {
+  FaUser,
+  FaLock,
+  FaMapMarkerAlt,
+  FaRegCalendarCheck,
+  FaPhoneAlt,
+  FaEnvelope,
+} from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import { Form, Button, Message, Title } from './SignUpForm.styled';
 import {
@@ -18,13 +23,16 @@ import { signUpUser } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/auth/selectors';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
-import PagesPath from 'constants/pagesPath';
-import FormTypes from 'constants/formTypes';
-import IconSizes from 'constants/iconSizes';
-import InputTypes from 'constants/inputTypes';
-import regEx from 'constants/regEx';
+import {
+  PagePaths,
+  regEx,
+  FormTypes,
+  IconSizes,
+  InputTypes,
+} from 'constants/index';
 
 const SignUpForm = () => {
+  const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
   const navigate = useNavigate();
   const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
@@ -32,21 +40,24 @@ const SignUpForm = () => {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
-    watch,
   } = useForm<ISignUpCredentials>();
-  const signInPageLink = `/${PagesPath.signInPath}`;
-  const watchAvatar = watch('password');
+  const signInPageLink = `/${PagePaths.signInPath}`;
   const userAvatarRef = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    console.log(watchAvatar);
-  }, [watchAvatar]);
-
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.length) {
+      return;
+    }
+
+    setUserAvatar(e.target.files);
     onChangeAvatar({ e, ref: userAvatarRef });
   };
 
   const onSubmit: SubmitHandler<ISignUpCredentials> = (data) => {
+    if (userAvatar) {
+      data.avatar = userAvatar;
+    }
+
     const userData = filterEmptyFields<ISignUpCredentials>(data);
     const formData = getCredentialsFormData(userData);
 
@@ -116,7 +127,7 @@ const SignUpForm = () => {
           settings={{ ...register('phone', { pattern: regEx.phoneRegEx }) }}
           type={InputTypes.text}
           placeholder="Phone"
-          icon={<MdPhone size={IconSizes.secondaryIconSize} />}
+          icon={<FaPhoneAlt size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
         />
@@ -129,7 +140,7 @@ const SignUpForm = () => {
           }}
           type={InputTypes.email}
           placeholder="Email"
-          icon={<MdEmail size={IconSizes.secondaryIconSize} />}
+          icon={<FaEnvelope size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
         />
@@ -139,7 +150,7 @@ const SignUpForm = () => {
           }}
           type={InputTypes.text}
           placeholder="Password"
-          icon={<AiFillLock size={IconSizes.secondaryIconSize} />}
+          icon={<FaLock size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
         />
@@ -147,7 +158,7 @@ const SignUpForm = () => {
           settings={{ ...register('location') }}
           type={InputTypes.text}
           placeholder="Location"
-          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          icon={<FaMapMarkerAlt size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
         />
@@ -157,7 +168,7 @@ const SignUpForm = () => {
           }}
           type={InputTypes.text}
           placeholder="Date of birth"
-          icon={<FaUser size={IconSizes.secondaryIconSize} />}
+          icon={<FaRegCalendarCheck size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
         />

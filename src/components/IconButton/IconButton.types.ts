@@ -1,7 +1,5 @@
+import { BtnType, IconBtnType, Positions } from 'constants/index';
 import { MouseEvent, ReactNode } from 'react';
-import IconBtnType from 'constants/iconBtnType';
-import Positions from 'constants/positions';
-import BtnType from 'constants/btnType';
 
 export interface IProps {
   children: ReactNode;

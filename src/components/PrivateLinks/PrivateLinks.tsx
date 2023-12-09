@@ -11,8 +11,6 @@ import { IconContainer, LinkContainer } from './PrivateLinks.styled';
 // import { logoutUser } from 'redux/auth/operations';
 // import { useAppDispatch, useAppSelector } from 'hooks/redux';
 // import { MouseEvent } from 'react';
-// import { PagesPath } from 'constants/pagesPath';
-// import { IconBtnType } from 'constants/iconBtnType';
 
 const PrivateLinks = () => {
   // const contacts = useAppSelector(selectContacts);

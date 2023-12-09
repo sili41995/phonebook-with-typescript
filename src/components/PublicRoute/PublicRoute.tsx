@@ -2,7 +2,6 @@
 // import { Navigate, useLocation } from 'react-router-dom';
 // import { toasts } from 'utils';
 // import { selectIsLoggedIn } from 'redux/auth/selectors';
-// import { PagesPath } from 'constants/pagesPath';
 // import { useAppSelector } from 'hooks/redux';
 import { IProps } from './PublicRoute.types';
 

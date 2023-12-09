@@ -1,5 +1,4 @@
-import FormTypes from 'constants/formTypes';
-import theme from 'constants/theme';
+import { FormTypes, theme } from 'constants/index';
 
 const setInputBorderColor = (formType: FormTypes | undefined) => {
   switch (formType) {

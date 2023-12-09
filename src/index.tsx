@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store, { persistor } from 'redux/store';
 import App from 'components/App';
-import theme from 'constants/theme';
+import { theme } from 'constants/index';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

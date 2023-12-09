@@ -1,5 +1,4 @@
-import  IconBtnType  from 'constants/iconBtnType';
-import theme from 'constants/theme';
+import { IconBtnType, theme } from 'constants/index';
 
 const setIconHoverEffect = (btnType: IconBtnType) => {
   switch (btnType) {
