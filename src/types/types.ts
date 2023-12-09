@@ -19,6 +19,15 @@ export interface IUser {
   avatar: string;
 }
 
+export interface ICurrentUser extends IUser {
+  _id: string;
+  avatar: string;
+  phone?: string;
+  lastName?: string;
+  location?: string;
+  dateOfBirth?: string;
+}
+
 export interface ISignInRes extends IUser {
   token: string;
   user: IUser;

@@ -7,6 +7,7 @@ import {
   ISignUpCredentials,
   ISignInRes,
   ICredentials,
+  ICurrentUser,
 } from 'types/types';
 
 export const signUpUser = createAsyncThunk<
@@ -81,7 +82,7 @@ export const signOutUser = createAsyncThunk<
 );
 
 export const refreshUser = createAsyncThunk<
-  IUser,
+  ICurrentUser,
   undefined,
   { rejectValue: string }
 >(
@@ -95,15 +96,9 @@ export const refreshUser = createAsyncThunk<
   ) => {
     const state = getState() as IInitialState;
     const { token } = state.auth;
-    if (!token) {
-      return rejectWithValue('Unable to fetch user');
-    }
     try {
       contactsServiceApi.token = token;
       const response = await contactsServiceApi.refreshUser();
-      if (response instanceof Error) {
-        throw new Error(response.message);
-      }
       return response;
     } catch (error) {
       if (error instanceof Error) {

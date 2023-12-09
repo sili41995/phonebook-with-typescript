@@ -1,9 +1,4 @@
-import { MdEmail } from 'react-icons/md';
-import {
-  AiFillLock,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from 'react-icons/ai';
+import { FaLock, FaEnvelope, FaEyeSlash, FaEye } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
@@ -43,9 +38,9 @@ const SignInForm = () => {
   const passwordBtnIcon =
     Boolean(watchPassword) &&
     (isShowPassword ? (
-      <AiOutlineEyeInvisible size={IconSizes.secondaryIconSize} />
+      <FaEyeSlash size={IconSizes.secondaryIconSize} />
     ) : (
-      <AiOutlineEye size={IconSizes.secondaryIconSize} />
+      <FaEye size={IconSizes.secondaryIconSize} />
     ));
   const signUpPageLink = `/${PagePaths.signUpPath}`;
 
@@ -102,7 +97,7 @@ const SignInForm = () => {
           settings={{ ...register('email', { required: true }) }}
           type={InputTypes.email}
           placeholder="Email"
-          icon={<MdEmail size={IconSizes.secondaryIconSize} />}
+          icon={<FaEnvelope size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
           autoFocus
@@ -113,7 +108,7 @@ const SignInForm = () => {
           }}
           type={passwordInputType}
           placeholder="Password"
-          icon={<AiFillLock size={IconSizes.secondaryIconSize} />}
+          icon={<FaLock size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
           btnType={IconBtnType.toggleShowPassword}

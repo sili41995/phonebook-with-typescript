@@ -13,14 +13,14 @@ import { PagePaths } from 'constants/index';
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage'));
 const AboutPage = lazy(() => import('pages/AboutPage'));
-// const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 // const ContactData = lazy(() => import('components/ContactData'));
 // const AddContactForm = lazy(() => import('components/AddContactForm'));
 // const ContactDetails = lazy(() => import('components/ContactDetails'));
 // const ModalForm = lazy(() => import('components/ModalForm'));
 // const ContactDescription = lazy(() => import('components/ContactDescription'));
-// const PrivateRoute = lazy(() => import('components/PrivateRoute'));
+const PrivateRoute = lazy(() => import('components/PrivateRoute'));
 
 const {
   homePath,
@@ -28,7 +28,7 @@ const {
   signInPath,
   signUpPath,
   aboutPath,
-  // contactsPath,
+  contactsPath,
   // dynamicParam,
   // contactPath,
 } = PagePaths;
@@ -68,19 +68,19 @@ const App = () => {
             path={aboutPath}
             element={<PublicRoute element={<AboutPage />} />}
           />
-          {/* <Route
+          <Route
             path={contactsPath}
             element={<PrivateRoute element={<ContactsPage />} />}
           >
-            <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
+            {/* <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
               <Route path={contactPath} element={<ContactData />} />
               <Route path={aboutPath} element={<ContactDescription />} />
             </Route>
             <Route
               path={newContactPath}
               element={<ModalForm children={<AddContactForm />} />}
-            />
-          </Route> */}
+            />*/}
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

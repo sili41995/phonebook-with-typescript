@@ -51,7 +51,12 @@ const authSlice = createSlice({
         })
       )
       .addMatcher(
-        isAnyOf(signUpUser.rejected, signInUser.rejected, signOutUser.rejected),
+        isAnyOf(
+          signUpUser.rejected,
+          signInUser.rejected,
+          signOutUser.rejected,
+          refreshUser.rejected
+        ),
         (state, { payload }) => ({
           ...state,
           isLoading: false,

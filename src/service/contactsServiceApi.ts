@@ -2,6 +2,7 @@ import initialState from 'redux/initialState';
 import {
   IContact,
   ICredentials,
+  ICurrentUser,
   ISignInRes,
   ISignUpCredentials,
   IUser,
@@ -74,7 +75,7 @@ class ContactsServiceApi {
       });
   }
 
-  refreshUser(): Promise<IUser> {
+  refreshUser(): Promise<ICurrentUser> {
     const options = {
       method: 'GET',
       headers: {
