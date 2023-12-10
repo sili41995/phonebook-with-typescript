@@ -5,11 +5,19 @@ import { IProps } from './IconButton.types';
 const IconButton = ({
   icon,
   onBtnClick,
+  title,
   type = BtnType.button,
   ...props
 }: IProps) => (
   <Button type={type} onClick={onBtnClick} {...props}>
-    {icon}
+    {title ? (
+      <>
+        {icon}
+        {title}
+      </>
+    ) : (
+      icon
+    )}
   </Button>
 );
 

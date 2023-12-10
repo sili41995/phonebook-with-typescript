@@ -5,7 +5,7 @@ export { default as filterContactsByName } from './filterContactsByName';
 // export { default as getUserInfo } from 'utils/getUserInfo';
 // export { default as isAuthPage } from 'utils/isAuthPage';
 export { default as getIsContactsPage } from './getIsContactsPage';
-// export { default as makeBlur } from 'utils/makeBlur';
+export { default as makeBlur } from './makeBlur';
 // export { default as setAuthPageBackgroundColor } from 'utils/setAuthPageBackgroundColor';
 export { default as setButtonColor } from './setButtonColor';
 export { default as setIconFill } from './setIconFill';

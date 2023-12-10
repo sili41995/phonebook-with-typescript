@@ -7,21 +7,22 @@ export interface IProps {
   // iconSize?: number;
   type?: BtnType;
   btnType: IconBtnType;
-  position: Positions;
-  top: number | 'center';
-  right: number;
+  position?: Positions;
+  top?: number | 'center';
+  right?: number;
   width: number;
-  height: number;
+  height?: number;
   inputWrap?: boolean;
   disabled?: boolean;
+  title?: string;
 }
 
 export interface IStyledProps {
-  position: Positions;
-  top: number | 'center';
-  right: number;
+  position?: Positions;
+  top?: number | 'center';
+  right?: number;
   width: number;
-  height: number;
+  height?: number;
   inputWrap?: boolean;
   // iconSize?: number;
   btnType: IconBtnType;

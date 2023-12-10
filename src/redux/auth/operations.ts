@@ -60,19 +60,15 @@ export const signInUser = createAsyncThunk<
 );
 
 export const signOutUser = createAsyncThunk<
-  undefined,
+  Response,
   undefined,
   { rejectValue: string }
 >(
   'auth/signOutUser',
   async (_, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
-      const response = await contactsServiceApi.signOutUser();
-      if (response.message) {
-        throw new Error(response.message);
-      }
+      await contactsServiceApi.signOutUser();
       contactsServiceApi.token = initialState.auth.token;
-      return response;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);

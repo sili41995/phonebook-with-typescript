@@ -4,7 +4,7 @@ enum PagePaths {
   aboutPath = 'about',
   signUpPath = 'signup',
   signInPath = 'signin',
-  // addNewContactPath = 'contacts/new-contact',
+  addNewContactPath = '/contacts/new-contact',
   contactPath = 'contact',
   newContactPath = 'new-contact',
   dynamicParam = 'id',

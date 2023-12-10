@@ -22,8 +22,13 @@ const authSlice = createSlice({
         token: payload.token,
         isLoggedIn: true,
       }))
-      .addCase(signOutUser.fulfilled, () => ({
+      .addCase(signOutUser.fulfilled, (state) => ({
         ...initialState.auth,
+        user: {
+          ...state.user,
+          name: state.user.name,
+          avatar: state.user.avatar,
+        },
       }))
       .addCase(refreshUser.pending, (state) => ({
         ...state,

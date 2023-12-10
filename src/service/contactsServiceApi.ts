@@ -56,23 +56,17 @@ class ContactsServiceApi {
       });
   }
 
-  signOutUser(): Promise<{ message?: string }> {
+  signOutUser(): Promise<Response> {
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
         Authorization: `Bearer ${this.TOKEN}`,
       },
     };
 
-    return fetch(`${this.BASE_URL}/auth/signout`, options)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message) {
-          throw Error(data.message);
-        }
-        return data;
-      });
+    return fetch(`${this.BASE_URL}/auth/signout`, options).then(
+      (response) => response
+    );
   }
 
   refreshUser(): Promise<ICurrentUser> {
