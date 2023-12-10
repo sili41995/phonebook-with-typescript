@@ -104,12 +104,14 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/contacts`, options).then((response) => {
-      if (!response.ok) {
-        throw new Error('Loading contacts failed');
+    return fetch(`${this.BASE_URL}/contacts?limit=0`, options).then(
+      (response) => {
+        if (!response.ok) {
+          throw new Error('Loading contacts failed');
+        }
+        return response.json();
       }
-      return response.json();
-    });
+    );
   }
 
   addContact(data: IContact): Promise<IContact> {

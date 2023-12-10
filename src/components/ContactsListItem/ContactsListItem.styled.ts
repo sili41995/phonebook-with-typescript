@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Item = styled.li`
   position: relative;
-  align-items: center;
+  /* align-items: center; */
   border-radius: ${({ theme }) => theme.borderRadius.secondaryBorderRadius}px;
   border: 0.5px solid;
   border-color: ${({ theme }) => theme.colors.borderColor};
@@ -22,6 +22,8 @@ export const Item = styled.li`
 
 export const Image = styled.img`
   width: 70px;
+  height: 70px;
+  border-radius: 50%;
 `;
 
 export const ContactInfo = styled.div`
@@ -30,7 +32,8 @@ export const ContactInfo = styled.div`
   justify-content: space-between;
   gap: ${({ theme }) => theme.primaryGap}px;
   align-items: center;
-  & div {
+  & div,
+  & p {
     flex-basis: calc((100% - ${({ theme }) => theme.primaryGap}*2px) / 3);
   }
 `;
@@ -54,17 +57,17 @@ export const Role = styled.p`
 `;
 
 export const Phone = styled.p`
-  color: ${({ theme }) => theme.colors.primaryFontColor};
-  font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
-  font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
-  text-align: center;
+  /* color: ${({ theme }) => theme.colors.primaryFontColor}; */
+  /* font-family: Inter; */
+  /* font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px; */
+  /* font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight}; */
+  /* text-align: center; */
 `;
 
 export const Email = styled.p`
-  color: ${({ theme }) => theme.colors.contactSecondaryTextColor};
-  font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
-  font-weight: ${({ theme }) => theme.fontWeight.secondaryFontWeight};
-  text-align: center;
+  /* color: ${({ theme }) => theme.colors.contactSecondaryTextColor}; */
+  /* font-family: Inter; */
+  /* font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px; */
+  /* font-weight: ${({ theme }) => theme.fontWeight.secondaryFontWeight}; */
+  /* text-align: center; */
 `;

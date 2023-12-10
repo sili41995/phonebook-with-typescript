@@ -2,7 +2,7 @@ import { BtnType, IconBtnType, Positions } from 'constants/index';
 import { MouseEvent, ReactNode } from 'react';
 
 export interface IProps {
-  children: ReactNode;
+  icon: ReactNode;
   onBtnClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   // iconSize?: number;
   type?: BtnType;
@@ -13,7 +13,7 @@ export interface IProps {
   width: number;
   height: number;
   inputWrap?: boolean;
-  // disabled?: boolean;
+  disabled?: boolean;
 }
 
 export interface IStyledProps {

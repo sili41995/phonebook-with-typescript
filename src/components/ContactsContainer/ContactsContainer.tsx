@@ -1,45 +1,56 @@
-import { useMemo, FC } from 'react';
-// import { useSearchParams } from 'react-router-dom';
+import { useMemo, FC, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PaginationBar from 'components/PaginationBar';
-// import TodosList from 'components/TodosList';
 import { IProps } from './ContactsContainer.types';
 import { SearchParamsKeys } from 'constants/index';
-// import { useAppSelector } from 'hooks/redux';
-// import { selectTodos } from 'redux/todos/selectors';
-import { sortContactsByName } from 'utils';
+import { useAppSelector } from 'hooks/redux';
+import { selectContacts } from 'redux/contacts/selectors';
+import {
+  filterContactsByName,
+  getVisibleContacts,
+  sortContactsByName,
+} from 'utils';
 import { Container } from './ContactsContainer.styled';
+import ContactsList from 'components/ContactsList';
+import DefaultMessage from 'components/DefaultMessage';
 
 const { FILTER_SP_KEY, SORT_SP_KEY, PAGE_SP_KEY } = SearchParamsKeys;
 
-const TodosContainer: FC<IProps> = ({ quantity, step }) => {
-  // const todos = useAppSelector(selectTodos);
-  // const [searchParams] = useSearchParams();
-  // const filter = searchParams.get(FILTER_SP_KEY) ?? '';
+const ContactsContainer: FC<IProps> = ({ quantity, step }) => {
+  const contacts = useAppSelector(selectContacts);
+  const [searchParams] = useSearchParams();
+  const filter = searchParams.get(FILTER_SP_KEY) ?? '';
   const sortType = searchParams.get(SORT_SP_KEY) ?? '';
-  // const currentPage = Number(searchParams.get(PAGE_SP_KEY) ?? 1);
+  const currentPage = Number(searchParams.get(PAGE_SP_KEY) ?? 1);
+  const isValidPage = currentPage > 0;
 
   const filteredContacts = useMemo(() => {
     const sortedContacts = sortContactsByName(contacts, sortType);
     return filterContactsByName(sortedContacts, filter);
   }, [contacts, filter, sortType]);
 
-  // const visibleTodos = getVisibleTodos({
-  //   filteredTodos,
-  //   quantity,
-  //   currentPage,
-  // });
+  const visibleContacts = getVisibleContacts({
+    filteredContacts,
+    quantity,
+    currentPage,
+  });
+
+  const isShouldRenderList = isValidPage && Boolean(visibleContacts.length);
 
   return (
     <Container>
-      {/* <TodosList visibleTodos={visibleTodos} currentPage={currentPage} />
-       */}
+      {isShouldRenderList ? (
+        <ContactsList contacts={visibleContacts} />
+      ) : (
+        <DefaultMessage message="Contact list is empty" />
+      )}
       <PaginationBar
         quantity={quantity}
         step={step}
-        todosQuantity={filteredContacts.length}
+        itemsQuantity={filteredContacts.length}
       />
     </Container>
   );
 };
 
-export default TodosContainer;
+export default ContactsContainer;

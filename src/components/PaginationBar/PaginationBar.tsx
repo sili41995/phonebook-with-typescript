@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { IProps } from './PaginationBar.types';
 import { getPageNumbers, getPaginationBarSettings } from 'utils';
-import { SearchParamsKeys } from 'constants/searchParamsKeys';
+import { SearchParamsKeys } from 'constants/index';
 import { Button, Item, List, TemplateItem } from './PaginationBar.styled';
 
 const { PAGE_SP_KEY } = SearchParamsKeys;
 
-const PaginationBar: FC<IProps> = ({ todosQuantity, quantity, step = 1 }) => {
+const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageQuantity = Math.round(todosQuantity / quantity);
+  const pageQuantity = Math.ceil(itemsQuantity / quantity);
   const pageNumbers = getPageNumbers(pageQuantity);
   const currentPage = Number(searchParams.get(PAGE_SP_KEY) ?? 1);
   const {

@@ -34,10 +34,15 @@ export interface ISignInRes extends IUser {
 }
 
 export interface IContact {
-  id: string;
+  _id: string;
   name: string;
   phone: string;
   avatar: string;
+  favorite: boolean;
+  role: string;
+  email?: string;
+  description?: string;
+  tgUsername?: string;
 }
 
 export interface IFetchContactsRes {

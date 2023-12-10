@@ -40,10 +40,9 @@ const Input: FC<IProps> = ({
           right={0}
           height={35}
           width={44}
+          icon={btnIcon}
           inputWrap
-        >
-          {btnIcon}
-        </IconButton>
+        />
       )}
     </Container>
   );

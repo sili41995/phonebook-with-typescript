@@ -34,13 +34,16 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        items: state.items.filter(({ id }) => id !== payload.id),
+        items: state.items.filter(({ _id }) => _id !== payload._id),
         count: (state.count as number) - 1,
       }))
       .addCase(updateContact.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        items: [...state.items.filter(({ id }) => id !== payload.id), payload],
+        items: [
+          ...state.items.filter(({ _id }) => _id !== payload._id),
+          payload,
+        ],
       }))
       .addCase(signOutUser.fulfilled, (state) => ({
         ...state,
