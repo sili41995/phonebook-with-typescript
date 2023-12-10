@@ -1,7 +1,6 @@
 import { AiOutlineDelete } from 'react-icons/ai';
 import IconButton from 'components/IconButton';
 import LinkWithQuery from 'components/LinkWithQuery';
-// import { getContactInfo } from 'utils';
 import { useDeleteContact } from 'hooks';
 import {
   Email,

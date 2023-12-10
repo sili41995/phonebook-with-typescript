@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-const trimText = `word-wrap: break-word; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;`;
-
 export const UserProfileContainer = styled.div`
   width: 250px;
 `;
@@ -19,7 +17,7 @@ export const Name = styled.p`
   font-family: Jua;
   font-size: ${({ theme }) => theme.fontSize.titleFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
-  ${trimText}
+  ${({ theme }) => theme.trimText}
 `;
 
 export const UserData = styled.div`
@@ -37,7 +35,7 @@ export const FullName = styled.p`
   font-size: ${({ theme }) => theme.fontSize.subtitleFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   text-align: center;
-  ${trimText}
+  ${({ theme }) => theme.trimText}
 `;
 
 export const Email = styled.p`
@@ -46,7 +44,7 @@ export const Email = styled.p`
   font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   text-align: center;
-  ${trimText}
+  ${({ theme }) => theme.trimText}
 `;
 
 export const ContactInfo = styled.div`
@@ -61,7 +59,7 @@ export const ContactInfo = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing(6)};
   }
   & p {
-    ${trimText}
+    ${({ theme }) => theme.trimText}
   }
 `;
 
