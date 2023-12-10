@@ -1,10 +1,9 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import ContactsList from 'components/ContactsList';
 import UserProfile from 'components/UserProfile';
 import Loader from 'components/Loader';
 import ContactsContainer from 'components/ContactsContainer';
-import { selectIsLoaded, selectIsLoading } from 'redux/contacts/selectors';
+import { selectIsLoading } from 'redux/contacts/selectors';
 import { fetchContacts } from 'redux/contacts/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import contactsServiceApi from 'service/contactsServiceApi';
