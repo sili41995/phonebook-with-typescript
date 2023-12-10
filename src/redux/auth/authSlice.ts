@@ -26,8 +26,7 @@ const authSlice = createSlice({
         ...initialState.auth,
         user: {
           ...state.user,
-          name: state.user.name,
-          avatar: state.user.avatar,
+          email: initialState.auth.user.email,
         },
       }))
       .addCase(refreshUser.pending, (state) => ({
