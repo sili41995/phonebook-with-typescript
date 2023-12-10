@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { FaMapMarkerAlt, FaRegCalendarCheck, FaPhoneAlt } from 'react-icons/fa';
+import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
 import 'react-toastify/dist/ReactToastify.css';
 import {
   UserInfo,
@@ -63,7 +63,7 @@ const UserProfile: FC = () => {
               {dateOfBirth && (
                 <ContactInfo>
                   <ContactInfoIconWrap>
-                    <FaRegCalendarCheck size={IconSizes.secondaryIconSize} />
+                    <SlEvent size={IconSizes.secondaryIconSize} />
                   </ContactInfoIconWrap>
                   <p>{dateOfBirth}</p>
                 </ContactInfo>
@@ -71,7 +71,7 @@ const UserProfile: FC = () => {
               {phone && (
                 <ContactInfo>
                   <ContactInfoIconWrap>
-                    <FaPhoneAlt size={IconSizes.secondaryIconSize} />
+                    <SlPhone size={IconSizes.secondaryIconSize} />
                   </ContactInfoIconWrap>
                   <p>{phone}</p>
                 </ContactInfo>
@@ -79,7 +79,7 @@ const UserProfile: FC = () => {
               {location && (
                 <ContactInfo>
                   <ContactInfoIconWrap>
-                    <FaMapMarkerAlt size={IconSizes.secondaryIconSize} />
+                    <SlLocationPin size={IconSizes.secondaryIconSize} />
                   </ContactInfoIconWrap>
                   <p>{location}</p>
                 </ContactInfo>

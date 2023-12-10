@@ -1,9 +1,9 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
 import { refreshUser, signInUser, signOutUser, signUpUser } from './operations';
-import { IAuthInitialState } from 'types/types';
+import { IAuthState } from 'types/types';
 
-const authState: IAuthInitialState = initialState.auth;
+const authState: IAuthState = initialState.auth;
 
 const authSlice = createSlice({
   name: 'auth',
@@ -33,7 +33,11 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        user: { ...payload },
+        user: {
+          name: payload.name,
+          email: payload.email,
+          avatar: payload.avatar,
+        },
         isLoggedIn: true,
         isRefreshing: false,
       }))

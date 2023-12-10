@@ -3,8 +3,8 @@ import {
   IContact,
   ICredentials,
   ICurrentUser,
+  IFetchContactsRes,
   ISignInRes,
-  ISignUpCredentials,
   IUser,
 } from 'types/types';
 
@@ -94,7 +94,7 @@ class ContactsServiceApi {
       });
   }
 
-  fetchContacts(signal: AbortSignal): Promise<IContact[]> {
+  fetchContacts(signal: AbortSignal): Promise<IFetchContactsRes> {
     const options = {
       signal,
       method: 'GET',

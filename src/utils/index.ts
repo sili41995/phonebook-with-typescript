@@ -4,7 +4,7 @@
 // export { default as getPhoneNumber } from 'utils/getPhoneNumber';
 // export { default as getUserInfo } from 'utils/getUserInfo';
 // export { default as isAuthPage } from 'utils/isAuthPage';
-// export { default as isContactsPage } from 'utils/isContactsPage';
+export { default as getIsContactsPage } from 'utils/getIsContactsPage';
 // export { default as makeBlur } from 'utils/makeBlur';
 // export { default as setAuthPageBackgroundColor } from 'utils/setAuthPageBackgroundColor';
 export { default as setButtonColor } from 'utils/setButtonColor';
@@ -17,7 +17,7 @@ export { default as setInputFontSize } from 'utils/setInputFontSize';
 export { default as setInputHeight } from 'utils/setInputHeight';
 export { default as setInputMaxWidth } from 'utils/setInputMaxWidth';
 export { default as setInputPadding } from 'utils/setInputPadding';
-// export { default as sortContactsByName } from 'utils/sortContactsByName';
+export { default as sortContactsByName } from 'utils/sortContactsByName';
 export { default as toasts } from 'utils/toasts';
 // export { default as updateSortSearchParams } from 'utils/updateSortSearchParams';
 // export { default as getAuthPages } from 'utils/getAuthPages';

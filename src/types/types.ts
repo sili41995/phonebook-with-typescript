@@ -40,7 +40,12 @@ export interface IContact {
   avatar: string;
 }
 
-export interface IAuthInitialState {
+export interface IFetchContactsRes {
+  contacts: IContact[];
+  count: number;
+}
+
+export interface IAuthState {
   user: IUserState;
   token: null | string;
   isLoggedIn: boolean;
@@ -55,16 +60,17 @@ interface IUserState {
   avatar: string | null;
 }
 
-export interface IContactsInitialState {
+export interface IContactsState {
   items: IContact[];
+  count: number | null;
   isLoading: boolean;
   isLoaded: boolean;
   error: string | null;
 }
 
 export interface IInitialState {
-  // contacts: IContactsInitialState;
-  auth: IAuthInitialState;
+  contacts: IContactsState;
+  auth: IAuthState;
 }
 
 export type Message = string;

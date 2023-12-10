@@ -1,12 +1,13 @@
 import { IInitialState } from 'types/types';
 
 const initialState: IInitialState = {
-  // contacts: {
-  //   items: [],
-  //   isLoading: false,
-  //   isLoaded: false,
-  //   error: null,
-  // },
+  contacts: {
+    items: [],
+    count: null,
+    isLoading: false,
+    isLoaded: false,
+    error: null,
+  },
   auth: {
     user: {
       name: null,

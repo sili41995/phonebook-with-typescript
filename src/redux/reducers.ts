@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-// import contactsReducer from './contacts/contactsSlice';
+import contactsReducer from './contacts/contactsSlice';
 import authReducer from './auth/authSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
@@ -13,7 +13,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
 const rootReducer = combineReducers({
-  // contacts: contactsReducer,
+  contacts: contactsReducer,
   auth: persistedReducer,
 });
 

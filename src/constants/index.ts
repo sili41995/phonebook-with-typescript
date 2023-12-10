@@ -7,3 +7,4 @@ export { default as PagePaths } from './pagPaths';
 export { default as Positions } from './positions';
 export { default as regEx } from './regEx';
 export { default as theme } from './theme';
+export { default as SearchParamsKeys } from './searchParamsKeys';
