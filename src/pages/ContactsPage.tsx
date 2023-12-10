@@ -21,7 +21,7 @@ const ContactsPage = () => {
   const dispatch = useAppDispatch();
   const isLoadingContacts = useAppSelector(selectIsLoading);
   const isLoadingUser = fetchUserStatus === pending;
-  const showLoader = isLoadingUser || isLoadingContacts;
+  const isLoading = isLoadingUser || isLoadingContacts;
 
   useEffect(() => {
     const promise = dispatch(fetchContacts());
@@ -51,7 +51,7 @@ const ContactsPage = () => {
 
   return (
     <>
-      {showLoader ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <>
