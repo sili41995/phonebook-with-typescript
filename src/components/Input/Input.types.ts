@@ -2,7 +2,7 @@ import { ChangeEvent, ReactElement, RefObject } from 'react';
 import { FormTypes, InputTypes, IconBtnType } from 'constants/index';
 
 export interface IProps {
-  settings: object;
+  settings?: object;
   type: InputTypes;
   placeholder?: string;
   icon?: ReactElement;
@@ -13,7 +13,7 @@ export interface IProps {
   btnIcon?: ReactElement | boolean;
   accept?: string;
   imageRef?: RefObject<HTMLImageElement>;
-  // value?: string;
+  value?: string;
   // defaultValue?: string;
   // children?: ReactNode;
   // right?: number;

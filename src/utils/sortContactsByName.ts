@@ -1,4 +1,4 @@
-import { SortTypes } from 'constants/sortTypes';
+import { SortTypes } from 'constants/index';
 import { IContact } from 'types/types';
 
 const { DESC_SORT_TYPE } = SortTypes;

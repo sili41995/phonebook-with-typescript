@@ -6,7 +6,7 @@ const filterContactsByName = (
 ): IContact[] =>
   filter
     ? contacts.filter(({ name }) =>
-        name.toLowerCase().includes(filter.toLowerCase())
+        name.toLowerCase().startsWith(filter.toLowerCase())
       )
     : contacts;
 

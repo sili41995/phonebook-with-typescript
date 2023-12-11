@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import IconButton from 'components/IconButton';
 import Filter from 'components/Filter';
 import LinkWithQuery from 'components/LinkWithQuery';
-import { IconContainer, LinkContainer } from './PrivateLinks.styled';
+import { LinkContainer } from './PrivateLinks.styled';
 import { makeBlur, toasts, getIsContactsPage } from 'utils';
 import { selectContacts } from 'redux/contacts/selectors';
 import { signOutUser } from 'redux/auth/operations';
@@ -37,10 +37,8 @@ const PrivateLinks = () => {
     <LinkContainer>
       {showFilter && <Filter />}
       <LinkWithQuery to={PagePaths.addNewContactPath}>
-        <IconContainer>
-          <SlPlus />
-        </IconContainer>
-        New Contact
+        <SlPlus />
+        <span>New Contact</span>
       </LinkWithQuery>
       <IconButton
         btnType={IconBtnType.logout}

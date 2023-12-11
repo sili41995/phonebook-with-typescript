@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import UserProfile from 'components/UserProfile';
 import Loader from 'components/Loader';
 import ContactsContainer from 'components/ContactsContainer';
-import { selectIsLoading } from 'redux/contacts/selectors';
+import { selectIsLoaded } from 'redux/contacts/selectors';
 import { fetchContacts } from 'redux/contacts/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import contactsServiceApi from 'service/contactsServiceApi';
@@ -19,9 +19,9 @@ const ContactsPage = () => {
     () => idle
   );
   const dispatch = useAppDispatch();
-  const isLoadingContacts = useAppSelector(selectIsLoading);
+  const isLoadedContacts = useAppSelector(selectIsLoaded);
   const isLoadingUser = fetchUserStatus === pending;
-  const isLoading = isLoadingUser || isLoadingContacts;
+  const isLoading = isLoadingUser || !isLoadedContacts;
 
   useEffect(() => {
     const promise = dispatch(fetchContacts());
