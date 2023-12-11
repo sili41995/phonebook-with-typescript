@@ -35,7 +35,7 @@ const ContactsListItem = ({ contact }: IProps) => {
         <ContactInfo>
           <Person>
             <Name>{name}</Name>
-            <Role>{role}</Role>
+            {role && <Role>{role}</Role>}
           </Person>
           <Phone>{phone}</Phone>
           <Email>{email}</Email>

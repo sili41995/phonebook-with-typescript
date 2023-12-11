@@ -17,7 +17,7 @@ const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 // const ContactData = lazy(() => import('components/ContactData'));
 // const AddContactForm = lazy(() => import('components/AddContactForm'));
-// const ContactDetails = lazy(() => import('components/ContactDetails'));
+const ContactDetails = lazy(() => import('components/ContactDetails'));
 // const ModalForm = lazy(() => import('components/ModalForm'));
 // const ContactDescription = lazy(() => import('components/ContactDescription'));
 const PrivateRoute = lazy(() => import('components/PrivateRoute'));
@@ -29,8 +29,8 @@ const {
   signUpPath,
   aboutPath,
   contactsPath,
-  // dynamicParam,
-  // contactPath,
+  dynamicParam,
+  contactPath,
 } = PagePaths;
 
 const App = () => {
@@ -72,10 +72,12 @@ const App = () => {
             path={contactsPath}
             element={<PrivateRoute element={<ContactsPage />} />}
           >
-            {/* <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
-              <Route path={contactPath} element={<ContactData />} />
-              <Route path={aboutPath} element={<ContactDescription />} />
+            <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
+              {/* <Route path={contactPath} element={<ContactData />} /> */}
+              {/* <Route path={aboutPath} element={<ContactDescription />} /> */}
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
+            {/*
             <Route
               path={newContactPath}
               element={<ModalForm children={<AddContactForm />} />}

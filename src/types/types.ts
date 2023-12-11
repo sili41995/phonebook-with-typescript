@@ -39,7 +39,7 @@ export interface IContact {
   phone: string;
   avatar: string;
   favorite: boolean;
-  role: string;
+  role?: string;
   email?: string;
   description?: string;
   tgUsername?: string;

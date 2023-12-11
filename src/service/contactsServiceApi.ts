@@ -106,14 +106,33 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/contacts?limit=0`, options).then(
-      (response) => {
-        if (!response.ok) {
-          throw new Error('Loading contacts failed');
+    return fetch(`${this.BASE_URL}/contacts?limit=0`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
         }
-        return response.json();
-      }
-    );
+        return data;
+      });
+  }
+
+  fetchContactById(id: string): Promise<IContact> {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: `Bearer ${this.TOKEN}`,
+      },
+    };
+
+    return fetch(`${this.BASE_URL}/contacts/${id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
   }
 
   addContact(data: IContact): Promise<IContact> {
