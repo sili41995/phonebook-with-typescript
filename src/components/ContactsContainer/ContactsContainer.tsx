@@ -1,4 +1,4 @@
-import { useMemo, FC, useEffect } from 'react';
+import { useMemo, FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PaginationBar from 'components/PaginationBar';
 import { IProps } from './ContactsContainer.types';
@@ -40,15 +40,17 @@ const ContactsContainer: FC<IProps> = ({ quantity, step }) => {
   return (
     <Container>
       {isShouldRenderList ? (
-        <ContactsList contacts={visibleContacts} />
+        <>
+          <ContactsList contacts={visibleContacts} />
+          <PaginationBar
+            quantity={quantity}
+            step={step}
+            itemsQuantity={filteredContacts.length}
+          />
+        </>
       ) : (
         <DefaultMessage message="Contact list is empty" />
       )}
-      <PaginationBar
-        quantity={quantity}
-        step={step}
-        itemsQuantity={filteredContacts.length}
-      />
     </Container>
   );
 };

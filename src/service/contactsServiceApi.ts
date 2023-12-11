@@ -56,7 +56,7 @@ class ContactsServiceApi {
       });
   }
 
-  signOutUser(): Promise<Response> {
+  signOutUser(): Promise<void> {
     const options = {
       method: 'POST',
       headers: {
@@ -64,9 +64,17 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/auth/signout`, options).then(
-      (response) => response
-    );
+    return fetch(`${this.BASE_URL}/auth/signout`, options)
+      .then((response) => {
+        if (!response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        if (data?.message) {
+          throw Error(data.message);
+        }
+      });
   }
 
   refreshUser(): Promise<ICurrentUser> {

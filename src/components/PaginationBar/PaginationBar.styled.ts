@@ -4,7 +4,7 @@ import { setBtnDisplayProp } from 'utils';
 
 export const List = styled.ul`
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
 `;
 
 export const Item = styled.li`

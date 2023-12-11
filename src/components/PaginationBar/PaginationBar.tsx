@@ -42,7 +42,7 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
             onPageBtnClick(currentPage - 1);
           }}
         >
-          {'<<GoBack'}
+          {'<< Back'}
         </Button>
       </Item>
       {isShowFirstPageBtn && (
@@ -102,7 +102,7 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
             onPageBtnClick(currentPage + 1);
           }}
         >
-          {'Next>>'}
+          {'Next >>'}
         </Button>
       </Item>
     </List>

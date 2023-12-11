@@ -4,7 +4,6 @@ import contactsServiceApi from 'service/contactsServiceApi';
 import {
   IInitialState,
   IUser,
-  ISignUpCredentials,
   ISignInRes,
   ICredentials,
   ICurrentUser,
@@ -60,7 +59,7 @@ export const signInUser = createAsyncThunk<
 );
 
 export const signOutUser = createAsyncThunk<
-  Response,
+  undefined,
   undefined,
   { rejectValue: string }
 >(
