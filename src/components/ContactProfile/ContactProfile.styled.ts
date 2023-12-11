@@ -1,30 +1,31 @@
 import styled from '@emotion/styled';
 
 export const Image = styled.img`
-  /* width: 112px; */
-  /* margin: 0 auto ${({ theme }) => theme.spacing(2)}; */
+  width: 200px;
+  height: 200px;
+  margin: 0 auto ${({ theme }) => theme.spacing(2)};
 `;
 
 export const ContactTitle = styled.div`
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* gap: ${({ theme }) => theme.spacing(2)}; */
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(2)};
 `;
 
 export const ContactName = styled.p`
-  /* color: ${({ theme }) => theme.colors.primaryFontColor}; */
-  /* font-family: Jua; */
-  /* font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px; */
-  /* font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight}; */
-  /* text-align: center; */
+  color: ${({ theme }) => theme.colors.primaryFontColor};
+  font-family: Jua;
+  font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
+  font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
+  text-align: center;
 `;
 
 export const ContactDesc = styled.p`
-  /* color: ${({ theme }) => theme.colors.secondaryFontColor}; */
-  /* font-family: Inter; */
-  /* font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px; */
-  /* font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight}; */
-  /* text-align: center; */
+  color: ${({ theme }) => theme.colors.secondaryFontColor};
+  font-family: Inter;
+  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
+  text-align: center;
 `;
 
 export const NavBar = styled.nav`

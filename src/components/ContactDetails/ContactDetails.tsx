@@ -43,7 +43,6 @@ const ContactDetails = () => {
       setFetchContactStatus(pending);
       try {
         const contact = await contactsServiceApi.fetchContactById(id);
-        console.log(contact);
         setContact(contact);
         setFetchContactStatus(resolved);
       } catch (error) {

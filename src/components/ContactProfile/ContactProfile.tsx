@@ -34,7 +34,7 @@ const ContactProfile: FC<IProps> = ({ contact }) => {
         </NavList>
       </NavBar>
       <Suspense fallback={<Loader />}>
-        <Outlet />
+        <Outlet context={contact} />
       </Suspense>
     </>
   );

@@ -49,7 +49,7 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
             onPageBtnClick({ e, page: currentPage - 1 });
           }}
         >
-          {'<< Back'}
+          {'<< Previous'}
         </Button>
       </Item>
       {isShowFirstPageBtn && (
