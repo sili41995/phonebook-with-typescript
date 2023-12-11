@@ -4,7 +4,6 @@ import { MouseEvent, ReactNode } from 'react';
 export interface IProps {
   icon: ReactNode;
   onBtnClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  // iconSize?: number;
   type?: BtnType;
   btnType: IconBtnType;
   position?: Positions;
@@ -24,6 +23,5 @@ export interface IStyledProps {
   width: number;
   height?: number;
   inputWrap?: boolean;
-  // iconSize?: number;
   btnType: IconBtnType;
 }

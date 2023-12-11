@@ -56,7 +56,7 @@ const ContactsPage = () => {
       ) : (
         <>
           <UserProfile user={user} />
-          <ContactsContainer quantity={6} step={2} />
+          <ContactsContainer quantity={6} />
         </>
       )}
       <Suspense fallback={<Loader />}>

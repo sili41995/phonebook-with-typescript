@@ -18,13 +18,10 @@ export interface IProps {
   // children?: ReactNode;
   // right?: number;
   // position?: string;
-  // fieldIconSize?: number;
-  // inputType?: FormType;
   action?: () => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IStyledProps {
-  // fieldIconSize?: number;
   formType?: FormTypes;
 }

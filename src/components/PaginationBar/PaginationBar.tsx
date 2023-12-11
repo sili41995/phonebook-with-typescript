@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { IProps } from './PaginationBar.types';
-import { getPageNumbers, getPaginationBarSettings } from 'utils';
+import { getPageNumbers, getPaginationBarSettings, makeBlur } from 'utils';
 import { SearchParamsKeys } from 'constants/index';
 import { Button, Item, List, TemplateItem } from './PaginationBar.styled';
 
@@ -28,8 +28,15 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
     step,
   });
 
-  const onPageBtnClick = (number: number): void => {
-    searchParams.set(PAGE_SP_KEY, String(number));
+  const onPageBtnClick = ({
+    e,
+    page,
+  }: {
+    e: MouseEvent<HTMLButtonElement>;
+    page: number;
+  }): void => {
+    makeBlur(e.currentTarget);
+    searchParams.set(PAGE_SP_KEY, String(page));
     setSearchParams(searchParams);
   };
 
@@ -38,8 +45,8 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
       <Item>
         <Button
           disabled={isBackNavBtnDisable}
-          onClick={() => {
-            onPageBtnClick(currentPage - 1);
+          onClick={(e) => {
+            onPageBtnClick({ e, page: currentPage - 1 });
           }}
         >
           {'<< Back'}
@@ -48,8 +55,8 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
       {isShowFirstPageBtn && (
         <Item>
           <Button
-            onClick={() => {
-              onPageBtnClick(firstPage);
+            onClick={(e) => {
+              onPageBtnClick({ e, page: firstPage });
             }}
           >
             {firstPage}
@@ -71,8 +78,8 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
           >
             <Button
               className={number === currentPage ? 'active' : ''}
-              onClick={() => {
-                onPageBtnClick(number);
+              onClick={(e) => {
+                onPageBtnClick({ e, page: number });
               }}
             >
               {number}
@@ -87,8 +94,8 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
       {isShowLastPageBtn && (
         <Item>
           <Button
-            onClick={() => {
-              onPageBtnClick(lastPage);
+            onClick={(e) => {
+              onPageBtnClick({ e, page: lastPage });
             }}
           >
             {lastPage}
@@ -98,8 +105,8 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
       <Item>
         <Button
           disabled={isNextNavBtnDisable}
-          onClick={() => {
-            onPageBtnClick(currentPage + 1);
+          onClick={(e) => {
+            onPageBtnClick({ e, page: currentPage + 1 });
           }}
         >
           {'Next >>'}

@@ -16,7 +16,7 @@ import DefaultMessage from 'components/DefaultMessage';
 
 const { FILTER_SP_KEY, SORT_SP_KEY, PAGE_SP_KEY } = SearchParamsKeys;
 
-const ContactsContainer: FC<IProps> = ({ quantity, step }) => {
+const ContactsContainer: FC<IProps> = ({ quantity }) => {
   const contacts = useAppSelector(selectContacts);
   const [searchParams] = useSearchParams();
   const filter = searchParams.get(FILTER_SP_KEY) ?? '';
@@ -44,7 +44,7 @@ const ContactsContainer: FC<IProps> = ({ quantity, step }) => {
           <ContactsList contacts={visibleContacts} />
           <PaginationBar
             quantity={quantity}
-            step={step}
+            step={2}
             itemsQuantity={filteredContacts.length}
           />
         </>
