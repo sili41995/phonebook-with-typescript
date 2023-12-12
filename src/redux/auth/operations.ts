@@ -7,10 +7,11 @@ import {
   ISignInRes,
   ICredentials,
   ICurrentUser,
+  ISignUpRes,
 } from 'types/types';
 
 export const signUpUser = createAsyncThunk<
-  IUser,
+  ISignUpRes,
   FormData,
   { rejectValue: string }
 >(

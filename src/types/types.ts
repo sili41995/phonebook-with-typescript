@@ -33,6 +33,10 @@ export interface ISignInRes extends IUser {
   user: IUser;
 }
 
+export interface ISignUpRes extends IUser {
+  user: IUser;
+}
+
 export interface IContact {
   _id: string;
   name: string;

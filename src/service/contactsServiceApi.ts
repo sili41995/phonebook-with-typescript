@@ -5,6 +5,7 @@ import {
   ICurrentUser,
   IFetchContactsRes,
   ISignInRes,
+  ISignUpRes,
   IUser,
 } from 'types/types';
 
@@ -20,7 +21,7 @@ class ContactsServiceApi {
     this.TOKEN = newToken;
   }
 
-  signUpUser(data: FormData): Promise<IUser> {
+  signUpUser(data: FormData): Promise<ISignUpRes> {
     const options = {
       method: 'POST',
       body: data,
