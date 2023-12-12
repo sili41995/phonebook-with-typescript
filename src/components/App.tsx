@@ -19,7 +19,7 @@ const ContactInfo = lazy(() => import('components/ContactInfo'));
 // const AddContactForm = lazy(() => import('components/AddContactForm'));
 const ContactDetails = lazy(() => import('components/ContactDetails'));
 // const ModalForm = lazy(() => import('components/ModalForm'));
-// const ContactDescription = lazy(() => import('components/ContactDescription'));
+const ContactDescription = lazy(() => import('components/ContactDescription'));
 const PrivateRoute = lazy(() => import('components/PrivateRoute'));
 
 const {
@@ -74,7 +74,7 @@ const App = () => {
           >
             <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
               <Route path={contactPath} element={<ContactInfo />} />
-              {/* <Route path={aboutPath} element={<ContactDescription />} /> */}
+              <Route path={aboutPath} element={<ContactDescription />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
             {/*
