@@ -18,7 +18,7 @@ const ContactProfile: FC<IProps> = ({ contact }) => {
 
   return (
     <>
-      <Image src={avatar} alt={`${name} photo`} />
+      <Image src={avatar as string} alt={`${name} photo`} />
       <ContactTitle>
         <ContactName>{name}</ContactName>
         {role && <ContactDesc>{role}</ContactDesc>}

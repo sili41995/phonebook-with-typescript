@@ -7,20 +7,13 @@ import {
   FaTelegramPlane,
   FaIdCardAlt,
   FaCheck,
-} from 'react-icons/fa'; // import { Link, useLocation } from 'react-router-dom';
-// import { GiCheckMark } from 'react-icons/gi';
+} from 'react-icons/fa';
 import { useForm, SubmitHandler } from 'react-hook-form';
-// import 'react-toastify/dist/ReactToastify.css';
-// import IconButton from 'components/IconButton';
+import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
 import { ButtonsContainer, Form, Title } from './AddContactForm.styled';
 import ModalForm from 'components/ModalForm';
-// import { toasts } from 'utils';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-// import { addContact } from 'redux/contacts/operations';
-// import { IconBtnType } from 'constants/iconBtnType';
-// import { BtnType } from 'constants/btnType';
-import { IContact, INewContact } from 'types/types';
 import {
   BtnType,
   IconBtnType,
@@ -35,9 +28,11 @@ import {
   filterEmptyFields,
   getIsContact,
   getProfileFormData,
+  onChangeAvatar,
   toasts,
 } from 'utils';
-// import { PagesPath } from 'constants/pagesPath';
+import { IContact } from 'types/types';
+import { addContact } from 'redux/contacts/operations';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
@@ -49,17 +44,19 @@ const AddContactForm: FC = () => {
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
-  } = useForm<INewContact>();
+  } = useForm<IContact>();
+  const dispatch = useAppDispatch();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    //  if (!e.target.files?.length) {
-    //    return;
-    //  }
-    //  setUserAvatar(e.target.files);
-    //  onChangeAvatar({ e, ref: userAvatarRef });
+    if (!e.target.files?.length) {
+      return;
+    }
+
+    setContactAvatar(e.target.files);
+    onChangeAvatar({ e, ref: contactAvatarRef });
   };
 
-  const handleFormSubmit: SubmitHandler<INewContact> = (data) => {
+  const handleFormSubmit: SubmitHandler<IContact> = (data) => {
     const newContactName = data.name;
     const isContact = getIsContact({ newContactName, contacts });
 
@@ -72,18 +69,18 @@ const AddContactForm: FC = () => {
       data.avatar = contactAvatar;
     }
 
-    const contactData = filterEmptyFields<INewContact>(data);
-    const formData = getProfileFormData(contactData);
+    const contactData = filterEmptyFields<IContact>(data);
+    const contactFormData = getProfileFormData(contactData);
 
-    //   dispatch(addContact(data))
-    //     .unwrap()
-    //     .then(() => {
-    //       toasts.successToast('Contact added successfully');
-    //       reset();
-    //     })
-    //     .catch(() => {
-    //       toasts.errorToast('Adding a contact failed');
-    //     });
+    dispatch(addContact(contactFormData))
+      .unwrap()
+      .then(() => {
+        toasts.successToast('Contact added successfully');
+        reset();
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
+      });
   };
 
   return (
@@ -98,7 +95,7 @@ const AddContactForm: FC = () => {
           imageRef={contactAvatarRef}
         />
         <Input
-          settings={{ ...register('name', { required: true }) }}
+          settings={{ ...register('name') }}
           type={InputTypes.text}
           placeholder="Name"
           icon={<FaUser size={IconSizes.defaultIconSize} />}

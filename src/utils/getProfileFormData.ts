@@ -3,7 +3,7 @@ import { IProfile } from 'types/types';
 const getProfileFormData = (profile: IProfile): FormData => {
   const formData = new FormData();
 
-  if (profile.avatar && profile.avatar.length) {
+  if (profile.avatar.length) {
     formData.append('avatar', profile.avatar[0]);
   }
 

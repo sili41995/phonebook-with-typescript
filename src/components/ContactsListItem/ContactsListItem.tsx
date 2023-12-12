@@ -25,13 +25,13 @@ const ContactsListItem = ({ contact }: IProps) => {
   const contactPath = `${id}/${PagePaths.contactPath}`;
 
   const handleDelBtnClick = () => {
-    deleteContact(id);
+    deleteContact(id as string);
   };
 
   return (
     <Item>
       <LinkWithQuery to={contactPath}>
-        <Image src={avatar} alt={name} />
+        <Image src={avatar as string} alt={name} />
         <ContactInfo>
           <Person>
             <Name>{name}</Name>

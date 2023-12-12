@@ -2,7 +2,7 @@ export type ProfileEntry = [string, string | boolean | FileList];
 
 export interface IProfile {
   [key: string]: string | boolean | FileList | undefined;
-  avatar: FileList;
+  avatar: FileList | string;
 }
 
 export interface ICredentials {
@@ -43,29 +43,17 @@ export interface ISignUpRes extends IUser {
   user: IUser;
 }
 
-export interface IBaseContact {
+export interface IContact {
+  [key: string]: string | FileList | boolean | undefined;
+  _id?: string;
   name: string;
   phone: string;
   role?: string;
   email?: string;
   description?: string;
   tgUsername?: string;
-}
-
-export interface INewContact extends IBaseContact {
-  [key: string]: string | FileList | boolean | undefined;
-  avatar: FileList;
   favorite?: boolean;
-}
-
-export interface IContact extends IBaseContact {
-  _id: string;
-  avatar: string;
-  favorite: boolean;
-}
-
-export interface IUpdateContact extends IBaseContact {
-  favorite: boolean;
+  avatar: FileList | string;
 }
 
 export interface IFetchContactsRes {

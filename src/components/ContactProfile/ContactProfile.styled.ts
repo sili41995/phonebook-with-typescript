@@ -4,6 +4,7 @@ export const Image = styled.img`
   width: 200px;
   height: 200px;
   margin: 0 auto ${({ theme }) => theme.spacing(2)};
+  border-radius: 30%;
 `;
 
 export const ContactTitle = styled.div`

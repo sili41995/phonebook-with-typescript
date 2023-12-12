@@ -58,9 +58,9 @@ const SignUpForm = () => {
     }
 
     const userData = filterEmptyFields<ISignUpCredentials>(data);
-    const formData = getProfileFormData(userData);
+    const userFormData = getProfileFormData(userData);
 
-    dispatch(signUpUser(formData))
+    dispatch(signUpUser(userFormData))
       .unwrap()
       .then(() => {
         toasts.successToast('User has been successfully registered');

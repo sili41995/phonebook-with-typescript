@@ -6,8 +6,6 @@ import {
   IFetchContactsRes,
   ISignInRes,
   ISignUpRes,
-  INewContact,
-  IUpdateContact,
 } from 'types/types';
 
 class ContactsServiceApi {
@@ -146,12 +144,14 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/contacts`, options).then((response) => {
-      if (!response.ok) {
-        throw new Error('Adding a contact failed');
-      }
-      return response.json();
-    });
+    return fetch(`${this.BASE_URL}/contacts`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
   }
 
   deleteContact(id: string): Promise<IContact> {
@@ -178,7 +178,7 @@ class ContactsServiceApi {
     data,
   }: {
     id: string;
-    data: IUpdateContact;
+    data: IContact;
   }): Promise<IContact> {
     const options = {
       method: 'PATCH',
