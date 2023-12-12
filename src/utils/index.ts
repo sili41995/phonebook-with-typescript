@@ -1,7 +1,7 @@
 export { default as filterContactsByName } from './filterContactsByName';
 // export { default as getAvatar } from 'utils/getAvatar';
 // export { default as getContactInfo } from 'utils/getContactInfo';
-// export { default as getPhoneNumber } from 'utils/getPhoneNumber';
+export { default as getPhoneNumber } from './getPhoneNumber';
 // export { default as getUserInfo } from 'utils/getUserInfo';
 // export { default as isAuthPage } from 'utils/isAuthPage';
 export { default as getIsContactsPage } from './getIsContactsPage';
@@ -29,3 +29,4 @@ export { default as getPageNumbers } from './getPageNumbers';
 export { default as getPaginationBarSettings } from './getPaginationBarSettings';
 export { default as setBtnDisplayProp } from './setBtnDisplayProp';
 export { default as getVisibleContacts } from './getVisibleContacts';
+export { default as getTelegramLink } from './getTelegramLink';
