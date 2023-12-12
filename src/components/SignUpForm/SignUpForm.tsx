@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Form, Message, Title } from './SignUpForm.styled';
 import {
   filterEmptyFields,
-  getCredentialsFormData,
+  getProfileFormData,
   onChangeAvatar,
   toasts,
 } from 'utils';
@@ -58,7 +58,7 @@ const SignUpForm = () => {
     }
 
     const userData = filterEmptyFields<ISignUpCredentials>(data);
-    const formData = getCredentialsFormData(userData);
+    const formData = getProfileFormData(userData);
 
     dispatch(signUpUser(formData))
       .unwrap()

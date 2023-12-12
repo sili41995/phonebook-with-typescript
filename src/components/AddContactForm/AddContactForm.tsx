@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useRef } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import {
   FaUser,
   FaPhoneAlt,
@@ -20,7 +20,7 @@ import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 // import { addContact } from 'redux/contacts/operations';
 // import { IconBtnType } from 'constants/iconBtnType';
 // import { BtnType } from 'constants/btnType';
-import { IContact } from 'types/types';
+import { IContact, INewContact } from 'types/types';
 import {
   BtnType,
   IconBtnType,
@@ -31,9 +31,17 @@ import {
 import GoBackLink from 'components/GoBackLink';
 import IconButton from 'components/IconButton';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import {
+  filterEmptyFields,
+  getIsContact,
+  getProfileFormData,
+  toasts,
+} from 'utils';
 // import { PagesPath } from 'constants/pagesPath';
 
 const AddContactForm: FC = () => {
+  const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
+  const contacts = useAppSelector(selectContacts);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
   const {
@@ -41,7 +49,7 @@ const AddContactForm: FC = () => {
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
-  } = useForm<IContact>();
+  } = useForm<INewContact>();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     //  if (!e.target.files?.length) {
@@ -51,15 +59,22 @@ const AddContactForm: FC = () => {
     //  onChangeAvatar({ e, ref: userAvatarRef });
   };
 
-  const handleFormSubmit: SubmitHandler<IContact> = (data) => {
-    //   const contactName = data.name;
-    //   const isContact = contacts.some(
-    //     ({ name }: IContact) => name === contactName
-    //   );
-    //   if (isContact) {
-    //     toasts.warnToast(`${contactName} is already in contacts`);
-    //     return;
-    //   }
+  const handleFormSubmit: SubmitHandler<INewContact> = (data) => {
+    const newContactName = data.name;
+    const isContact = getIsContact({ newContactName, contacts });
+
+    if (isContact) {
+      toasts.warnToast(`${newContactName} is already in contacts`);
+      return;
+    }
+
+    if (contactAvatar) {
+      data.avatar = contactAvatar;
+    }
+
+    const contactData = filterEmptyFields<INewContact>(data);
+    const formData = getProfileFormData(contactData);
+
     //   dispatch(addContact(data))
     //     .unwrap()
     //     .then(() => {

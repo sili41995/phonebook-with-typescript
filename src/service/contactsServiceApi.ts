@@ -6,6 +6,8 @@ import {
   IFetchContactsRes,
   ISignInRes,
   ISignUpRes,
+  INewContact,
+  IUpdateContact,
 } from 'types/types';
 
 class ContactsServiceApi {
@@ -135,12 +137,11 @@ class ContactsServiceApi {
       });
   }
 
-  addContact(data: IContact): Promise<IContact> {
+  addContact(data: FormData): Promise<IContact> {
     const options = {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: data,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
         Authorization: `Bearer ${this.TOKEN}`,
       },
     };
@@ -177,7 +178,7 @@ class ContactsServiceApi {
     data,
   }: {
     id: string;
-    data: IContact;
+    data: IUpdateContact;
   }): Promise<IContact> {
     const options = {
       method: 'PATCH',
