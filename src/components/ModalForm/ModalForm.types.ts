@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 
 export interface IProps {
   children: ReactNode;
-  formType: FormTypes;
+  formType?: FormTypes;
 }
 
 export interface IStyledProps {
-  formType: FormTypes;
+  formType?: FormTypes;
 }

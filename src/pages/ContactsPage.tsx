@@ -49,16 +49,12 @@ const ContactsPage = () => {
     getUser();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <UserProfile user={user} />
-          <ContactsContainer quantity={6} />
-        </>
-      )}
+      <UserProfile user={user} />
+      <ContactsContainer quantity={6} />
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
