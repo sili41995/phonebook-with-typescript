@@ -20,7 +20,7 @@ export const Container = styled.div`
   box-shadow: ${({ formType, theme }) =>
     formType === FormTypes.authForm ? theme.shadows.secondaryShadow : 'none'};
   margin: ${({ formType, theme }) =>
-    formType === FormTypes.authForm ? `${theme.spacing(10)} auto` : 'auto'};
+    formType === FormTypes.authForm ? `${theme.spacing(10)} auto` : '0px'};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.primaryGap}px;

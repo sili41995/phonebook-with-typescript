@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import {
-  ButtonContainer,
+  ButtonsContainer,
   Container,
   ManipulationButtons,
 } from './ContactDetails.styled';
@@ -71,7 +71,7 @@ const ContactDetails = () => {
     <Loader />
   ) : (
     <Container>
-      <ButtonContainer>
+      <ButtonsContainer>
         <GoBackLink />
         {isLoadedContact && (
           <ManipulationButtons>
@@ -92,7 +92,7 @@ const ContactDetails = () => {
             />
           </ManipulationButtons>
         )}
-      </ButtonContainer>
+      </ButtonsContainer>
       {isLoadedContact && <ContactProfile contact={contact} />}
       {isFetchError && <DefaultMessage message="Contact is absent" />}
     </Container>

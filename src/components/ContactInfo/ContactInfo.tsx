@@ -14,7 +14,7 @@ import { getPhoneNumber, getTelegramLink } from 'utils';
 
 const ContactInfo = () => {
   const contact: IContact = useOutletContext();
-  const { phone, email, tgUsername = '' } = contact;
+  const { phone, email, tgUsername } = contact;
   const phoneNumber = getPhoneNumber(phone);
   const telegramLink = getTelegramLink(tgUsername);
 
