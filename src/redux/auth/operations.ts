@@ -3,7 +3,6 @@ import initialState from 'redux/initialState';
 import contactsServiceApi from 'service/contactsServiceApi';
 import {
   IInitialState,
-  IUser,
   ISignInRes,
   ICredentials,
   ICurrentUser,

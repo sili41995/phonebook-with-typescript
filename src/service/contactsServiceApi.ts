@@ -6,7 +6,6 @@ import {
   IFetchContactsRes,
   ISignInRes,
   ISignUpRes,
-  IUser,
 } from 'types/types';
 
 class ContactsServiceApi {

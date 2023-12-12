@@ -21,7 +21,6 @@ export interface IUser {
 
 export interface ICurrentUser extends IUser {
   _id: string;
-  avatar: string;
   phone?: string;
   lastName?: string;
   location?: string;
