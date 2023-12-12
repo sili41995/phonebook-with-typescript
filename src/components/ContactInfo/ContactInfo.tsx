@@ -44,17 +44,19 @@ const ContactInfo = () => {
           />
         </Field>
       )}
-      <Field>
-        <Info>
-          <Title>Username on Telegram</Title>
-          <Description>{tgUsername}</Description>
-        </Info>
-        <ActionLink
-          link={`tg://resolve?domain=${telegramLink}`}
-          btnType={IconBtnType.chat}
-          icon={<FaRegComment size={IconSizes.otherIconSize} />}
-        />
-      </Field>
+      {tgUsername && (
+        <Field>
+          <Info>
+            <Title>Username on Telegram</Title>
+            <Description>{tgUsername}</Description>
+          </Info>
+          <ActionLink
+            link={`tg://resolve?domain=${telegramLink}`}
+            btnType={IconBtnType.chat}
+            icon={<FaRegComment size={IconSizes.otherIconSize} />}
+          />
+        </Field>
+      )}
     </Container>
   );
 };
