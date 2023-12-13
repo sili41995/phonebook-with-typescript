@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 
 export const UserProfileContainer = styled.div`
+  width: 230px;
   flex-shrink: 0;
 `;
 
 export const Image = styled.img`
   width: 150px;
+  height: 150px;
+  border-radius: 30%;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -15,6 +18,7 @@ export const Name = styled.p`
   font-family: Jua;
   font-size: ${({ theme }) => theme.fontSize.titleFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
+  ${({ theme }) => theme.trimText}
 `;
 
 export const UserData = styled.div`
@@ -32,6 +36,7 @@ export const FullName = styled.p`
   font-size: ${({ theme }) => theme.fontSize.subtitleFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   text-align: center;
+  ${({ theme }) => theme.trimText}
 `;
 
 export const Email = styled.p`
@@ -40,6 +45,7 @@ export const Email = styled.p`
   font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   text-align: center;
+  ${({ theme }) => theme.trimText}
 `;
 
 export const ContactInfo = styled.div`
@@ -53,13 +59,12 @@ export const ContactInfo = styled.div`
   &:not(:last-child) {
     margin-bottom: ${({ theme }) => theme.spacing(6)};
   }
+  & p {
+    ${({ theme }) => theme.trimText}
+  }
 `;
 
 export const ContactInfoIconWrap = styled.span`
   display: flex;
   align-items: center;
-  & svg {
-    width: 22px;
-    height: 22px;
-  }
 `;

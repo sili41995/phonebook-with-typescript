@@ -1,4 +1,4 @@
-export enum IconBtnType {
+enum IconBtnType {
   delete = 'delete',
   edit = 'edit',
   phone = 'phone',
@@ -12,3 +12,5 @@ export enum IconBtnType {
   toggleShowPassword = 'toggleShowPassword',
   clearFilter = 'clearFilter',
 }
+
+export default IconBtnType;

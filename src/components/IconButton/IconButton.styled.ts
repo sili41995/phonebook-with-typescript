@@ -30,10 +30,6 @@ export const Button = styled.button`
       !inputWrap && theme.shadows.primaryShadow};
   }
   & svg {
-    width: ${({ iconSize }: IStyledProps) =>
-      iconSize ? `${iconSize}px` : '100%'};
-    height: ${({ iconSize }: IStyledProps) =>
-      iconSize ? `${iconSize}px` : '100%'};
     color: ${({ btnType }) => setIconFill(btnType)};
     transition: color ${({ theme }) => theme.transitionDurationAndFunc};
   }

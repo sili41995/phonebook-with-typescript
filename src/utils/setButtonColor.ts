@@ -1,5 +1,4 @@
-import { IconBtnType } from 'constants/iconBtnType';
-import theme from 'constants/theme';
+import { IconBtnType, theme } from 'constants/index';
 
 function setButtonColor(btnType: IconBtnType): string {
   switch (btnType) {

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { IconBtnType } from 'constants/iconBtnType';
+import { IconBtnType } from 'constants/index';
 
 export interface IProps {
   link: string;
-  children: ReactNode;
+  icon: ReactNode;
   btnType: IconBtnType;
 }
 

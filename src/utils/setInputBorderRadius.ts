@@ -1,9 +1,8 @@
-import { FormType } from 'constants/formType';
-import theme from 'constants/theme';
+import { FormTypes, theme } from 'constants/index';
 
-const setInputBorderRadius = (inputType: FormType | undefined) => {
-  switch (inputType) {
-    case FormType.filter:
+const setInputBorderRadius = (formType: FormTypes | undefined) => {
+  switch (formType) {
+    case FormTypes.filter:
       return theme.borderRadius.primaryBorderRadius;
 
     default:

@@ -5,71 +5,79 @@ import Loader from 'components/Loader';
 import SharedLayout from 'components/SharedLayout';
 import GlobalStyles from 'components/GlobalStyles';
 import Toast from 'components/Toast';
-import { selectIsRefreshing } from 'redux/auth/selectors';
+import { selectIsRefreshing, selectToken } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { PagesPath } from 'constants/pagesPath';
+import { PagePaths } from 'constants/index';
 
-const RegisterPage = lazy(() => import('pages/RegisterPage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
+const SignUpPage = lazy(() => import('pages/SignUpPage'));
+const SignInPage = lazy(() => import('pages/SignInPage'));
 const AboutPage = lazy(() => import('pages/AboutPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
-const ContactData = lazy(() => import('components/ContactData'));
+const ContactInfo = lazy(() => import('components/ContactInfo'));
 const AddContactForm = lazy(() => import('components/AddContactForm'));
 const ContactDetails = lazy(() => import('components/ContactDetails'));
-const ContactModalForm = lazy(() => import('components/ContactModalForm'));
 const ContactDescription = lazy(() => import('components/ContactDescription'));
 const PrivateRoute = lazy(() => import('components/PrivateRoute'));
+
+const {
+  homePath,
+  newContactPath,
+  signInPath,
+  signUpPath,
+  aboutPath,
+  contactsPath,
+  dynamicParam,
+  contactPath,
+} = PagePaths;
 
 const App = () => {
   const dispatch = useAppDispatch();
   const isRefreshing = useAppSelector(selectIsRefreshing);
+  const token = useAppSelector(selectToken);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
+
     dispatch(refreshUser());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return isRefreshing ? (
     <Loader />
   ) : (
     <>
       <Routes>
-        <Route path={PagesPath.homePath} element={<SharedLayout />}>
+        <Route path={homePath} element={<SharedLayout />}>
           <Route
             index
-            element={<PublicRoute restricted element={<LoginPage />} />}
+            element={<PublicRoute restricted element={<SignInPage />} />}
           />
           <Route
-            path={PagesPath.loginPath}
-            element={<PublicRoute restricted element={<LoginPage />} />}
+            path={signInPath}
+            element={<PublicRoute restricted element={<SignInPage />} />}
           />
           <Route
-            path={PagesPath.registerPath}
-            element={<PublicRoute restricted element={<RegisterPage />} />}
+            path={signUpPath}
+            element={<PublicRoute restricted element={<SignUpPage />} />}
           />
           <Route
-            path={PagesPath.aboutPath}
+            path={aboutPath}
             element={<PublicRoute element={<AboutPage />} />}
           />
           <Route
-            path={PagesPath.contactsPath}
+            path={contactsPath}
             element={<PrivateRoute element={<ContactsPage />} />}
           >
-            <Route
-              path={`${PagesPath.contactDetailsPath}/:${PagesPath.dynamicParam}`}
-              element={<ContactDetails />}
-            >
-              <Route path={PagesPath.contactPath} element={<ContactData />} />
-              <Route
-                path={PagesPath.aboutPath}
-                element={<ContactDescription />}
-              />
+            <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
+              <Route path={contactPath} element={<ContactInfo />} />
+              <Route path={aboutPath} element={<ContactDescription />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
-            <Route
-              path={PagesPath.newContactPath}
-              element={<ContactModalForm children={<AddContactForm />} />}
-            />
+
+            <Route path={newContactPath} element={<AddContactForm />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>

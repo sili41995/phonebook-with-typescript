@@ -6,11 +6,11 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store, { persistor } from 'redux/store';
 import App from 'components/App';
-import theme from 'constants/theme';
+import { theme } from 'constants/index';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter basename="/phonebook-with-typescript">
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>

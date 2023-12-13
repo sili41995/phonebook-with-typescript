@@ -1,8 +1,10 @@
 import theme from 'constants/theme';
-import { isAuthPage } from 'utils';
+import { getIsAuthPage } from 'utils';
 
 const setAuthPageBackgroundColor = (path: string): void => {
-  document.body.style.backgroundColor = isAuthPage(path)
+  const isAuthPage = getIsAuthPage(path);
+
+  document.body.style.backgroundColor = isAuthPage
     ? theme.colors.authPageBackgroundColor
     : theme.colors.whiteColor;
 };

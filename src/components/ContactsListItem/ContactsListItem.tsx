@@ -1,8 +1,7 @@
 import { AiOutlineDelete } from 'react-icons/ai';
 import IconButton from 'components/IconButton';
-import LinkWithQuery from 'components/LinkWithQuery/LinkWithQuery';
-import { getContactInfo } from 'utils';
-import { useDeleteContact } from 'hooks';
+import LinkWithQuery from 'components/LinkWithQuery';
+import useDeleteContact from 'hooks/useDeleteContact';
 import {
   Email,
   Image,
@@ -16,46 +15,43 @@ import {
 import { selectIsLoading } from 'redux/contacts/selectors';
 import { useAppSelector } from 'hooks/redux';
 import { IProps } from './ContactsListItem.types';
-import { PagesPath } from 'constants/pagesPath';
-import { IconBtnType } from 'constants/iconBtnType';
+import { IconSizes, PagePaths, Positions } from 'constants/index';
+import { IconBtnType } from 'constants/index';
 
 const ContactsListItem = ({ contact }: IProps) => {
-  const { userAvatar, name, id, role, number, email } = getContactInfo(contact);
+  const { avatar, name, _id: id, role, phone, email } = contact;
   const isLoading = useAppSelector(selectIsLoading);
   const deleteContact = useDeleteContact();
-  const path = `${PagesPath.contactDetailsPath}/${id}/${PagesPath.contactPath}`;
+  const contactPath = `${id}/${PagePaths.contactPath}`;
 
   const handleDelBtnClick = () => {
-    if (id) {
-      deleteContact(id);
-    }
+    deleteContact(id as string);
   };
 
   return (
     <Item>
-      <LinkWithQuery to={path}>
-        <Image src={userAvatar} alt={name} />
+      <LinkWithQuery to={contactPath}>
+        <Image src={avatar as string} alt={name} />
         <ContactInfo>
           <Person>
             <Name>{name}</Name>
-            <Role>{role}</Role>
+            {role && <Role>{role}</Role>}
           </Person>
-          <Phone>{number}</Phone>
+          <Phone>{phone}</Phone>
           <Email>{email}</Email>
         </ContactInfo>
       </LinkWithQuery>
       <IconButton
         top={0}
         right={0}
-        position="absolute"
+        position={Positions.absolute}
         disabled={isLoading}
         btnType={IconBtnType.deleteTransparent}
         width={44}
         height={35}
         onBtnClick={handleDelBtnClick}
-      >
-        <AiOutlineDelete />
-      </IconButton>
+        icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
+      />
     </Item>
   );
 };

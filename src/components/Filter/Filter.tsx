@@ -1,27 +1,40 @@
-import { IoMdClose } from 'react-icons/io';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { BsSortAlphaDown } from 'react-icons/bs';
-import { BsSortAlphaDownAlt } from 'react-icons/bs';
-import { FiFilter } from 'react-icons/fi';
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
+import {
+  FaSortAlphaDown,
+  FaSortAlphaUp,
+  FaSistrix,
+  FaTimes,
+} from 'react-icons/fa';
 import { FilterContainer } from './Filter.styled';
 import { makeBlur, updateSortSearchParams } from 'utils';
 import IconButton from 'components/IconButton';
 import Input from 'components/Input';
-import { FormType } from 'constants/formType';
-import { SearchParamsKeys } from 'constants/searchParamsKeys';
-import { SortTypes } from 'constants/sortTypes';
-import { IconBtnType } from 'constants/iconBtnType';
+import {
+  FormTypes,
+  IconBtnType,
+  IconSizes,
+  InputTypes,
+  SearchParamsKeys,
+  SortTypes,
+} from 'constants/index';
 
-const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
+const { FILTER_SP_KEY, SORT_SP_KEY, PAGE_SP_KEY } = SearchParamsKeys;
 const { DESC_SORT_TYPE } = SortTypes;
 
 const Filter = () => {
-  const [showFilter, setShowFilter] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const inputRef = useRef<HTMLInputElement>(null);
   const filter = searchParams.get(FILTER_SP_KEY) ?? '';
+  const [showFilter, setShowFilter] = useState<boolean>(() => Boolean(filter));
   const deskSortType = searchParams.get(SORT_SP_KEY) === DESC_SORT_TYPE;
+  const clearFilterBtnIcon = Boolean(filter) && (
+    <FaTimes size={IconSizes.primaryIconSize} />
+  );
+  const sortBtnIcon = deskSortType ? (
+    <FaSortAlphaDown size={IconSizes.primaryIconSize} />
+  ) : (
+    <FaSortAlphaUp size={IconSizes.primaryIconSize} />
+  );
 
   useEffect(() => {
     if (!showFilter) {
@@ -29,12 +42,6 @@ const Filter = () => {
       setSearchParams(searchParams);
     }
   }, [searchParams, setSearchParams, showFilter]);
-
-  useEffect(() => {
-    if (filter) {
-      setShowFilter(true);
-    }
-  }, [filter]);
 
   const onSortBtnClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     makeBlur(currentTarget);
@@ -46,6 +53,7 @@ const Filter = () => {
     value
       ? searchParams.set(FILTER_SP_KEY, value)
       : searchParams.delete(FILTER_SP_KEY);
+    searchParams.delete(PAGE_SP_KEY);
     setSearchParams(searchParams);
   };
 
@@ -63,34 +71,29 @@ const Filter = () => {
     <FilterContainer>
       {showFilter && (
         <Input
-          ref={inputRef}
-          type="text"
+          type={InputTypes.text}
           value={filter}
           onChange={onFilterChange}
-          inputType={FormType.filter}
+          formType={FormTypes.filter}
           autoFocus
           inputWrap
-          children={filter && <IoMdClose />}
+          btnIcon={clearFilterBtnIcon}
           btnType={IconBtnType.clearFilter}
           action={onClearFilterBtnClick}
         />
       )}
       <IconButton
         btnType={IconBtnType.filter}
-        iconSize={28}
         width={44}
         onBtnClick={onFilterBtnClick}
-      >
-        <FiFilter />
-      </IconButton>
+        icon={<FaSistrix size={IconSizes.otherIconSize} />}
+      />
       <IconButton
         btnType={IconBtnType.filter}
-        iconSize={28}
         width={44}
         onBtnClick={onSortBtnClick}
-      >
-        {deskSortType ? <BsSortAlphaDown /> : <BsSortAlphaDownAlt />}
-      </IconButton>
+        icon={sortBtnIcon}
+      />
     </FilterContainer>
   );
 };

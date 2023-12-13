@@ -1,7 +1,6 @@
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { HiOutlinePhone } from 'react-icons/hi';
-import { SlLocationPin } from 'react-icons/sl';
-import { getUserInfo } from 'utils';
+import { FC } from 'react';
+import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   UserInfo,
   Email,
@@ -13,49 +12,51 @@ import {
   ContactInfoIconWrap,
   UserProfileContainer,
 } from './UserProfile.styled';
-import { selectUser } from 'redux/auth/selectors';
-import { useAppSelector } from 'hooks/redux';
+import { IconSizes } from 'constants/index';
+import { IProps } from './UserProfile.types';
 
-const UserProfile = () => {
-  const user = useAppSelector(selectUser);
-  const {
-    name,
-    userAvatar,
-    userName,
-    email,
-    dateOfBirth,
-    phoneNumber,
-    location,
-  } = getUserInfo(user);
+const UserProfile: FC<IProps> = ({ user }) => {
+  if (!user) return <UserProfileContainer />;
+
+  const { name, avatar, email, dateOfBirth, phone, location, lastName } = user;
+  const fullName = lastName ? `${name} ${lastName}` : name;
 
   return (
     <UserProfileContainer>
       <Name>{name}</Name>
       <UserData>
-        <Image src={userAvatar} alt="user avatar" />
-        <FullName>{userName}</FullName>
+        <Image src={avatar} alt="user avatar" />
+        <FullName>{fullName}</FullName>
         <Email>{email}</Email>
       </UserData>
-      <UserInfo>
-        <ContactInfo>
-          <ContactInfoIconWrap>
-            <AiOutlineCalendar />
-          </ContactInfoIconWrap>
-          {dateOfBirth}
-        </ContactInfo>
-        <ContactInfo>
-          <ContactInfoIconWrap>
-            <HiOutlinePhone />
-          </ContactInfoIconWrap>
-          {phoneNumber}
-        </ContactInfo>
-        <ContactInfo>
-          <ContactInfoIconWrap>
-            <SlLocationPin />
-          </ContactInfoIconWrap>
-          {location}
-        </ContactInfo>
-      </UserInfo>
+      {(phone || dateOfBirth || location) && (
+        <UserInfo>
+          {dateOfBirth && (
+            <ContactInfo>
+              <ContactInfoIconWrap>
+                <SlEvent size={IconSizes.secondaryIconSize} />
+              </ContactInfoIconWrap>
+              <p>{dateOfBirth}</p>
+            </ContactInfo>
+          )}
+          {phone && (
+            <ContactInfo>
+              <ContactInfoIconWrap>
+                <SlPhone size={IconSizes.secondaryIconSize} />
+              </ContactInfoIconWrap>
+              <p>{phone}</p>
+            </ContactInfo>
+          )}
+          {location && (
+            <ContactInfo>
+              <ContactInfoIconWrap>
+                <SlLocationPin size={IconSizes.secondaryIconSize} />
+              </ContactInfoIconWrap>
+              <p>{location}</p>
+            </ContactInfo>
+          )}
+        </UserInfo>
+      )}
     </UserProfileContainer>
   );
 };

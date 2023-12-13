@@ -1,97 +1,96 @@
-import { FC, useEffect } from 'react';
-import { HiPhone } from 'react-icons/hi';
-import { FaUser } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
-import { GiCheckMark } from 'react-icons/gi';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
-import IconButton from 'components/IconButton';
 import Input from 'components/Input';
-import { Buttons, Form, Title } from './AddContactForm.styled';
-import { toasts } from 'utils';
+import { ButtonsContainer, Form, Title } from './AddContactForm.styled';
+import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import { addContact } from 'redux/contacts/operations';
-import { IconBtnType } from 'constants/iconBtnType';
-import { BtnType } from 'constants/btnType';
-import { IContact } from 'types/types';
+import { InputTypes } from 'constants/index';
+import GoBackLink from 'components/GoBackLink';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { PagesPath } from 'constants/pagesPath';
+import {
+  filterEmptyFields,
+  getIsContact,
+  getProfileFormData,
+  onChangeAvatar,
+  toasts,
+} from 'utils';
+import { IContact } from 'types/types';
+import { addContact } from 'redux/contacts/operations';
+import ContactFormInputs from 'components/ContactFormInputs';
+import AcceptBtn from 'components/AcceptBtn';
 
 const AddContactForm: FC = () => {
+  const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
   const contacts = useAppSelector(selectContacts);
+  const contactAvatarRef = useRef<HTMLImageElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
-  const dispatch = useAppDispatch();
   const {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm<IContact>();
-  const location = useLocation();
-  const goBackLink = location.state?.from || PagesPath.homePath;
+  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (isSubmitting) {
-      errors.name && toasts.errorToast('Name is required');
-      errors.number && toasts.errorToast('Phone is required');
-    }
-  }, [errors, isSubmitting]);
-
-  const handleFormSubmit: SubmitHandler<IContact> = (data) => {
-    const contactName = data.name;
-    const isContact = contacts.some(
-      ({ name }: IContact) => name === contactName
-    );
-    if (isContact) {
-      toasts.warnToast(`${contactName} is already in contacts`);
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.length) {
       return;
     }
-    dispatch(addContact(data))
+
+    setContactAvatar(e.target.files);
+    onChangeAvatar({ e, ref: contactAvatarRef });
+  };
+
+  const handleFormSubmit: SubmitHandler<IContact> = (data) => {
+    const newContactName = data.name;
+    const isContact = getIsContact({ newContactName, contacts });
+
+    if (isContact) {
+      toasts.warnToast(`${newContactName} is already in contacts`);
+      return;
+    }
+
+    if (contactAvatar) {
+      data.avatar = contactAvatar;
+    }
+
+    const contactData = filterEmptyFields<IContact>(data);
+    const contactFormData = getProfileFormData(contactData);
+
+    dispatch(addContact(contactFormData))
       .unwrap()
       .then(() => {
         toasts.successToast('Contact added successfully');
         reset();
       })
-      .catch(() => {
-        toasts.errorToast('Adding a contact failed');
+      .catch((error) => {
+        toasts.errorToast(error);
       });
   };
 
   return (
-    <>
+    <ModalForm>
       <Title>Add contact</Title>
       <Form onSubmit={handleSubmit(handleFormSubmit)}>
         <Input
-          settings={{ ...register('name', { required: true, minLength: 1 }) }}
-          type="text"
-          placeholder="Name"
-          autoFocus
-          inputWrap
-          fieldIcon={<FaUser />}
-          fieldIconSize={18}
+          settings={{ ...register('avatar') }}
+          accept="image/png, image/jpeg, image/jpg"
+          onChange={onChangeInput}
+          type={InputTypes.file}
+          imageRef={contactAvatarRef}
         />
-        <Input
-          settings={{ ...register('number', { required: true }) }}
-          type="tel"
-          placeholder="Phone"
-          inputWrap
-          fieldIcon={<HiPhone />}
-          fieldIconSize={18}
+        <ContactFormInputs
+          register={register}
+          errors={errors}
+          isSubmitting={isSubmitting}
         />
-        <Buttons>
-          <IconButton
-            disabled={isLoading}
-            btnType={IconBtnType.accept}
-            width={44}
-            height={35}
-            type={BtnType.submit}
-          >
-            <GiCheckMark />
-          </IconButton>
-          <Link to={goBackLink}>Cancel</Link>
-        </Buttons>
+        <ButtonsContainer>
+          <AcceptBtn disabled={isLoading} />
+          <GoBackLink />
+        </ButtonsContainer>
       </Form>
-    </>
+    </ModalForm>
   );
 };
 

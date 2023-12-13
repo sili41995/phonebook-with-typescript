@@ -1,8 +1,8 @@
-import { FormType } from 'constants/formType';
+import { FormTypes } from 'constants/index';
 
-const setInputMaxWidth = (inputType: FormType | undefined) => {
-  switch (inputType) {
-    case FormType.filter:
+const setInputMaxWidth = (formType: FormTypes | undefined) => {
+  switch (formType) {
+    case FormTypes.filter:
       return '200px';
 
     default:

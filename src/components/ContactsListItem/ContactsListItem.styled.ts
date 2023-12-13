@@ -22,16 +22,19 @@ export const Item = styled.li`
 
 export const Image = styled.img`
   width: 70px;
+  height: 70px;
+  border-radius: 50%;
 `;
 
 export const ContactInfo = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  gap: ${({ theme }) => theme.primaryGap}px;
   align-items: center;
-  & div {
-    flex-basis: calc((100% - ${({ theme }) => theme.primaryGap}*2px) / 3);
+  & div,
+  & p {
+    width: 165px;
+    ${({ theme }) => theme.trimText}
   }
 `;
 
@@ -43,6 +46,8 @@ export const Name = styled.p`
   font-size: ${({ theme }) => theme.fontSize.otherFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.secondaryFontWeight};
   text-align: center;
+  /* ${({ theme }) => theme.trimText} */
+  overflow: hidden;
 `;
 
 export const Role = styled.p`

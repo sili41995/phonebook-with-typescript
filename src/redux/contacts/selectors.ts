@@ -8,3 +8,5 @@ export const selectIsLoading = (state: IInitialState) =>
   state.contacts.isLoading;
 
 export const selectIsLoaded = (state: IInitialState) => state.contacts.isLoaded;
+
+export const selectCount = (state: IInitialState) => state.contacts.count;

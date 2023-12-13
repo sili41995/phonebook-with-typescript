@@ -1,44 +1,63 @@
-import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { useTargetContact } from 'hooks';
-import { getContactInfo } from 'utils';
-import Loader from 'components/Loader';
+import { FaEnvelope, FaPhoneAlt, FaRegComment } from 'react-icons/fa';
+import { useOutletContext } from 'react-router-dom';
 import {
-  ContactDesc,
-  ContactName,
-  ContactTitle,
-  Image,
-  ListItem,
-  List,
-  Navigation,
+  Title,
+  Description,
+  Container,
+  Field,
+  Info,
 } from './ContactInfo.styled';
-import { PagesPath } from 'constants/pagesPath';
+import { IContact } from 'types/types';
+import ActionLink from 'components/ActionLink';
+import { IconBtnType, IconSizes } from 'constants/index';
+import { getPhoneNumber, getTelegramLink } from 'utils';
 
 const ContactInfo = () => {
-  const targetContact = useTargetContact();
-  const { name, role, userAvatar } = getContactInfo(targetContact);
+  const contact: IContact = useOutletContext();
+  const { phone, email, tgUsername } = contact;
+  const phoneNumber = getPhoneNumber(phone);
+  const telegramLink = getTelegramLink(tgUsername);
 
   return (
-    <>
-      <Image src={userAvatar} alt={`${name} photo`} />
-      <ContactTitle>
-        <ContactName>{name}</ContactName>
-        <ContactDesc>{role}</ContactDesc>
-      </ContactTitle>
-      <Navigation>
-        <List>
-          <ListItem>
-            <NavLink to={PagesPath.contactPath}>Contact</NavLink>
-          </ListItem>
-          <ListItem>
-            <NavLink to={PagesPath.aboutPath}>About</NavLink>
-          </ListItem>
-        </List>
-      </Navigation>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
-    </>
+    <Container>
+      <Field>
+        <Info>
+          <Title>Phone number</Title>
+          <Description>{phone}</Description>
+        </Info>
+        <ActionLink
+          link={`tel:${phoneNumber}`}
+          btnType={IconBtnType.phone}
+          icon={<FaPhoneAlt size={IconSizes.otherIconSize} />}
+        />
+      </Field>
+      {email && (
+        <Field>
+          <Info>
+            <Title>Email Address</Title>
+            <Description>{email}</Description>
+          </Info>
+          <ActionLink
+            link={`mailto:${email}`}
+            btnType={IconBtnType.message}
+            icon={<FaEnvelope size={IconSizes.otherIconSize} />}
+          />
+        </Field>
+      )}
+      {tgUsername && (
+        <Field>
+          <Info>
+            <Title>Username on Telegram</Title>
+            <Description>{tgUsername}</Description>
+          </Info>
+          <ActionLink
+            link={`tg://resolve?domain=${telegramLink}`}
+            btnType={IconBtnType.chat}
+            icon={<FaRegComment size={IconSizes.otherIconSize} />}
+          />
+        </Field>
+      )}
+    </Container>
   );
 };
 

@@ -6,7 +6,6 @@ export const LinkContainer = styled.div`
   & a {
     display: flex;
     gap: ${({ theme }) => theme.spacing(3)};
-    justify-content: space-between;
     align-items: center;
     white-space: nowrap;
     border-radius: ${({ theme }) => theme.borderRadius.primaryBorderRadius}px;
@@ -23,9 +22,4 @@ export const LinkContainer = styled.div`
       box-shadow: ${({ theme }) => theme.shadows.primaryShadow};
     }
   }
-`;
-
-export const IconContainer = styled.span`
-  display: flex;
-  align-items: center;
 `;

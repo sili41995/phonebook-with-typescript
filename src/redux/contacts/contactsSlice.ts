@@ -6,10 +6,10 @@ import {
   fetchContacts,
   updateContact,
 } from './operations';
-import { logoutUser } from 'redux/auth/operations';
-import { IContactsInitialState } from 'types/types';
+import { signOutUser } from 'redux/auth/operations';
+import { IContactsState } from 'types/types';
 
-const contactsState: IContactsInitialState = initialState.contacts;
+const contactsState: IContactsState = initialState.contacts;
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -22,24 +22,30 @@ const contactsSlice = createSlice({
         isLoading: false,
         isLoaded: true,
         error: initialState.contacts.error,
-        items: payload,
+        items: payload.contacts,
+        count: payload.count,
       }))
       .addCase(addContact.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
         items: [...state.items, payload],
+        count: (state.count as number) + 1,
       }))
       .addCase(deleteContact.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        items: state.items.filter(({ id }) => id !== payload.id),
+        items: state.items.filter(({ _id }) => _id !== payload._id),
+        count: (state.count as number) - 1,
       }))
       .addCase(updateContact.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        items: [...state.items.filter(({ id }) => id !== payload.id), payload],
+        items: [
+          ...state.items.filter(({ _id }) => _id !== payload._id),
+          payload,
+        ],
       }))
-      .addCase(logoutUser.fulfilled, (state) => ({
+      .addCase(signOutUser.fulfilled, (state) => ({
         ...state,
         ...initialState.contacts,
       }))

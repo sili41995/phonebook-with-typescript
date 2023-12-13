@@ -1,46 +1,53 @@
-import { forwardRef } from 'react';
-import { Container, StyledInput } from './Input.styled';
+import { FC } from 'react';
+import { Container, Image, Label, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
+import { Positions, InputTypes } from 'constants/index';
+import image from 'images/default-signup-avatar.png';
 
-const Input = forwardRef<HTMLInputElement, IProps>(
-  (
-    {
-      fieldIcon,
-      settings,
-      inputWrap,
-      btnType,
-      children,
-      action,
-      right = 0,
-      ...props
-    },
-    ref
-  ) => {
-    const input = <StyledInput ref={ref} {...settings} {...props} />;
-    const inputWithWrap = (
-      <Container {...props}>
+const Input: FC<IProps> = ({
+  settings,
+  inputWrap,
+  action,
+  btnIcon,
+  btnType,
+  type,
+  imageRef,
+  icon,
+  ...otherProps
+}) => {
+  const input = <StyledInput type={type} {...settings} {...otherProps} />;
+
+  if (type === InputTypes.file) {
+    return (
+      <Label>
+        <Image src={image} alt="user avatar" ref={imageRef} />
         {input}
-        {fieldIcon}
-        {btnType && (
-          <IconButton
-            position="absolute"
-            top="center"
-            right={right}
-            btnType={btnType}
-            width={44}
-            height={35}
-            onBtnClick={action}
-            inputWrap
-          >
-            {children}
-          </IconButton>
-        )}
-      </Container>
+      </Label>
     );
-
-    return inputWrap ? inputWithWrap : input;
   }
-);
+
+  const inputWithWrap = (
+    <Container>
+      {input}
+      {icon}
+      {btnType && (
+        <IconButton
+          onBtnClick={action}
+          btnType={btnType}
+          position={Positions.absolute}
+          top="center"
+          right={0}
+          height={35}
+          width={44}
+          icon={btnIcon}
+          inputWrap
+        />
+      )}
+    </Container>
+  );
+
+  return inputWrap ? inputWithWrap : input;
+};
 
 export default Input;

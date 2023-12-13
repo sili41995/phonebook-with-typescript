@@ -1,29 +1,27 @@
+import { BtnType, IconBtnType, Positions } from 'constants/index';
 import { MouseEvent, ReactNode } from 'react';
-import { IconBtnType } from 'constants/iconBtnType';
-import { BtnType } from 'constants/btnType';
 
 export interface IProps {
-  iconSize?: number;
-  children: ReactNode;
+  icon: ReactNode;
+  onBtnClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: BtnType;
   btnType: IconBtnType;
-  position?: string;
+  position?: Positions;
   top?: number | 'center';
   right?: number;
   width: number;
   height?: number;
   inputWrap?: boolean;
   disabled?: boolean;
-  onBtnClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  title?: string;
 }
 
 export interface IStyledProps {
-  position?: string;
+  position?: Positions;
   top?: number | 'center';
   right?: number;
-  width?: number;
+  width: number;
   height?: number;
   inputWrap?: boolean;
-  iconSize?: number;
   btnType: IconBtnType;
 }

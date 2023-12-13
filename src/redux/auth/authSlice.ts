@@ -1,9 +1,9 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
-import { loginUser, logoutUser, refreshUser, registerUser } from './operations';
-import { IAuthInitialState } from 'types/types';
+import { refreshUser, signInUser, signOutUser, signUpUser } from './operations';
+import { IAuthState } from 'types/types';
 
-const authState: IAuthInitialState = initialState.auth;
+const authState: IAuthState = initialState.auth;
 
 const authSlice = createSlice({
   name: 'auth',
@@ -11,22 +11,22 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.fulfilled, (state, { payload }) => ({
-        ...state,
-        isLoading: false,
-        user: { ...payload.user },
-        token: payload.token,
-        isLoggedIn: true,
-      }))
-      .addCase(loginUser.fulfilled, (state, { payload }) => ({
-        ...state,
-        isLoading: false,
-        user: { ...payload.user },
-        token: payload.token,
-        isLoggedIn: true,
-      }))
-      .addCase(logoutUser.fulfilled, () => ({
+      .addCase(signUpUser.fulfilled, (state, { payload }) => ({
         ...initialState.auth,
+      }))
+      .addCase(signInUser.fulfilled, (state, { payload }) => ({
+        ...state,
+        isLoading: false,
+        user: { ...payload.user },
+        token: payload.token,
+        isLoggedIn: true,
+      }))
+      .addCase(signOutUser.fulfilled, (state) => ({
+        ...initialState.auth,
+        user: {
+          ...state.user,
+          email: initialState.auth.user.email,
+        },
       }))
       .addCase(refreshUser.pending, (state) => ({
         ...state,
@@ -36,7 +36,11 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        user: { name: payload.name, email: payload.email },
+        user: {
+          name: payload.name,
+          email: payload.email,
+          avatar: payload.avatar,
+        },
         isLoggedIn: true,
         isRefreshing: false,
       }))
@@ -46,11 +50,20 @@ const authSlice = createSlice({
         isRefreshing: false,
       }))
       .addMatcher(
-        isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending),
-        (state) => ({ ...state, isLoading: true, error: null })
+        isAnyOf(signUpUser.pending, signInUser.pending, signOutUser.pending),
+        (state) => ({
+          ...state,
+          isLoading: true,
+          error: null,
+        })
       )
       .addMatcher(
-        isAnyOf(registerUser.rejected, loginUser.rejected, logoutUser.rejected),
+        isAnyOf(
+          signUpUser.rejected,
+          signInUser.rejected,
+          signOutUser.rejected,
+          refreshUser.rejected
+        ),
         (state, { payload }) => ({
           ...state,
           isLoading: false,

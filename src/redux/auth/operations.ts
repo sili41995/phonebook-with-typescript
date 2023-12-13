@@ -1,24 +1,26 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
 import contactsServiceApi from 'service/contactsServiceApi';
-import { ICredentials, IInitialState, IUser, IAuthResponse } from 'types/types';
-
-export const registerUser = createAsyncThunk<
-  IAuthResponse,
+import {
+  IInitialState,
+  ISignInRes,
   ICredentials,
+  ICurrentUser,
+  ISignUpRes,
+} from 'types/types';
+
+export const signUpUser = createAsyncThunk<
+  ISignUpRes,
+  FormData,
   { rejectValue: string }
 >(
-  'auth/registerUser',
+  'auth/signUpUser',
   async (
-    credentials: ICredentials,
+    credentials: FormData,
     { rejectWithValue }: { rejectWithValue: Function }
   ) => {
     try {
-      const response = await contactsServiceApi.registerUser(credentials);
-      if (response.keyValue) {
-        throw new Error('This user is already registered');
-      }
-      contactsServiceApi.token = response.token;
+      const response = await contactsServiceApi.signUpUser(credentials);
       return response;
     } catch (error) {
       if (error instanceof Error) {
@@ -28,12 +30,12 @@ export const registerUser = createAsyncThunk<
   }
 );
 
-export const loginUser = createAsyncThunk<
-  IAuthResponse,
+export const signInUser = createAsyncThunk<
+  ISignInRes,
   ICredentials,
   { rejectValue: string }
 >(
-  'auth/loginUser',
+  'auth/signInUser',
   async (
     credentials: ICredentials,
     {
@@ -42,8 +44,8 @@ export const loginUser = createAsyncThunk<
     }: { rejectWithValue: Function; signal: AbortSignal }
   ) => {
     try {
-      const response = await contactsServiceApi.loginUser(credentials, signal);
-      if (!response.token) {
+      const response = await contactsServiceApi.signInUser(credentials, signal);
+      if (response instanceof Error) {
         throw new Error('Wrong username or password');
       }
       contactsServiceApi.token = response.token;
@@ -56,20 +58,16 @@ export const loginUser = createAsyncThunk<
   }
 );
 
-export const logoutUser = createAsyncThunk<
+export const signOutUser = createAsyncThunk<
   undefined,
   undefined,
   { rejectValue: string }
 >(
-  'auth/logoutUser',
+  'auth/signOutUser',
   async (_, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
-      const response = await contactsServiceApi.logoutUser();
-      if (response.message) {
-        throw new Error(response.message);
-      }
+      await contactsServiceApi.signOutUser();
       contactsServiceApi.token = initialState.auth.token;
-      return response;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -79,7 +77,7 @@ export const logoutUser = createAsyncThunk<
 );
 
 export const refreshUser = createAsyncThunk<
-  IUser,
+  ICurrentUser,
   undefined,
   { rejectValue: string }
 >(
@@ -93,15 +91,9 @@ export const refreshUser = createAsyncThunk<
   ) => {
     const state = getState() as IInitialState;
     const { token } = state.auth;
-    if (!token) {
-      return rejectWithValue('Unable to fetch user');
-    }
     try {
       contactsServiceApi.token = token;
       const response = await contactsServiceApi.refreshUser();
-      if (response.message) {
-        throw new Error(response.message);
-      }
       return response;
     } catch (error) {
       if (error instanceof Error) {

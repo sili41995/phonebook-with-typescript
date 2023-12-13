@@ -1,5 +1,4 @@
-import { SearchParamsKeys } from 'constants/searchParamsKeys';
-import { SortTypes } from 'constants/sortTypes';
+import { SearchParamsKeys, SortTypes } from 'constants/index';
 
 const { ASC_SORT_TYPE, DESC_SORT_TYPE } = SortTypes;
 

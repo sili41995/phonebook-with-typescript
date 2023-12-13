@@ -1,9 +1,8 @@
-import { FormType } from 'constants/formType';
-import theme from 'constants/theme';
+import { FormTypes, theme } from 'constants/index';
 
-const setInputFontSize = (inputType: FormType | undefined) => {
-  switch (inputType) {
-    case FormType.authForm:
+const setInputFontSize = (formType: FormTypes | undefined) => {
+  switch (formType) {
+    case FormTypes.authForm:
       return theme.fontSize.otherFontSize;
 
     default:

@@ -1,15 +1,15 @@
-import { FormType } from 'constants/formType';
+import { FormTypes } from 'constants/index';
 
-const setInputHeight = (inputType: FormType | undefined) => {
-  switch (inputType) {
-    case FormType.filter:
+const setInputHeight = (formType: FormTypes | undefined) => {
+  switch (formType) {
+    case FormTypes.filter:
       return '100%';
 
-    case FormType.authForm:
+    case FormTypes.authForm:
       return '60px';
 
     default:
-      return '50px';
+      return '44px';
   }
 };
 
