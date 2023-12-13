@@ -12,7 +12,21 @@ import { IconSizes, InputTypes, regEx } from 'constants/index';
 import { toasts } from 'utils';
 import { IProps } from './ContactFormInputs.types';
 
-const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
+const ContactFormInputs: FC<IProps> = ({
+  register,
+  errors,
+  isSubmitting,
+  contact = {},
+}) => {
+  const {
+    name = '',
+    phone = '',
+    email = '',
+    role = '',
+    tgUsername = '',
+    description = '',
+  } = contact;
+
   useEffect(() => {
     errors.name && toasts.errorToast('First name is required');
     errors.phone &&
@@ -32,6 +46,7 @@ const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
         type={InputTypes.text}
         placeholder="Name"
         icon={<FaUser size={IconSizes.defaultIconSize} />}
+        defaultValue={name}
         inputWrap
         autoFocus
       />
@@ -42,6 +57,7 @@ const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
         type={InputTypes.text}
         placeholder="Phone"
         icon={<FaPhoneAlt size={IconSizes.defaultIconSize} />}
+        defaultValue={phone}
         inputWrap
       />
       <Input
@@ -53,6 +69,7 @@ const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
         type={InputTypes.email}
         placeholder="Email"
         icon={<FaEnvelope size={IconSizes.defaultIconSize} />}
+        defaultValue={email}
         inputWrap
       />
       <Input
@@ -62,6 +79,7 @@ const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
         type={InputTypes.email}
         placeholder="Role"
         icon={<FaIdCardAlt size={IconSizes.defaultIconSize} />}
+        defaultValue={role}
         inputWrap
       />
       <Input
@@ -71,6 +89,7 @@ const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
         type={InputTypes.email}
         placeholder="Telegram username"
         icon={<FaTelegramPlane size={IconSizes.defaultIconSize} />}
+        defaultValue={tgUsername}
         inputWrap
       />
       <Input
@@ -80,6 +99,7 @@ const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting }) => {
         type={InputTypes.email}
         placeholder="About contact"
         icon={<FaInfo size={IconSizes.defaultIconSize} />}
+        defaultValue={description}
         inputWrap
       />
     </>

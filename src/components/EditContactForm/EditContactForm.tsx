@@ -22,7 +22,7 @@ import ModalForm from 'components/ModalForm';
 // import { PagesPath } from 'constants/pagesPath';
 // import { IconBtnType } from 'constants/iconBtnType';
 
-const EditContactForm = ({ setEditContact, contact }: IProps) => {
+const EditContactForm = ({ setEditContact, ...otherProps }: IProps) => {
   // const isLoading = useAppSelector(selectIsLoading);
   // const dispatch = useAppDispatch();
   // const id = useParams()[PagesPath.dynamicParam];
@@ -62,6 +62,7 @@ const EditContactForm = ({ setEditContact, contact }: IProps) => {
           register={register}
           errors={errors}
           isSubmitting={isSubmitting}
+          {...otherProps}
         />
       </Form>
 

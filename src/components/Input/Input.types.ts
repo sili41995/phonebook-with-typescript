@@ -14,7 +14,7 @@ export interface IProps {
   accept?: string;
   imageRef?: RefObject<HTMLImageElement>;
   value?: string;
-  // defaultValue?: string;
+  defaultValue?: string;
   // children?: ReactNode;
   // right?: number;
   // position?: string;

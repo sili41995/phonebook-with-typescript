@@ -5,4 +5,5 @@ export interface IProps {
   register: UseFormRegister<IContact>;
   errors: FieldErrors<IContact>;
   isSubmitting: boolean;
+  contact?: IContact;
 }
