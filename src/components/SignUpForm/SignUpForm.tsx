@@ -25,11 +25,12 @@ import { useAppDispatch } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
 import {
   PagePaths,
-  regEx,
+  regExp,
   FormTypes,
   IconSizes,
   InputTypes,
 } from 'constants/index';
+import AuthFormInputs from 'components/AuthFormInputs';
 
 const SignUpForm = () => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
@@ -73,18 +74,6 @@ const SignUpForm = () => {
 
   useEffect(() => {
     errors.name && toasts.errorToast('First name is required');
-    errors.email &&
-      toasts.errorToast(
-        errors.email.type === 'required'
-          ? 'Email is required'
-          : 'Email must be letters, digits, dot and @'
-      );
-    errors.password &&
-      toasts.errorToast(
-        errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 6 characters'
-      );
     errors.phone &&
       toasts.errorToast(
         'Phone number must be digits and can start with character +'
@@ -123,35 +112,17 @@ const SignUpForm = () => {
           inputWrap
         />
         <Input
-          settings={{ ...register('phone', { pattern: regEx.phoneRegEx }) }}
+          settings={{ ...register('phone', { pattern: regExp.phoneRegEx }) }}
           type={InputTypes.text}
           placeholder="Phone"
           icon={<FaPhoneAlt size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
           inputWrap
         />
-        <Input
-          settings={{
-            ...register('email', {
-              required: true,
-              pattern: regEx.emailRegEx,
-            }),
-          }}
-          type={InputTypes.email}
-          placeholder="Email"
-          icon={<FaEnvelope size={IconSizes.secondaryIconSize} />}
-          formType={FormTypes.authForm}
-          inputWrap
-        />
-        <Input
-          settings={{
-            ...register('password', { required: true, minLength: 6 }),
-          }}
-          type={InputTypes.text}
-          placeholder="Password"
-          icon={<FaLock size={IconSizes.secondaryIconSize} />}
-          formType={FormTypes.authForm}
-          inputWrap
+        <AuthFormInputs
+          register={register}
+          errors={errors}
+          isSubmitting={isSubmitting}
         />
         <Input
           settings={{ ...register('location') }}
@@ -163,7 +134,7 @@ const SignUpForm = () => {
         />
         <Input
           settings={{
-            ...register('dateOfBirth', { pattern: regEx.dateOfBirthRegEx }),
+            ...register('dateOfBirth', { pattern: regExp.dateOfBirthRegEx }),
           }}
           type={InputTypes.text}
           placeholder="Date of birth"
