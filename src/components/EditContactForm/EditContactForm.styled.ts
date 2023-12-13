@@ -15,7 +15,7 @@ export const Form = styled.form`
 `;
 
 export const ButtonsContainer = styled.div`
-  /* display: flex; */
-  /* gap: ${({ theme }) => theme.spacing(10)}; */
-  /* align-self: center; */
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(10)};
+  justify-content: center;
 `;
