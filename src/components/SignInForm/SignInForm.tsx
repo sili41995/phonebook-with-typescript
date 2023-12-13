@@ -10,12 +10,20 @@ import { signInUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { selectUser } from 'redux/auth/selectors';
 import { ICredentials } from 'types/types';
-import { PagePaths } from 'constants/index';
-import AuthFormInputs from 'components/AuthFormInputs';
+import {
+  FormTypes,
+  IconBtnType,
+  IconSizes,
+  InputTypes,
+  PagePaths,
+} from 'constants/index';
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
+import Input from 'components/Input';
 
 const SignInForm = () => {
   const user = useAppSelector(selectUser);
   const [credentials, setCredentials] = useState<ICredentials | null>(null);
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -23,8 +31,23 @@ const SignInForm = () => {
     handleSubmit,
     watch,
   } = useForm<ICredentials>();
+  const passwordInputType = isShowPassword
+    ? InputTypes.text
+    : InputTypes.password;
   const watchPassword = watch('password');
+  const passwordBtnIcon =
+    Boolean(watchPassword) &&
+    (isShowPassword ? (
+      <FaEyeSlash size={IconSizes.secondaryIconSize} />
+    ) : (
+      <FaEye size={IconSizes.secondaryIconSize} />
+    ));
   const signUpPageLink = `/${PagePaths.signUpPath}`;
+  const greetings = `Welcome to Phonebook${user.name ? `, ${user.name}` : ''}!`;
+
+  const toggleIsShowPassword = () => {
+    setIsShowPassword((prevState) => !prevState);
+  };
 
   useEffect(() => {
     if (credentials) {
@@ -44,11 +67,24 @@ const SignInForm = () => {
     }
   }, [credentials, dispatch]);
 
+  useEffect(() => {
+    errors.email &&
+      toasts.errorToast(
+        errors.email.type === 'required'
+          ? 'Email is required'
+          : 'Email must be letters, digits, dot and @'
+      );
+    errors.password &&
+      toasts.errorToast(
+        errors.password.type === 'required'
+          ? 'Password is required'
+          : 'Password minimum length is 6 characters'
+      );
+  }, [isSubmitting, errors]);
+
   const onSubmit: SubmitHandler<ICredentials> = (data) => {
     setCredentials(data);
   };
-
-  const greetings = `Welcome to Phonebook${user.name ? `, ${user.name}` : ''}!`;
 
   return (
     <>
@@ -56,11 +92,27 @@ const SignInForm = () => {
       <Message>{greetings}</Message>
       <Image src={user.avatar ?? defaultAvatar} alt="user avatar" />
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <AuthFormInputs
-          watchPassword={watchPassword}
-          register={register}
-          errors={errors}
-          isSubmitting={isSubmitting}
+        <Input
+          settings={{ ...register('email', { required: true }) }}
+          type={InputTypes.email}
+          placeholder="Email"
+          icon={<FaEnvelope size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
+          autoFocus
+        />
+        <Input
+          settings={{
+            ...register('password', { required: true, minLength: 6 }),
+          }}
+          type={passwordInputType}
+          placeholder="Password"
+          icon={<FaLock size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
+          btnType={IconBtnType.toggleShowPassword}
+          btnIcon={passwordBtnIcon}
+          action={toggleIsShowPassword}
         />
         <AuthFormMessage
           action="Sign up"

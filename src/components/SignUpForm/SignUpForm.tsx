@@ -30,7 +30,6 @@ import {
   IconSizes,
   InputTypes,
 } from 'constants/index';
-import AuthFormInputs from 'components/AuthFormInputs';
 
 const SignUpForm = () => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
@@ -74,6 +73,18 @@ const SignUpForm = () => {
 
   useEffect(() => {
     errors.name && toasts.errorToast('First name is required');
+    errors.email &&
+      toasts.errorToast(
+        errors.email.type === 'required'
+          ? 'Email is required'
+          : 'Email must be letters, digits, dot and @'
+      );
+    errors.password &&
+      toasts.errorToast(
+        errors.password.type === 'required'
+          ? 'Password is required'
+          : 'Password minimum length is 6 characters'
+      );
     errors.phone &&
       toasts.errorToast(
         'Phone number must be digits and can start with character +'
@@ -111,6 +122,7 @@ const SignUpForm = () => {
           formType={FormTypes.authForm}
           inputWrap
         />
+
         <Input
           settings={{ ...register('phone', { pattern: regExp.phoneRegEx }) }}
           type={InputTypes.text}
@@ -119,10 +131,28 @@ const SignUpForm = () => {
           formType={FormTypes.authForm}
           inputWrap
         />
-        <AuthFormInputs
-          register={register}
-          errors={errors}
-          isSubmitting={isSubmitting}
+        <Input
+          settings={{
+            ...register('email', {
+              required: true,
+              pattern: regExp.emailRegEx,
+            }),
+          }}
+          type={InputTypes.email}
+          placeholder="Email"
+          icon={<FaEnvelope size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
+        />
+        <Input
+          settings={{
+            ...register('password', { required: true, minLength: 6 }),
+          }}
+          type={InputTypes.text}
+          placeholder="Password"
+          icon={<FaLock size={IconSizes.secondaryIconSize} />}
+          formType={FormTypes.authForm}
+          inputWrap
         />
         <Input
           settings={{ ...register('location') }}
