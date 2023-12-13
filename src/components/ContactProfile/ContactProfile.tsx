@@ -25,7 +25,7 @@ const ContactProfile: FC<IProps> = ({
     <>
       <Image src={avatar as string} alt={`${name} photo`} />
       {editContact ? (
-        <EditContactForm {...otherProps} />
+        <EditContactForm {...otherProps} contact={contact} />
       ) : (
         <>
           <ContactTitle>

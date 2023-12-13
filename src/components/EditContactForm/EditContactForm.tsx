@@ -18,10 +18,11 @@ import { IContact } from 'types/types';
 // import { BtnType } from 'constants/btnType';
 import { IProps } from './EditContactForm.types';
 import ContactFormInputs from 'components/ContactFormInputs';
+import ModalForm from 'components/ModalForm';
 // import { PagesPath } from 'constants/pagesPath';
 // import { IconBtnType } from 'constants/iconBtnType';
 
-const EditContactForm = ({ setEditContact }: IProps) => {
+const EditContactForm = ({ setEditContact, contact }: IProps) => {
   // const isLoading = useAppSelector(selectIsLoading);
   // const dispatch = useAppDispatch();
   // const id = useParams()[PagesPath.dynamicParam];
@@ -54,7 +55,7 @@ const EditContactForm = ({ setEditContact }: IProps) => {
   };
 
   return (
-    <>
+    <ModalForm>
       <Title>Contact editing</Title>
       <Form onSubmit={handleSubmit(handleFormSubmit)}>
         <ContactFormInputs
@@ -103,7 +104,7 @@ const EditContactForm = ({ setEditContact }: IProps) => {
           </IconButton>
         </Buttons>
       </Form> */}
-    </>
+    </ModalForm>
   );
 };
 
