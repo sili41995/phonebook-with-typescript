@@ -15,9 +15,6 @@ export interface IProps {
   imageRef?: RefObject<HTMLImageElement>;
   value?: string;
   defaultValue?: string;
-  // children?: ReactNode;
-  // right?: number;
-  // position?: string;
   action?: () => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }

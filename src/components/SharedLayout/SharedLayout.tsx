@@ -3,13 +3,13 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Container, Header, Main, Section } from './SharedLayout.styled';
 import NavigationBar from 'components/NavigationBar';
 import Loader from 'components/Loader';
-import { getIsContactsPage } from 'utils';
+import { getIsContactsPage, setAuthPageBackgroundColor } from 'utils';
 
 const SharedLayout = () => {
   const { pathname } = useLocation();
   const isContactsPage = getIsContactsPage(pathname);
 
-  // setAuthPageBackgroundColor(pathname);
+  setAuthPageBackgroundColor(pathname);
 
   return (
     <>

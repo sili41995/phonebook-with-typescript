@@ -22,7 +22,7 @@ import GoBackLink from 'components/GoBackLink';
 import IconButton from 'components/IconButton';
 import { useAppSelector } from 'hooks/redux';
 import { selectIsLoading } from 'redux/contacts/selectors';
-import { useDeleteContact } from 'hooks';
+import useDeleteContact from 'hooks/useDeleteContact';
 
 const { idle, pending, resolved, rejected } = FetchStatuses;
 
