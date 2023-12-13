@@ -8,7 +8,7 @@ import {
   FaTelegramPlane,
   FaIdCardAlt,
 } from 'react-icons/fa';
-import { IconSizes, InputTypes, regEx } from 'constants/index';
+import { IconSizes, InputTypes, regExp } from 'constants/index';
 import { toasts } from 'utils';
 import { IProps } from './ContactFormInputs.types';
 
@@ -52,7 +52,7 @@ const ContactFormInputs: FC<IProps> = ({
       />
       <Input
         settings={{
-          ...register('phone', { pattern: regEx.phoneRegEx, required: true }),
+          ...register('phone', { pattern: regExp.phoneRegEx, required: true }),
         }}
         type={InputTypes.text}
         placeholder="Phone"
@@ -63,7 +63,7 @@ const ContactFormInputs: FC<IProps> = ({
       <Input
         settings={{
           ...register('email', {
-            pattern: regEx.emailRegEx,
+            pattern: regExp.emailRegEx,
           }),
         }}
         type={InputTypes.email}
