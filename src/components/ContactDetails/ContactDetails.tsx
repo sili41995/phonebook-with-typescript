@@ -29,6 +29,7 @@ const { idle, pending, resolved, rejected } = FetchStatuses;
 const ContactDetails = () => {
   const deleteContact = useDeleteContact();
   const [contact, setContact] = useState<IContact | null>(null);
+  const [editContact, setEditContact] = useState<boolean>(false);
   const [fetchContactStatus, setFetchContactStatus] = useState<FetchStatuses>(
     () => idle
   );
@@ -63,7 +64,7 @@ const ContactDetails = () => {
   };
 
   const onEditBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    // setEditState();
+    setEditContact((prevState) => !prevState);
     makeBlur(e.currentTarget);
   };
 
@@ -75,14 +76,16 @@ const ContactDetails = () => {
         <GoBackLink />
         {isLoadedContact && (
           <ManipulationButtons>
-            <IconButton
-              disabled={isLoading}
-              btnType={IconBtnType.delete}
-              width={44}
-              height={35}
-              onBtnClick={onDelBtnClick}
-              icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
-            />
+            {!editContact && (
+              <IconButton
+                disabled={isLoading}
+                btnType={IconBtnType.delete}
+                width={44}
+                height={35}
+                onBtnClick={onDelBtnClick}
+                icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
+              />
+            )}
             <IconButton
               btnType={IconBtnType.edit}
               width={44}
@@ -93,7 +96,13 @@ const ContactDetails = () => {
           </ManipulationButtons>
         )}
       </ButtonsContainer>
-      {isLoadedContact && <ContactProfile contact={contact} />}
+      {isLoadedContact && (
+        <ContactProfile
+          contact={contact}
+          editContact={editContact}
+          setEditContact={setEditContact}
+        />
+      )}
       {isFetchError && <DefaultMessage message="Contact is absent" />}
     </Container>
   );

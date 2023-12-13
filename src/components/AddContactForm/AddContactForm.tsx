@@ -1,26 +1,12 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
-import {
-  FaUser,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaInfo,
-  FaTelegramPlane,
-  FaIdCardAlt,
-  FaCheck,
-} from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
 import { ButtonsContainer, Form, Title } from './AddContactForm.styled';
 import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import {
-  BtnType,
-  IconBtnType,
-  IconSizes,
-  InputTypes,
-  regEx,
-} from 'constants/index';
+import { BtnType, IconBtnType, IconSizes, InputTypes } from 'constants/index';
 import GoBackLink from 'components/GoBackLink';
 import IconButton from 'components/IconButton';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
@@ -33,6 +19,7 @@ import {
 } from 'utils';
 import { IContact } from 'types/types';
 import { addContact } from 'redux/contacts/operations';
+import ContactFormInputs from 'components/ContactFormInputs';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
@@ -94,60 +81,10 @@ const AddContactForm: FC = () => {
           type={InputTypes.file}
           imageRef={contactAvatarRef}
         />
-        <Input
-          settings={{ ...register('name') }}
-          type={InputTypes.text}
-          placeholder="Name"
-          icon={<FaUser size={IconSizes.defaultIconSize} />}
-          inputWrap
-          autoFocus
-        />
-        <Input
-          settings={{
-            ...register('phone', { pattern: regEx.phoneRegEx, required: true }),
-          }}
-          type={InputTypes.text}
-          placeholder="Phone"
-          icon={<FaPhoneAlt size={IconSizes.defaultIconSize} />}
-          inputWrap
-        />
-        <Input
-          settings={{
-            ...register('email', {
-              pattern: regEx.emailRegEx,
-            }),
-          }}
-          type={InputTypes.email}
-          placeholder="Email"
-          icon={<FaEnvelope size={IconSizes.defaultIconSize} />}
-          inputWrap
-        />
-        <Input
-          settings={{
-            ...register('role'),
-          }}
-          type={InputTypes.email}
-          placeholder="Role"
-          icon={<FaIdCardAlt size={IconSizes.defaultIconSize} />}
-          inputWrap
-        />
-        <Input
-          settings={{
-            ...register('tgUsername'),
-          }}
-          type={InputTypes.email}
-          placeholder="Telegram username"
-          icon={<FaTelegramPlane size={IconSizes.defaultIconSize} />}
-          inputWrap
-        />
-        <Input
-          settings={{
-            ...register('description'),
-          }}
-          type={InputTypes.email}
-          placeholder="About contact"
-          icon={<FaInfo size={IconSizes.defaultIconSize} />}
-          inputWrap
+        <ContactFormInputs
+          register={register}
+          errors={errors}
+          isSubmitting={isSubmitting}
         />
         <ButtonsContainer>
           <IconButton
