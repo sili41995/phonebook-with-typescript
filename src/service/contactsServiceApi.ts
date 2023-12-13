@@ -181,7 +181,7 @@ class ContactsServiceApi {
     data: IContact;
   }): Promise<IContact> {
     const options = {
-      method: 'PATCH',
+      method: 'PUT',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -189,14 +189,14 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/contacts/${id}`, options).then(
-      (response) => {
-        if (!response.ok) {
-          throw new Error('Contact update failed');
+    return fetch(`${this.BASE_URL}/contacts/${id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
         }
-        return response.json();
-      }
-    );
+        return data;
+      });
   }
 }
 

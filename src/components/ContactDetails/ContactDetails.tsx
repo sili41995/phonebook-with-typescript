@@ -40,6 +40,10 @@ const ContactDetails = () => {
   const isFetchError = fetchContactStatus === rejected;
 
   useEffect(() => {
+    setEditContact(false);
+  }, [id]);
+
+  useEffect(() => {
     const getContact = async (id: string) => {
       setFetchContactStatus(pending);
       try {

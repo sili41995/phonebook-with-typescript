@@ -11,7 +11,7 @@ export const Title = styled.p`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.primaryGap}px;
+  gap: ${({ theme }) => theme.spacing(4)};
 `;
 
 export const ButtonsContainer = styled.div`

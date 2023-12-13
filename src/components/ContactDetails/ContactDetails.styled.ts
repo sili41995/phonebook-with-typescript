@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.spacing(20)};
+  margin-bottom: ${({ theme }) => theme.spacing(10)};
 `;
 
 export const ManipulationButtons = styled.div`

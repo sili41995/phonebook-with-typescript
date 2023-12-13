@@ -20,15 +20,16 @@ import { IProps } from './EditContactForm.types';
 import ContactFormInputs from 'components/ContactFormInputs';
 import ModalForm from 'components/ModalForm';
 import AcceptBtn from 'components/AcceptBtn';
-import { IconBtnType, IconSizes } from 'constants/index';
+import { IconBtnType, IconSizes, PagePaths } from 'constants/index';
 import { FaTimes } from 'react-icons/fa';
+import { updateContact } from 'redux/contacts/operations';
+import { useParams } from 'react-router-dom';
+import { filterEmptyFields, toasts } from 'utils';
 
 const EditContactForm = ({ onEditBtnClick, ...otherProps }: IProps) => {
   const isLoading = useAppSelector(selectIsLoading);
-  // const dispatch = useAppDispatch();
-  // const id = useParams()[PagesPath.dynamicParam];
-  // const targetContact = useTargetContact();
-  // const { name, number } = getContactInfo(targetContact);
+  const dispatch = useAppDispatch();
+  const id = useParams()[PagePaths.dynamicParam] as string;
   const {
     register,
     formState: { errors, isSubmitting },
@@ -36,16 +37,18 @@ const EditContactForm = ({ onEditBtnClick, ...otherProps }: IProps) => {
   } = useForm<IContact>();
 
   const handleFormSubmit: SubmitHandler<IContact> = (data) => {
-    //   if (id) {
-    //     dispatch(updateContact({ data, id }))
-    //       .unwrap()
-    //       .then(() => {
-    //         toasts.successToast('Contact updated successfully');
-    //       })
-    //       .catch(() => {
-    //         toasts.errorToast('Contact update failed');
-    //       });
-    //   }
+    console.log('data', data);
+    const contactData = filterEmptyFields<IContact>(data);
+    console.log('contactData', contactData);
+
+    dispatch(updateContact({ data: contactData, id }))
+      .unwrap()
+      .then(() => {
+        toasts.successToast('Contact updated successfully');
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
+      });
   };
 
   return (
