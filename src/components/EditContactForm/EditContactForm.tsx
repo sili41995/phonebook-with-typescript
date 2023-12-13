@@ -34,13 +34,6 @@ const EditContactForm = ({ setEditContact, ...otherProps }: IProps) => {
     handleSubmit,
   } = useForm<IContact>();
 
-  // useEffect(() => {
-  //   if (isSubmitting) {
-  //     errors.name && toasts.errorToast('Name is required');
-  //     errors.number && toasts.errorToast('Phone is required');
-  //   }
-  // }, [errors, isSubmitting]);
-
   const handleFormSubmit: SubmitHandler<IContact> = (data) => {
     //   if (id) {
     //     dispatch(updateContact({ data, id }))

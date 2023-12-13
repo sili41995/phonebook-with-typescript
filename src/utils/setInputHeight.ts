@@ -9,7 +9,7 @@ const setInputHeight = (formType: FormTypes | undefined) => {
       return '60px';
 
     default:
-      return '50px';
+      return '44px';
   }
 };
 
