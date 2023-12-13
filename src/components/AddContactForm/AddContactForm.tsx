@@ -1,14 +1,12 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
 import { ButtonsContainer, Form, Title } from './AddContactForm.styled';
 import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import { BtnType, IconBtnType, IconSizes, InputTypes } from 'constants/index';
+import { InputTypes } from 'constants/index';
 import GoBackLink from 'components/GoBackLink';
-import IconButton from 'components/IconButton';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import {
   filterEmptyFields,
@@ -20,6 +18,7 @@ import {
 import { IContact } from 'types/types';
 import { addContact } from 'redux/contacts/operations';
 import ContactFormInputs from 'components/ContactFormInputs';
+import AcceptBtn from 'components/AcceptBtn';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
@@ -87,14 +86,7 @@ const AddContactForm: FC = () => {
           isSubmitting={isSubmitting}
         />
         <ButtonsContainer>
-          <IconButton
-            disabled={isLoading}
-            btnType={IconBtnType.accept}
-            width={44}
-            height={35}
-            type={BtnType.submit}
-            icon={<FaCheck size={IconSizes.primaryIconSize} />}
-          />
+          <AcceptBtn disabled={isLoading} />
           <GoBackLink />
         </ButtonsContainer>
       </Form>

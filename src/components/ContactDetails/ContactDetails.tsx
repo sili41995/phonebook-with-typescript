@@ -100,7 +100,7 @@ const ContactDetails = () => {
         <ContactProfile
           contact={contact}
           editContact={editContact}
-          setEditContact={setEditContact}
+          onEditBtnClick={onEditBtnClick}
         />
       )}
       {isFetchError && <DefaultMessage message="Contact is absent" />}
