@@ -5,6 +5,7 @@ import {
   deleteContact,
   fetchContacts,
   updateContact,
+  updateContactStatus,
 } from './operations';
 import { signOutUser } from 'redux/auth/operations';
 import { IContactsState } from 'types/types';
@@ -45,6 +46,17 @@ const contactsSlice = createSlice({
           payload,
         ],
       }))
+      .addCase(updateContactStatus.fulfilled, (state, { payload }) => ({
+        ...state,
+        isLoading: false,
+        items: [
+          ...state.items.map((item) =>
+            item._id !== payload._id
+              ? item
+              : { ...item, favorite: !item.favorite }
+          ),
+        ],
+      }))
       .addCase(signOutUser.fulfilled, (state) => ({
         ...state,
         ...initialState.contacts,
@@ -54,7 +66,8 @@ const contactsSlice = createSlice({
           fetchContacts.pending,
           addContact.pending,
           deleteContact.pending,
-          updateContact.pending
+          updateContact.pending,
+          updateContactStatus.pending
         ),
         (state) => ({
           ...state,
@@ -66,7 +79,8 @@ const contactsSlice = createSlice({
           fetchContacts.rejected,
           addContact.rejected,
           deleteContact.rejected,
-          updateContact.rejected
+          updateContact.rejected,
+          updateContactStatus.rejected
         ),
         (state, { payload }) => ({
           ...state,

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import contactsServiceApi from 'service/contactsServiceApi';
-import { IContact, IFetchContactsRes } from 'types/types';
+import { IContact, IContactStatus, IFetchContactsRes } from 'types/types';
 
 export const fetchContacts = createAsyncThunk<
   IFetchContactsRes,
@@ -74,6 +74,24 @@ export const updateContact = createAsyncThunk<
   async (data, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
       const response = await contactsServiceApi.updateContact(data);
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateContactStatus = createAsyncThunk<
+  IContact,
+  { data: IContactStatus; id: string },
+  { rejectValue: string }
+>(
+  'contacts/updateContactStatus',
+  async (data, { rejectWithValue }: { rejectWithValue: Function }) => {
+    try {
+      const response = await contactsServiceApi.updateContactStatus(data);
       return response;
     } catch (error) {
       if (error instanceof Error) {

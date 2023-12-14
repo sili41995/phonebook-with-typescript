@@ -20,6 +20,17 @@ export const Item = styled.li`
   }
 `;
 
+export const ImageContainer = styled.div`
+  position: relative;
+  flex-shrink: 0;
+  & svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: ${({ theme }) => theme.colors.yellowIconColor};
+  }
+`;
+
 export const Image = styled.img`
   width: 70px;
   height: 70px;

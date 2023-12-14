@@ -14,6 +14,9 @@ function setIconFill(btnType: IconBtnType): string {
     case IconBtnType.message:
       return theme.colors.yellowIconColor;
 
+    case IconBtnType.favorite:
+      return theme.colors.yellowIconColor;
+
     case IconBtnType.chat:
       return theme.colors.blueIconColor;
 

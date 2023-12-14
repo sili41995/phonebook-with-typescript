@@ -11,6 +11,7 @@ enum IconBtnType {
   deleteTransparent = 'deleteTransparent',
   toggleShowPassword = 'toggleShowPassword',
   clearFilter = 'clearFilter',
+  favorite = 'favorite',
 }
 
 export default IconBtnType;

@@ -1,6 +1,7 @@
 import initialState from 'redux/initialState';
 import {
   IContact,
+  IContactStatus,
   ICredentials,
   ICurrentUser,
   IFetchContactsRes,
@@ -190,6 +191,32 @@ class ContactsServiceApi {
     };
 
     return fetch(`${this.BASE_URL}/contacts/${id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
+  }
+
+  updateContactStatus({
+    id,
+    data,
+  }: {
+    id: string;
+    data: IContactStatus;
+  }): Promise<IContact> {
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: `Bearer ${this.TOKEN}`,
+      },
+    };
+
+    return fetch(`${this.BASE_URL}/contacts/${id}/favorite`, options)
       .then((response) => response.json())
       .then((data) => {
         if (data.message) {
