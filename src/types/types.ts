@@ -89,4 +89,8 @@ export interface IInitialState {
   auth: IAuthState;
 }
 
+export interface IContactStatus {
+  favorite: boolean;
+}
+
 export type Message = string;

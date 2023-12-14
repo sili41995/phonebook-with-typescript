@@ -12,5 +12,5 @@ export const ButtonsContainer = styled.div`
 
 export const ManipulationButtons = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.primaryGap}px;
+  gap: ${({ theme }) => theme.spacing(3)};
 `;

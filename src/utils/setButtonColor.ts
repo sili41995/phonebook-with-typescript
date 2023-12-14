@@ -14,6 +14,9 @@ function setButtonColor(btnType: IconBtnType): string {
     case IconBtnType.message:
       return theme.colors.yellowBtnColor;
 
+    case IconBtnType.favorite:
+      return theme.colors.yellowBtnColor;
+
     case IconBtnType.chat:
       return theme.colors.blueBtnColor;
 

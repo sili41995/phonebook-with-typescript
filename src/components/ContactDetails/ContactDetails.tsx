@@ -1,5 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import {
+  AiFillStar,
+  AiOutlineDelete,
+  AiOutlineEdit,
+  AiOutlineStar,
+} from 'react-icons/ai';
 import {
   ButtonsContainer,
   Container,
@@ -20,14 +25,16 @@ import ContactProfile from 'components/ContactProfile';
 import Loader from 'components/Loader';
 import GoBackLink from 'components/GoBackLink';
 import IconButton from 'components/IconButton';
-import { useAppSelector } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { selectIsLoading } from 'redux/contacts/selectors';
 import useDeleteContact from 'hooks/useDeleteContact';
+import { updateContactStatus } from 'redux/contacts/operations';
 
 const { idle, pending, resolved, rejected } = FetchStatuses;
 
 const ContactDetails = () => {
   const deleteContact = useDeleteContact();
+  const dispatch = useAppDispatch();
   const [contact, setContact] = useState<IContact | null>(null);
   const [editContact, setEditContact] = useState<boolean>(false);
   const [fetchContactStatus, setFetchContactStatus] = useState<FetchStatuses>(
@@ -38,6 +45,11 @@ const ContactDetails = () => {
   const isLoadingContact = fetchContactStatus === pending;
   const isLoadedContact = fetchContactStatus === resolved && contact;
   const isFetchError = fetchContactStatus === rejected;
+  const favoriteBtnIcon = contact?.favorite ? (
+    <AiFillStar size={IconSizes.primaryIconSize} />
+  ) : (
+    <AiOutlineStar size={IconSizes.primaryIconSize} />
+  );
 
   useEffect(() => {
     setEditContact(false);
@@ -72,6 +84,27 @@ const ContactDetails = () => {
     makeBlur(e.currentTarget);
   };
 
+  const onFavoriteBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
+    makeBlur(e.currentTarget);
+
+    if (contact?._id) {
+      const { favorite, _id: id } = contact;
+      const data = { favorite: !favorite };
+      dispatch(updateContactStatus({ data, id }))
+        .unwrap()
+        .then(() => {
+          toasts.successToast('Contact status updated successfully');
+          setContact(
+            (prevState) =>
+              ({ ...prevState, favorite: !prevState?.favorite } as IContact)
+          );
+        })
+        .catch((error) => {
+          toasts.errorToast(error);
+        });
+    }
+  };
+
   return isLoadingContact ? (
     <Loader />
   ) : (
@@ -81,14 +114,24 @@ const ContactDetails = () => {
         {isLoadedContact && (
           <ManipulationButtons>
             {!editContact && (
-              <IconButton
-                disabled={isLoading}
-                btnType={IconBtnType.delete}
-                width={44}
-                height={35}
-                onBtnClick={onDelBtnClick}
-                icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
-              />
+              <>
+                <IconButton
+                  disabled={isLoading}
+                  btnType={IconBtnType.favorite}
+                  width={44}
+                  height={35}
+                  onBtnClick={onFavoriteBtnClick}
+                  icon={favoriteBtnIcon}
+                />
+                <IconButton
+                  disabled={isLoading}
+                  btnType={IconBtnType.delete}
+                  width={44}
+                  height={35}
+                  onBtnClick={onDelBtnClick}
+                  icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
+                />
+              </>
             )}
             <IconButton
               btnType={IconBtnType.edit}

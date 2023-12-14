@@ -35,18 +35,21 @@ const ContactsContainer: FC<IProps> = ({ quantity }) => {
     currentPage,
   });
 
-  const isShouldRenderList = isValidPage && Boolean(visibleContacts.length);
+  const isShouldRenderList = isValidPage && Boolean(filteredContacts.length);
+  const renderContacts = filter ? filteredContacts : visibleContacts;
 
   return (
     <Container>
       {isShouldRenderList ? (
         <>
-          <ContactsList contacts={visibleContacts} />
-          <PaginationBar
-            quantity={quantity}
-            step={2}
-            itemsQuantity={filteredContacts.length}
-          />
+          <ContactsList contacts={renderContacts} />
+          {!filter && (
+            <PaginationBar
+              quantity={quantity}
+              step={2}
+              itemsQuantity={filteredContacts.length}
+            />
+          )}
         </>
       ) : (
         <DefaultMessage message="Contact list is empty" />

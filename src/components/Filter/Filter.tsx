@@ -19,7 +19,7 @@ import {
   SortTypes,
 } from 'constants/index';
 
-const { FILTER_SP_KEY, SORT_SP_KEY, PAGE_SP_KEY } = SearchParamsKeys;
+const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
 const { DESC_SORT_TYPE } = SortTypes;
 
 const Filter = () => {
@@ -53,7 +53,6 @@ const Filter = () => {
     value
       ? searchParams.set(FILTER_SP_KEY, value)
       : searchParams.delete(FILTER_SP_KEY);
-    searchParams.delete(PAGE_SP_KEY);
     setSearchParams(searchParams);
   };
 
