@@ -3,7 +3,7 @@ import { Container, Image, Label, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
 import { Positions, InputTypes } from 'constants/index';
-import image from 'images/default-signup-avatar.png';
+import image from 'images/default-profile-avatar.png';
 
 const Input: FC<IProps> = ({
   settings,
@@ -21,7 +21,7 @@ const Input: FC<IProps> = ({
   if (type === InputTypes.file) {
     return (
       <Label>
-        <Image src={image} alt="user avatar" ref={imageRef} />
+        <Image src={image} alt="profile avatar" ref={imageRef} />
         {input}
       </Label>
     );

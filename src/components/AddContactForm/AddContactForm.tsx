@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
@@ -22,6 +22,7 @@ import AcceptBtn from 'components/AcceptBtn';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
+  const [defaultAvatar, setDefaultAvatar] = useState<string>('');
   const contacts = useAppSelector(selectContacts);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
@@ -32,6 +33,12 @@ const AddContactForm: FC = () => {
     reset,
   } = useForm<IContact>();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (contactAvatarRef.current?.src) {
+      setDefaultAvatar(contactAvatarRef.current.src);
+    }
+  }, []);
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
@@ -62,6 +69,9 @@ const AddContactForm: FC = () => {
       .unwrap()
       .then(() => {
         toasts.successToast('Contact added successfully');
+        if (contactAvatarRef.current) {
+          contactAvatarRef.current.src = defaultAvatar;
+        }
         reset();
       })
       .catch((error) => {
