@@ -5,12 +5,21 @@ export const UserProfileContainer = styled.div`
   flex-shrink: 0;
 `;
 
+export const UserData = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(7)};
+  margin-bottom: ${({ theme }) => theme.spacing(16)};
+  text-align: center;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
 export const Image = styled.img`
   width: 150px;
   height: 150px;
   border-radius: 30%;
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 export const Name = styled.p`
@@ -19,11 +28,6 @@ export const Name = styled.p`
   font-size: ${({ theme }) => theme.fontSize.titleFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   ${({ theme }) => theme.trimText}
-`;
-
-export const UserData = styled.div`
-  margin-top: ${({ theme }) => theme.spacing(7)};
-  margin-bottom: ${({ theme }) => theme.spacing(16)};
 `;
 
 export const UserInfo = styled.div``;

@@ -19,3 +19,15 @@ export const ButtonsContainer = styled.div`
   gap: ${({ theme }) => theme.spacing(10)};
   align-self: center;
 `;
+
+export const Image = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
+  &:hover,
+  &:focus {
+    box-shadow: ${({ theme }) => theme.shadows.primaryShadow};
+  }
+`;

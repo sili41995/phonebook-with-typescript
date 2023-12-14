@@ -10,7 +10,7 @@ import {
   FaEnvelope,
 } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Message, Title } from './SignUpForm.styled';
+import { Form, Message, Title, Image } from './SignUpForm.styled';
 import {
   filterEmptyFields,
   getProfileFormData,
@@ -30,6 +30,7 @@ import {
   IconSizes,
   InputTypes,
 } from 'constants/index';
+import image from 'images/default-profile-avatar.png';
 
 const SignUpForm = () => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
@@ -103,7 +104,9 @@ const SignUpForm = () => {
           accept="image/png, image/jpeg, image/jpg"
           onChange={onChangeInput}
           type={InputTypes.file}
-          imageRef={userAvatarRef}
+          altElem={
+            <Image src={image} alt="profile avatar" ref={userAvatarRef} />
+          }
         />
         <Input
           settings={{ ...register('name', { required: true }) }}

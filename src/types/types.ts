@@ -93,4 +93,8 @@ export interface IContactStatus {
   favorite: boolean;
 }
 
+export interface IAvatar {
+  avatar: FileList | null;
+}
+
 export type Message = string;

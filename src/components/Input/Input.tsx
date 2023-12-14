@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { Container, Image, Label, StyledInput } from './Input.styled';
+import { Container, Label, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
 import { Positions, InputTypes } from 'constants/index';
-import image from 'images/default-profile-avatar.png';
 
 const Input: FC<IProps> = ({
   settings,
@@ -12,8 +11,8 @@ const Input: FC<IProps> = ({
   btnIcon,
   btnType,
   type,
-  imageRef,
   icon,
+  altElem,
   ...otherProps
 }) => {
   const input = <StyledInput type={type} {...settings} {...otherProps} />;
@@ -21,7 +20,7 @@ const Input: FC<IProps> = ({
   if (type === InputTypes.file) {
     return (
       <Label>
-        <Image src={image} alt="profile avatar" ref={imageRef} />
+        {altElem}
         {input}
       </Label>
     );

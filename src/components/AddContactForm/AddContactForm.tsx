@@ -1,8 +1,8 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
-import { ButtonsContainer, Form, Title } from './AddContactForm.styled';
+import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
 import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { InputTypes } from 'constants/index';
@@ -19,10 +19,10 @@ import { IContact } from 'types/types';
 import { addContact } from 'redux/contacts/operations';
 import ContactFormInputs from 'components/ContactFormInputs';
 import AcceptBtn from 'components/AcceptBtn';
+import image from 'images/default-profile-avatar.png';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
-  const [defaultAvatar, setDefaultAvatar] = useState<string>('');
   const contacts = useAppSelector(selectContacts);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
@@ -33,12 +33,6 @@ const AddContactForm: FC = () => {
     reset,
   } = useForm<IContact>();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (contactAvatarRef.current?.src) {
-      setDefaultAvatar(contactAvatarRef.current.src);
-    }
-  }, []);
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
@@ -70,7 +64,7 @@ const AddContactForm: FC = () => {
       .then(() => {
         toasts.successToast('Contact added successfully');
         if (contactAvatarRef.current) {
-          contactAvatarRef.current.src = defaultAvatar;
+          contactAvatarRef.current.src = image;
         }
         reset();
       })
@@ -88,7 +82,9 @@ const AddContactForm: FC = () => {
           accept="image/png, image/jpeg, image/jpg"
           onChange={onChangeInput}
           type={InputTypes.file}
-          imageRef={contactAvatarRef}
+          altElem={
+            <Image src={image} alt="profile avatar" ref={contactAvatarRef} />
+          }
         />
         <ContactFormInputs
           register={register}

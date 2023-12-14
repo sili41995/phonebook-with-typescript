@@ -20,3 +20,15 @@ export const Message = styled.p`
   font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
 `;
+
+export const Image = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
+  &:hover,
+  &:focus {
+    box-shadow: ${({ theme }) => theme.shadows.primaryShadow};
+  }
+`;
