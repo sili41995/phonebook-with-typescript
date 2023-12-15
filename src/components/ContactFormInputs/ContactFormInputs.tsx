@@ -7,15 +7,18 @@ import {
   FaInfo,
   FaTelegramPlane,
   FaIdCardAlt,
+  FaCheck,
 } from 'react-icons/fa';
 import { IconSizes, InputTypes, regExp } from 'constants/index';
 import { toasts } from 'utils';
 import { IProps } from './ContactFormInputs.types';
+import { CheckboxTitle, InputWrap } from './ContactFormInputs.styled';
 
 const ContactFormInputs: FC<IProps> = ({
   register,
   errors,
   isSubmitting,
+  onCheckboxChange,checked,
   contact = {},
 }) => {
   const {
@@ -102,6 +105,16 @@ const ContactFormInputs: FC<IProps> = ({
         defaultValue={description}
         inputWrap
       />
+      <InputWrap>
+        <CheckboxTitle>Favorite contact</CheckboxTitle>
+        <Input
+          settings={{ ...register('favorite') }}
+          checked={checked}
+          onChange={onCheckboxChange}
+          type={InputTypes.checkbox}
+          altElem={<FaCheck size={IconSizes.primaryIconSize} />}
+        />
+      </InputWrap>
     </>
   );
 };

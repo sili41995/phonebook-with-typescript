@@ -10,7 +10,6 @@ import contactsServiceApi from 'service/contactsServiceApi';
 import { ICurrentUser } from 'types/types';
 import { toasts } from 'utils';
 import { FetchStatuses } from 'constants/index';
-import { Helmet } from 'react-helmet';
 
 const { idle, pending, resolved, rejected } = FetchStatuses;
 
@@ -50,22 +49,15 @@ const ContactsPage = () => {
     getUser();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
-      <Helmet>
-        <title>Contacts</title>
-      </Helmet>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <UserProfile user={user} />
-          <ContactsContainer quantity={6} />
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </>
-      )}
+      <UserProfile user={user} />
+      <ContactsContainer quantity={6} />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

@@ -14,12 +14,17 @@ import { FaTimes } from 'react-icons/fa';
 import { updateContact } from 'redux/contacts/operations';
 import { useParams } from 'react-router-dom';
 import { toasts } from 'utils';
+import { useState } from 'react';
 
 const EditContactForm = ({
   onEditBtnClick,
   setContact,
+  contact,
   ...otherProps
 }: IProps) => {
+  const [checked, setChecked] = useState<boolean>(
+    () => contact.favorite as boolean
+  );
   const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const id = useParams()[PagePaths.dynamicParam] as string;
@@ -41,6 +46,10 @@ const EditContactForm = ({
       });
   };
 
+  const onCheckboxChange = () => {
+    setChecked((prevState) => !prevState);
+  };
+
   return (
     <ModalForm>
       <Title>Contact editing</Title>
@@ -49,6 +58,9 @@ const EditContactForm = ({
           register={register}
           errors={errors}
           isSubmitting={isSubmitting}
+          contact={contact}
+          onCheckboxChange={onCheckboxChange}
+          checked={checked}
           {...otherProps}
         />
         <ButtonsContainer>

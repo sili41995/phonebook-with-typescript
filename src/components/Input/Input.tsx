@@ -16,7 +16,9 @@ const Input: FC<IProps> = ({
   checked,
   ...otherProps
 }) => {
-  const input = <StyledInput type={type} {...settings} {...otherProps} />;
+  const input = (
+    <StyledInput type={type} checked={checked} {...settings} {...otherProps} />
+  );
 
   if (type === InputTypes.file || type === InputTypes.checkbox) {
     return (

@@ -1,19 +1,11 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { FaCheck } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
-import {
-  ButtonsContainer,
-  Form,
-  Title,
-  Image,
-  CheckboxTitle,
-  InputWrap,
-} from './AddContactForm.styled';
+import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
 import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import { IconSizes, InputTypes } from 'constants/index';
+import { InputTypes } from 'constants/index';
 import GoBackLink from 'components/GoBackLink';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import {
@@ -103,17 +95,9 @@ const AddContactForm: FC = () => {
           register={register}
           errors={errors}
           isSubmitting={isSubmitting}
+          onCheckboxChange={onCheckboxChange}
+          checked={checked}
         />
-        <InputWrap>
-          <CheckboxTitle>Favorite contact</CheckboxTitle>
-          <Input
-            settings={{ ...register('favorite') }}
-            checked={checked}
-            onChange={onCheckboxChange}
-            type={InputTypes.checkbox}
-            altElem={<FaCheck size={IconSizes.primaryIconSize} />}
-          />
-        </InputWrap>
         <ButtonsContainer>
           <AcceptBtn disabled={isLoading} />
           <GoBackLink />

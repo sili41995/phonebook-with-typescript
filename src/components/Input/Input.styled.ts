@@ -58,7 +58,7 @@ export const Label = styled.label`
     position: fixed;
     transform: scale(0);
   }
-  & svg {
+  &:has([type='checkbox']) svg {
     width: ${({ formType }: IStyledProps) => setInputHeight(formType)};
     height: 100%;
     padding: ${({ theme }) => theme.spacing(2)};

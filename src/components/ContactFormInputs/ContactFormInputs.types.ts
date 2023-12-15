@@ -6,4 +6,6 @@ export interface IProps {
   errors: FieldErrors<IContact>;
   isSubmitting: boolean;
   contact?: IContact;
+  checked?: boolean;
+  onCheckboxChange?: () => void;
 }
