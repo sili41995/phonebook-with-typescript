@@ -220,6 +220,31 @@ class ContactsServiceApi {
       });
   }
 
+  updateContactAvatar({
+    id,
+    data,
+  }: {
+    id: string;
+    data: FormData;
+  }): Promise<IAvatar> {
+    const options = {
+      method: 'PATCH',
+      body: data,
+      headers: {
+        Authorization: `Bearer ${this.TOKEN}`,
+      },
+    };
+
+    return fetch(`${this.BASE_URL}/contacts/${id}/avatar`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
+  }
+
   updateContactStatus({
     id,
     data,

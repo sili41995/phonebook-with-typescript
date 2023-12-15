@@ -1,8 +1,12 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+  text-align: center;
+`;
+
 export const ImageContainer = styled.div`
   position: relative;
-  /* display: inline-block; */
+  display: inline-block;
   margin-bottom: ${({ theme }) => theme.spacing(2)};
 `;
 

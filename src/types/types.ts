@@ -94,7 +94,8 @@ export interface IContactStatus {
 }
 
 export interface IAvatar {
-  [key: string]: FileList | string;
+  [key: string]: FileList | string | undefined;
+  _id?: string;
   avatar: FileList | string;
 }
 

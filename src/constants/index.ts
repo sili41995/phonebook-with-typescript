@@ -10,3 +10,4 @@ export { default as theme } from './theme';
 export { default as SearchParamsKeys } from './searchParamsKeys';
 export { default as FetchStatuses } from './fetchStatuses';
 export { default as SortTypes } from './sortTypes';
+export { default as FavoriteTypes } from './favoriteTypes';

@@ -13,9 +13,13 @@ import { IconBtnType, IconSizes, PagePaths } from 'constants/index';
 import { FaTimes } from 'react-icons/fa';
 import { updateContact } from 'redux/contacts/operations';
 import { useParams } from 'react-router-dom';
-import { filterEmptyFields, toasts } from 'utils';
+import { toasts } from 'utils';
 
-const EditContactForm = ({ onEditBtnClick, ...otherProps }: IProps) => {
+const EditContactForm = ({
+  onEditBtnClick,
+  setContact,
+  ...otherProps
+}: IProps) => {
   const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const id = useParams()[PagePaths.dynamicParam] as string;
@@ -26,14 +30,11 @@ const EditContactForm = ({ onEditBtnClick, ...otherProps }: IProps) => {
   } = useForm<IContact>();
 
   const handleFormSubmit: SubmitHandler<IContact> = (data) => {
-    console.log('data', data);
-    const contactData = filterEmptyFields<IContact>(data);
-    console.log('contactData', contactData);
-
-    dispatch(updateContact({ data: contactData, id }))
+    dispatch(updateContact({ data, id }))
       .unwrap()
-      .then(() => {
+      .then((data) => {
         toasts.successToast('Contact updated successfully');
+        setContact(data);
       })
       .catch((error) => {
         toasts.errorToast(error);

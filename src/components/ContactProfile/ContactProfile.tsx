@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, Suspense, useRef, useState } from 'react';
 import { IProps } from './ContactProfile.types';
 import {
+  Container,
   ContactDesc,
   ContactName,
   ContactTitle,
@@ -14,10 +15,12 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Loader from 'components/Loader';
 import { PagePaths } from 'constants/index';
 import EditContactForm from 'components/EditContactForm';
-import { onChangeAvatar } from 'utils';
+import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
 import { SubmitHandler } from 'react-hook-form';
 import { IAvatar } from 'types/types';
 import ChangeAvatarForm from 'components/ChangeAvatarForm';
+import { useAppDispatch } from 'hooks/redux';
+import { updateContactAvatar } from 'redux/contacts/operations';
 
 const ContactProfile: FC<IProps> = ({
   contact,
@@ -26,7 +29,8 @@ const ContactProfile: FC<IProps> = ({
 }) => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
-  const { avatar, name, role } = contact;
+  const dispatch = useAppDispatch();
+  const { avatar, name, role, _id: id } = contact;
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
@@ -38,20 +42,24 @@ const ContactProfile: FC<IProps> = ({
   };
 
   const handleFormSubmit: SubmitHandler<IAvatar> = (data) => {
-    // if (!userAvatar?.length) {
-    //   return;
-    // }
-    // data.avatar = userAvatar;
-    // const userFormData = getProfileFormData(data);
-    // dispatch(updateUserAvatar(userFormData))
-    //   .unwrap()
-    //   .then(() => {
-    //     toasts.successToast('Avatar updated successfully');
-    //     setUserAvatar(null);
-    //   })
-    //   .catch((error) => {
-    //     toasts.errorToast(error);
-    //   });
+    if (!contactAvatar?.length) {
+      return;
+    }
+
+    data.avatar = contactAvatar;
+    const contactFormData = getProfileFormData(data);
+
+    if (!id) return;
+
+    dispatch(updateContactAvatar({ data: contactFormData, id }))
+      .unwrap()
+      .then(() => {
+        toasts.successToast('Avatar updated successfully');
+        setContactAvatar(null);
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
+      });
   };
 
   const onCancelBtnClick = () => {
@@ -63,19 +71,21 @@ const ContactProfile: FC<IProps> = ({
 
   return (
     <>
-      <ImageContainer>
-        <Image
-          src={avatar as string}
-          alt={`${name} photo`}
-          ref={contactAvatarRef}
-        />
-        <ChangeAvatarForm
-          avatar={contactAvatar}
-          handleFormSubmit={handleFormSubmit}
-          onChangeInput={onChangeInput}
-          onCancelBtnClick={onCancelBtnClick}
-        />
-      </ImageContainer>
+      <Container>
+        <ImageContainer>
+          <Image
+            src={avatar as string}
+            alt={`${name} photo`}
+            ref={contactAvatarRef}
+          />
+          <ChangeAvatarForm
+            avatar={contactAvatar}
+            handleFormSubmit={handleFormSubmit}
+            onChangeInput={onChangeInput}
+            onCancelBtnClick={onCancelBtnClick}
+          />
+        </ImageContainer>
+      </Container>
       {editContact ? (
         <EditContactForm {...otherProps} contact={contact} />
       ) : (

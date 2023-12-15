@@ -87,22 +87,26 @@ const ContactDetails = () => {
   const onFavoriteBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
     makeBlur(e.currentTarget);
 
-    if (contact?._id) {
-      const { favorite, _id: id } = contact;
-      const data = { favorite: !favorite };
-      dispatch(updateContactStatus({ data, id }))
-        .unwrap()
-        .then(() => {
-          toasts.successToast('Contact status updated successfully');
-          setContact(
-            (prevState) =>
-              ({ ...prevState, favorite: !prevState?.favorite } as IContact)
-          );
-        })
-        .catch((error) => {
-          toasts.errorToast(error);
-        });
-    }
+    if (!contact?._id) return;
+
+    const { favorite, _id: id } = contact;
+    const data = { favorite: !favorite };
+    dispatch(updateContactStatus({ data, id }))
+      .unwrap()
+      .then(() => {
+        toasts.successToast('Contact status updated successfully');
+        setContact(
+          (prevState) =>
+            ({ ...prevState, favorite: !prevState?.favorite } as IContact)
+        );
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
+      });
+  };
+
+  const updateContact = (data: IContact): void => {
+    setContact(data);
   };
 
   return isLoadingContact ? (
@@ -148,6 +152,7 @@ const ContactDetails = () => {
           contact={contact}
           editContact={editContact}
           onEditBtnClick={onEditBtnClick}
+          setContact={updateContact}
         />
       )}
       {isFetchError && <DefaultMessage message="Contact is absent" />}
