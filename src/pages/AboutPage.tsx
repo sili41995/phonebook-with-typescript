@@ -1,7 +1,15 @@
+import { Helmet } from 'react-helmet';
 import About from 'components/About';
 
 const AboutPage = () => {
-  return <About />;
+  return (
+    <>
+      <Helmet>
+        <title>About</title>
+      </Helmet>
+      <About />
+    </>
+  );
 };
 
 export default AboutPage;

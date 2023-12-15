@@ -5,11 +5,9 @@ import {
   FaSortAlphaUp,
   FaSistrix,
   FaTimes,
-  FaRegStar,
-  FaStar,
 } from 'react-icons/fa';
 import { FilterContainer } from './Filter.styled';
-import { makeBlur, updateFavSearchParams, updateSortSearchParams } from 'utils';
+import { makeBlur, updateSortSearchParams } from 'utils';
 import IconButton from 'components/IconButton';
 import Input from 'components/Input';
 import {
@@ -19,19 +17,16 @@ import {
   InputTypes,
   SearchParamsKeys,
   SortTypes,
-  FavoriteTypes,
 } from 'constants/index';
 
-const { FILTER_SP_KEY, SORT_SP_KEY, FAVORITE_SP_KEY } = SearchParamsKeys;
+const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
 const { DESC_SORT_TYPE } = SortTypes;
-const { TRUE_FAV_TYPE } = FavoriteTypes;
 
 const Filter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get(FILTER_SP_KEY) ?? '';
   const [showFilter, setShowFilter] = useState<boolean>(() => Boolean(filter));
   const deskSortType = searchParams.get(SORT_SP_KEY) === DESC_SORT_TYPE;
-  const showFavContacts = searchParams.get(FAVORITE_SP_KEY) === TRUE_FAV_TYPE;
   const clearFilterBtnIcon = Boolean(filter) && (
     <FaTimes size={IconSizes.primaryIconSize} />
   );
@@ -39,11 +34,6 @@ const Filter = () => {
     <FaSortAlphaDown size={IconSizes.primaryIconSize} />
   ) : (
     <FaSortAlphaUp size={IconSizes.primaryIconSize} />
-  );
-  const favBtnIcon = showFavContacts ? (
-    <FaRegStar size={IconSizes.primaryIconSize} />
-  ) : (
-    <FaStar size={IconSizes.primaryIconSize} />
   );
 
   useEffect(() => {
@@ -56,11 +46,6 @@ const Filter = () => {
   const onSortBtnClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     makeBlur(currentTarget);
     updateSortSearchParams(searchParams, setSearchParams, SORT_SP_KEY);
-  };
-
-  const onFavBtnClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    makeBlur(currentTarget);
-    updateFavSearchParams(searchParams, setSearchParams, FAVORITE_SP_KEY);
   };
 
   const onFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,12 +92,6 @@ const Filter = () => {
         width={44}
         onBtnClick={onSortBtnClick}
         icon={sortBtnIcon}
-      />
-      <IconButton
-        btnType={IconBtnType.filter}
-        width={44}
-        onBtnClick={onFavBtnClick}
-        icon={favBtnIcon}
       />
     </FilterContainer>
   );

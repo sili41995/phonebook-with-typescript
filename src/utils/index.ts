@@ -27,5 +27,3 @@ export { default as getVisibleContacts } from './getVisibleContacts';
 export { default as getTelegramLink } from './getTelegramLink';
 export { default as getIsContact } from './getIsContact';
 export { default as getIsAuthPage } from './getIsAuthPage';
-export { default as updateFavSearchParams } from './updateFavSearchParams';
-export { default as getFavoriteContacts } from './getFavoriteContacts';
