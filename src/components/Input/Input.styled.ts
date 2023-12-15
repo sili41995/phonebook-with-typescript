@@ -51,10 +51,33 @@ export const StyledInput = styled.input`
 `;
 
 export const Label = styled.label`
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   & input {
     position: fixed;
     transform: scale(0);
+  }
+  & svg {
+    width: ${({ formType }: IStyledProps) => setInputHeight(formType)};
+    height: 100%;
+    padding: ${({ theme }) => theme.spacing(2)};
+    border: 1px solid;
+    border-color: ${({ formType, checked }) =>
+      checked ? 'transparent' : setInputBorderColor(formType)};
+    border-radius: ${({ formType }) => setInputBorderRadius(formType)}px;
+    background-color: ${({ theme, checked }) =>
+      checked ? theme.colors.otherColor : 'transparent'};
+    color: ${({ theme, checked }) =>
+      checked ? theme.colors.whiteColor : 'transparent'};
+    cursor: pointer;
+    transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc},
+      background-color ${({ theme }) => theme.transitionDurationAndFunc},
+      color ${({ theme }) => theme.transitionDurationAndFunc},
+      border-color ${({ theme }) => theme.transitionDurationAndFunc};
+    &:hover,
+    &:focus {
+      box-shadow: ${({ theme }) => theme.shadows.primaryShadow};
+    }
   }
 `;

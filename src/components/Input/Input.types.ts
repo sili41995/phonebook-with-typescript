@@ -15,10 +15,12 @@ export interface IProps {
   altElem?: ReactElement;
   value?: string;
   defaultValue?: string;
+  checked?: boolean;
   action?: () => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IStyledProps {
   formType?: FormTypes;
+  checked?: boolean;
 }

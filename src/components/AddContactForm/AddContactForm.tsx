@@ -1,11 +1,19 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { FaCheck } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from 'components/Input';
-import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
+import {
+  ButtonsContainer,
+  Form,
+  Title,
+  Image,
+  CheckboxTitle,
+  InputWrap,
+} from './AddContactForm.styled';
 import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import { InputTypes } from 'constants/index';
+import { IconSizes, InputTypes } from 'constants/index';
 import GoBackLink from 'components/GoBackLink';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import {
@@ -26,6 +34,7 @@ const AddContactForm: FC = () => {
   const contacts = useAppSelector(selectContacts);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
+  const [checked, setChecked] = useState<boolean>(false);
   const {
     register,
     formState: { errors, isSubmitting },
@@ -34,7 +43,7 @@ const AddContactForm: FC = () => {
   } = useForm<IContact>();
   const dispatch = useAppDispatch();
 
-  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
       return;
     }
@@ -73,6 +82,10 @@ const AddContactForm: FC = () => {
       });
   };
 
+  const onCheckboxChange = () => {
+    setChecked((prevState) => !prevState);
+  };
+
   return (
     <ModalForm>
       <Title>Add contact</Title>
@@ -80,7 +93,7 @@ const AddContactForm: FC = () => {
         <Input
           settings={{ ...register('avatar') }}
           accept="image/png, image/jpeg, image/jpg"
-          onChange={onChangeInput}
+          onChange={onChangeFile}
           type={InputTypes.file}
           altElem={
             <Image src={image} alt="profile avatar" ref={contactAvatarRef} />
@@ -91,6 +104,16 @@ const AddContactForm: FC = () => {
           errors={errors}
           isSubmitting={isSubmitting}
         />
+        <InputWrap>
+          <CheckboxTitle>Favorite contact</CheckboxTitle>
+          <Input
+            settings={{ ...register('favorite') }}
+            checked={checked}
+            onChange={onCheckboxChange}
+            type={InputTypes.checkbox}
+            altElem={<FaCheck size={IconSizes.primaryIconSize} />}
+          />
+        </InputWrap>
         <ButtonsContainer>
           <AcceptBtn disabled={isLoading} />
           <GoBackLink />

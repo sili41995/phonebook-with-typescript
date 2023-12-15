@@ -14,6 +14,19 @@ export const Form = styled.form`
   gap: ${({ theme }) => theme.primaryGap}px;
 `;
 
+export const InputWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const CheckboxTitle = styled.p`
+  color: ${({ theme }) => theme.colors.secondaryFontColor};
+  font-family: Inter;
+  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
+`;
+
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(10)};
