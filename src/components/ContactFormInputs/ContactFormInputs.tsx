@@ -76,7 +76,7 @@ const ContactFormInputs: FC<IProps> = ({
         settings={{
           ...register('role'),
         }}
-        type={InputTypes.email}
+        type={InputTypes.text}
         placeholder="Role"
         icon={<FaIdCardAlt size={IconSizes.defaultIconSize} />}
         defaultValue={role}
@@ -96,7 +96,7 @@ const ContactFormInputs: FC<IProps> = ({
         settings={{
           ...register('description'),
         }}
-        type={InputTypes.email}
+        type={InputTypes.text}
         placeholder="About contact"
         icon={<FaInfo size={IconSizes.defaultIconSize} />}
         defaultValue={description}

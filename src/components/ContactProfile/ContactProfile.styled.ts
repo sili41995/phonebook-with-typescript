@@ -1,9 +1,14 @@
 import styled from '@emotion/styled';
 
+export const ImageContainer = styled.div`
+  position: relative;
+  /* display: inline-block; */
+  margin-bottom: ${({ theme }) => theme.spacing(2)};
+`;
+
 export const Image = styled.img`
   width: 200px;
   height: 200px;
-  margin: 0 auto ${({ theme }) => theme.spacing(2)};
   border-radius: 30%;
 `;
 

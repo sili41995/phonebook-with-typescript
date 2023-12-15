@@ -1,8 +1,8 @@
 import Input from 'components/Input';
 import { IconBtnType, IconSizes, InputTypes } from 'constants/index';
 import { useAppSelector } from 'hooks/redux';
-import { ChangeEvent, FC } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 import { SlPaperClip } from 'react-icons/sl';
 import { selectIsLoading } from 'redux/auth/selectors';
 import { IAvatar } from 'types/types';
@@ -10,13 +10,7 @@ import { ButtonsContainer, Form } from './ChangeAvatarForm.styled';
 import AcceptBtn from 'components/AcceptBtn';
 import IconButton from 'components/IconButton';
 import { FaTimes } from 'react-icons/fa';
-
-interface IProps {
-  avatar: FileList | null;
-  handleFormSubmit: SubmitHandler<IAvatar>;
-  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onCancelBtnClick: () => void;
-}
+import { IProps } from './ChangeAvatarForm.types';
 
 const ChangeAvatarForm: FC<IProps> = ({
   avatar,
