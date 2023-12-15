@@ -86,7 +86,7 @@ const ContactFormInputs: FC<IProps> = ({
         settings={{
           ...register('tgUsername'),
         }}
-        type={InputTypes.email}
+        type={InputTypes.text}
         placeholder="Telegram username"
         icon={<FaTelegramPlane size={IconSizes.defaultIconSize} />}
         defaultValue={tgUsername}

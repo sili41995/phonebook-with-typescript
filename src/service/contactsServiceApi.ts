@@ -1,5 +1,6 @@
 import initialState from 'redux/initialState';
 import {
+  IAvatar,
   IContact,
   IContactStatus,
   ICredentials,
@@ -88,6 +89,25 @@ class ContactsServiceApi {
     };
 
     return fetch(`${this.BASE_URL}/auth/current`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          throw Error(data.message);
+        }
+        return data;
+      });
+  }
+
+  updateUserAvatar(data: FormData): Promise<IAvatar> {
+    const options = {
+      method: 'PATCH',
+      body: data,
+      headers: {
+        Authorization: `Bearer ${this.TOKEN}`,
+      },
+    };
+
+    return fetch(`${this.BASE_URL}/auth/avatars`, options)
       .then((response) => response.json())
       .then((data) => {
         if (data.message) {

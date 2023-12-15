@@ -7,6 +7,7 @@ import {
   ICredentials,
   ICurrentUser,
   ISignUpRes,
+  IAvatar,
 } from 'types/types';
 
 export const signUpUser = createAsyncThunk<
@@ -94,6 +95,27 @@ export const refreshUser = createAsyncThunk<
     try {
       contactsServiceApi.token = token;
       const response = await contactsServiceApi.refreshUser();
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateUserAvatar = createAsyncThunk<
+  IAvatar,
+  FormData,
+  { rejectValue: string }
+>(
+  'auth/updateUserAvatar',
+  async (
+    data: FormData,
+    { rejectWithValue }: { rejectWithValue: Function }
+  ) => {
+    try {
+      const response = await contactsServiceApi.updateUserAvatar(data);
       return response;
     } catch (error) {
       if (error instanceof Error) {

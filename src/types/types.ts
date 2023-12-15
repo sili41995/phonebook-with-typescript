@@ -94,7 +94,8 @@ export interface IContactStatus {
 }
 
 export interface IAvatar {
-  avatar: FileList | null;
+  [key: string]: FileList | string;
+  avatar: FileList | string;
 }
 
 export type Message = string;
