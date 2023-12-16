@@ -83,13 +83,13 @@ const Filter = () => {
       )}
       <IconButton
         btnType={IconBtnType.filter}
-        width={44}
+        // width={44}
         onBtnClick={onFilterBtnClick}
         icon={<FaSistrix size={IconSizes.otherIconSize} />}
       />
       <IconButton
         btnType={IconBtnType.filter}
-        width={44}
+        // width={44}
         onBtnClick={onSortBtnClick}
         icon={sortBtnIcon}
       />

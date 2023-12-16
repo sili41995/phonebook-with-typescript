@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, Suspense, useRef, useState } from 'react';
 import { IProps } from './ContactProfile.types';
 import {
-  Container,
   ContactDesc,
   ContactName,
   ContactTitle,
@@ -71,21 +70,19 @@ const ContactProfile: FC<IProps> = ({
 
   return (
     <>
-      <Container>
-        <ImageContainer>
-          <Image
-            src={avatar as string}
-            alt={`${name} photo`}
-            ref={contactAvatarRef}
-          />
-          <ChangeAvatarForm
-            avatar={contactAvatar}
-            handleFormSubmit={handleFormSubmit}
-            onChangeInput={onChangeInput}
-            onCancelBtnClick={onCancelBtnClick}
-          />
-        </ImageContainer>
-      </Container>
+      <ImageContainer>
+        <Image
+          src={avatar as string}
+          alt={`${name} photo`}
+          ref={contactAvatarRef}
+        />
+        <ChangeAvatarForm
+          avatar={contactAvatar}
+          handleFormSubmit={handleFormSubmit}
+          onChangeInput={onChangeInput}
+          onCancelBtnClick={onCancelBtnClick}
+        />
+      </ImageContainer>
       {editContact ? (
         <EditContactForm {...otherProps} contact={contact} />
       ) : (

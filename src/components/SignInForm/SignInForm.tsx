@@ -88,7 +88,7 @@ const SignInForm = () => {
 
   return (
     <>
-      <Title>log in</Title>
+      <Title>sign in</Title>
       <Message>{greetings}</Message>
       <Image src={user.avatar ?? defaultAvatar} alt="user avatar" />
       <Form onSubmit={handleSubmit(onSubmit)}>

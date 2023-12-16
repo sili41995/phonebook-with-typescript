@@ -9,7 +9,7 @@ export interface IProps {
   position?: Positions;
   top?: number | 'center';
   right?: number;
-  width: number;
+  width?: number;
   height?: number;
   inputWrap?: boolean;
   disabled?: boolean;
@@ -20,7 +20,7 @@ export interface IStyledProps {
   position?: Positions;
   top?: number | 'center';
   right?: number;
-  width: number;
+  width?: number;
   height?: number;
   inputWrap?: boolean;
   btnType: IconBtnType;

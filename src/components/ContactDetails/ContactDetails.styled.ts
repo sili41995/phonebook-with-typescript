@@ -1,16 +1,7 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  flex-grow: 1;
-`;
+export const Container = styled.div``;
 
-export const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.spacing(10)};
-`;
+export const ButtonsContainer = styled.div``;
 
-export const ManipulationButtons = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(3)};
-`;
+export const ManipulationButtons = styled.div``;

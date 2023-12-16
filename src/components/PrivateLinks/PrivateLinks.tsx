@@ -42,7 +42,7 @@ const PrivateLinks = () => {
       </LinkWithQuery>
       <IconButton
         btnType={IconBtnType.logout}
-        width={44}
+        // width={44}
         onBtnClick={onLogoutBtnClick}
         icon={<SlLogout size={IconSizes.otherIconSize} />}
         title="Logout"

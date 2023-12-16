@@ -7,6 +7,8 @@ const IconButton = ({
   onBtnClick,
   title,
   type = BtnType.button,
+  width = 44,
+  height = 36,
   ...props
 }: IProps) => (
   <Button type={type} onClick={onBtnClick} {...props}>

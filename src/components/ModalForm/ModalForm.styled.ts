@@ -1,27 +1,22 @@
 import styled from '@emotion/styled';
-import { FormTypes } from 'constants/index';
 import { IStyledProps } from './ModalForm.types';
+import {
+  setModalFormBackgroundColor,
+  setModalFormBorderRadius,
+  setModalFormBoxShadow,
+  setModalFormMargin,
+  setModalFormPadding,
+  setModalFormWidth,
+} from 'utils';
 
 export const Container = styled.div`
-  width: ${({ formType }: IStyledProps) =>
-    formType === FormTypes.authForm ? '600px' : '100%'};
-  padding: ${({ formType, theme }) =>
-    formType === FormTypes.authForm
-      ? `${theme.padding.paddingAuthForm}px`
-      : 'auto'};
-  background-color: ${({ formType, theme }) =>
-    formType === FormTypes.authForm
-      ? theme.colors.authFormBackgroundColor
-      : 'transparent'};
-  border-radius: ${({ formType, theme }) =>
-    formType === FormTypes.authForm
-      ? `${theme.borderRadius.otherBorderRadius}px`
-      : false};
-  box-shadow: ${({ formType, theme }) =>
-    formType === FormTypes.authForm ? theme.shadows.secondaryShadow : 'none'};
-  margin: ${({ formType, theme }) =>
-    formType === FormTypes.authForm ? `${theme.spacing(10)} auto` : '0px'};
+  width: ${({ formType }: IStyledProps) => setModalFormWidth(formType)};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.primaryGap}px;
+  padding: ${({ formType }) => setModalFormPadding(formType)};
+  background-color: ${({ formType }) => setModalFormBackgroundColor(formType)};
+  border-radius: ${({ formType }) => setModalFormBorderRadius(formType)};
+  box-shadow: ${({ formType }) => setModalFormBoxShadow(formType)};
+  margin: ${({ formType }) => setModalFormMargin(formType)};
 `;
