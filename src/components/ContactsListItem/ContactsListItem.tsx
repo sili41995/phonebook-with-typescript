@@ -46,13 +46,9 @@ const ContactsListItem = ({ contact }: IProps) => {
         </ContactInfo>
       </LinkWithQuery>
       <IconButton
-        // top={0}
-        // right={0}
         position={Positions.absolute}
         disabled={isLoading}
         btnType={IconBtnType.deleteTransparent}
-        // width={44}
-        // height={35}
         onBtnClick={handleDelBtnClick}
         icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
       />
