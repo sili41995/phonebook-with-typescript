@@ -40,6 +40,7 @@ const Input: FC<IProps> = ({
           position={Positions.absolute}
           top="center"
           icon={btnIcon}
+          height={36}
           inputWrap
         />
       )}

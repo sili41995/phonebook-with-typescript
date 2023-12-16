@@ -28,8 +28,6 @@ const ChangeAvatarForm: FC<IProps> = ({
           <AcceptBtn disabled={isLoading} />
           <IconButton
             btnType={IconBtnType.cancel}
-            // width={44}
-            // height={35}
             onBtnClick={onCancelBtnClick}
             icon={<FaTimes size={IconSizes.primaryIconSize} />}
           />

@@ -4,19 +4,25 @@ import { IStyledProps } from './IconButton.types';
 
 export const Button = styled.button`
   position: ${({ position }: IStyledProps) => position};
+  z-index: 10;
   top: ${({ top }) => (top === 'center' ? '50%' : `${top}px`)};
   right: ${({ right }) => `${right}px`};
   transform: translateY(${({ top }) => (top === 'center' ? '-50%' : '')});
   display: flex;
+  gap: ${({ theme }) => `${theme.primaryGap}px`};
   justify-content: center;
   align-items: center;
   min-width: ${({ width }) => `${width}px`};
-  height: ${({ height }) => `${height}px`};
+  height: ${({ height }) => (height ? `${height}px` : '')};
   padding: ${({ theme }) => theme.spacing()};
   background-color: ${({ btnType }) => setButtonColor(btnType)};
   border-color: transparent;
   border-radius: ${({ theme }) =>
     `${theme.borderRadius.secondaryBorderRadius}px`};
+  color: ${({ theme }) => theme.colors.primaryFontColor};
+  font-family: Inter;
+  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &:hover,
   &:focus {
@@ -33,12 +39,3 @@ export const Button = styled.button`
       inputWrap && setIconHoverEffect(btnType)};
   }
 `;
-
-// export const Button = styled.button`
-//   gap: ${({ theme }) => theme.primaryGap}px;
-//   color: ${({ theme }) => theme.colors.primaryFontColor};
-//   font-family: Inter;
-//   font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
-//   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
-//   z-index: 10;
-// `;

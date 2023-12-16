@@ -8,7 +8,6 @@ const IconButton = ({
   title,
   type = BtnType.button,
   width = 44,
-  height = 36,
   top = 0,
   right = 0,
   ...props
@@ -18,7 +17,6 @@ const IconButton = ({
     right={right}
     top={top}
     width={width}
-    height={height}
     onClick={onBtnClick}
     {...props}
   >

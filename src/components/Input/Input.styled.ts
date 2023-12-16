@@ -16,6 +16,7 @@ export const Container = styled.div`
   position: relative;
   & > svg {
     position: absolute;
+    z-index: 10;
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
@@ -27,6 +28,7 @@ export const StyledInput = styled.input`
   width: 100%;
   max-width: ${({ formType }: IStyledProps) => setInputMaxWidth(formType)};
   height: ${({ formType }) => setInputHeight(formType)};
+  background-color: transparent;
   border: 1px solid ${({ formType }) => setInputBorderColor(formType)};
   border-radius: ${({ formType }) => setInputBorderRadius(formType)};
   filter: ${({ formType }) => setInputFilter(formType)};
@@ -80,5 +82,5 @@ export const Label = styled.label`
 `;
 
 // export const StyledInput = styled.input`
-//   background-color: transparent;
+//
 // `;

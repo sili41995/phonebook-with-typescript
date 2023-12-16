@@ -51,6 +51,7 @@ const ContactsListItem = ({ contact }: IProps) => {
         btnType={IconBtnType.deleteTransparent}
         onBtnClick={handleDelBtnClick}
         icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
+        height={36}
       />
     </Item>
   );

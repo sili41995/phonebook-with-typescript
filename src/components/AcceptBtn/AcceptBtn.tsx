@@ -10,6 +10,7 @@ const AcceptBtn: FC<IProps> = ({ disabled = false }) => (
     btnType={IconBtnType.accept}
     type={BtnType.submit}
     icon={<FaCheck size={IconSizes.primaryIconSize} />}
+    height={36}
   />
 );
 

@@ -23,6 +23,7 @@ export const ImageContainer = styled.div`
   flex-shrink: 0;
   & svg {
     position: absolute;
+    z-index: 10;
     top: 0;
     right: 0;
     color: ${({ theme }) => theme.colors.yellowIconColor};

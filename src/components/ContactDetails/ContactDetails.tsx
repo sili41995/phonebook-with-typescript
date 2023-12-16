@@ -114,7 +114,7 @@ const ContactDetails = () => {
   ) : (
     <Container>
       <ButtonsContainer>
-        <GoBackLink />
+        <GoBackLink height={36} />
         {isLoadedContact && (
           <ManipulationButtons>
             {!editContact && (
