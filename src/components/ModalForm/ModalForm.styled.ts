@@ -10,8 +10,8 @@ import {
 } from 'utils';
 
 export const Container = styled.div`
-  width: ${({ formType }: IStyledProps) => setModalFormWidth(formType)};
   display: flex;
+  width: ${({ formType }: IStyledProps) => setModalFormWidth(formType)};
   flex-direction: column;
   gap: ${({ theme }) => theme.primaryGap}px;
   padding: ${({ formType }) => setModalFormPadding(formType)};

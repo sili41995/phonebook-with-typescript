@@ -9,9 +9,17 @@ const IconButton = ({
   type = BtnType.button,
   width = 44,
   height = 36,
+  right = 0,
   ...props
 }: IProps) => (
-  <Button type={type} onClick={onBtnClick} {...props}>
+  <Button
+    type={type}
+    right={right}
+    width={width}
+    height={height}
+    onClick={onBtnClick}
+    {...props}
+  >
     {title ? (
       <>
         {icon}

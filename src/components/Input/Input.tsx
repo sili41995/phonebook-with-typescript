@@ -39,9 +39,6 @@ const Input: FC<IProps> = ({
           btnType={btnType}
           position={Positions.absolute}
           top="center"
-          // right={0}
-          // height={35}
-          // width={44}
           icon={btnIcon}
           inputWrap
         />
