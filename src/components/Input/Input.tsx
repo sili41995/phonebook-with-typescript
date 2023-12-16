@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Container, Label, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
 import { Positions, InputTypes } from 'constants/index';
+import { Container, Label, StyledInput } from './Input.styled';
 
 const Input: FC<IProps> = ({
   settings,

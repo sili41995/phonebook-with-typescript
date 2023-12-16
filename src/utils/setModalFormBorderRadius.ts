@@ -6,7 +6,7 @@ const setModalFormBorderRadius = (formType: FormTypes | undefined): string => {
       return `${theme.borderRadius.otherBorderRadius}px`;
 
     default:
-      return '0px';
+      return '0';
   }
 };
 

@@ -9,6 +9,6 @@ export const InputWrap = styled.div`
 export const CheckboxTitle = styled.p`
   color: ${({ theme }) => theme.colors.secondaryFontColor};
   font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.primaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
 `;

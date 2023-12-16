@@ -6,7 +6,7 @@ const setModalFormPadding = (formType: FormTypes | undefined): string => {
       return `${theme.padding.paddingAuthForm}px`;
 
     default:
-      return '';
+      return '0';
   }
 };
 

@@ -9,10 +9,10 @@ import {
   getVisibleContacts,
   sortContactsByName,
 } from 'utils';
-import { Container } from './ContactsContainer.styled';
 import ContactsList from 'components/ContactsList';
 import PaginationBar from 'components/PaginationBar';
 import DefaultMessage from 'components/DefaultMessage';
+import { Container } from './ContactsContainer.styled';
 
 const { FILTER_SP_KEY, SORT_SP_KEY, PAGE_SP_KEY } = SearchParamsKeys;
 

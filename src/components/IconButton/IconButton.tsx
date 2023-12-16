@@ -1,6 +1,6 @@
 import { BtnType } from 'constants/index';
-import { Button } from './IconButton.styled';
 import { IProps } from './IconButton.types';
+import { Button } from './IconButton.styled';
 
 const IconButton = ({
   icon,

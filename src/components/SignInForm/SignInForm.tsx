@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Message, Title, Image } from './SignInForm.styled';
-import defaultAvatar from 'images/default-signin-avatar.png';
 import { toasts } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
+import Input from 'components/Input';
 import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
-import { signInUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { signInUser } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';
 import { ICredentials } from 'types/types';
 import {
@@ -17,8 +17,8 @@ import {
   InputTypes,
   PagePaths,
 } from 'constants/index';
-import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
-import Input from 'components/Input';
+import defaultAvatar from 'images/default-signin-avatar.png';
+import { Form, Message, Title, Image } from './SignInForm.styled';
 
 const SignInForm = () => {
   const user = useAppSelector(selectUser);

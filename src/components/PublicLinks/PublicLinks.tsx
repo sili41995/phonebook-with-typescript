@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { List, ListItem } from './PublicLinks.styled';
 import { PagePaths } from 'constants/index';
+import { List, ListItem } from './PublicLinks.styled';
 
 const PublicLinks = () => {
   const signUpPagePath = `/${PagePaths.signUpPath}`;

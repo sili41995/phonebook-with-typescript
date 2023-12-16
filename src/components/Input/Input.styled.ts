@@ -80,7 +80,3 @@ export const Label = styled.label`
     }
   }
 `;
-
-// export const StyledInput = styled.input`
-//
-// `;

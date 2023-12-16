@@ -1,3 +1,4 @@
+import { MouseEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   AiFillStar,
@@ -5,30 +6,29 @@ import {
   AiOutlineEdit,
   AiOutlineStar,
 } from 'react-icons/ai';
-import {
-  ButtonsContainer,
-  Container,
-  ManipulationButtons,
-} from './ContactDetails.styled';
 import DefaultMessage from 'components/DefaultMessage';
+import ContactProfile from 'components/ContactProfile';
+import GoBackLink from 'components/GoBackLink';
+import IconButton from 'components/IconButton';
+import Loader from 'components/Loader';
 import {
   FetchStatuses,
   IconBtnType,
   IconSizes,
   PagePaths,
 } from 'constants/index';
-import { MouseEvent, useEffect, useState } from 'react';
 import { IContact } from 'types/types';
 import contactsServiceApi from 'service/contactsServiceApi';
 import { makeBlur, toasts } from 'utils';
-import ContactProfile from 'components/ContactProfile';
-import Loader from 'components/Loader';
-import GoBackLink from 'components/GoBackLink';
-import IconButton from 'components/IconButton';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { selectIsLoading } from 'redux/contacts/selectors';
 import useDeleteContact from 'hooks/useDeleteContact';
+import { selectIsLoading } from 'redux/contacts/selectors';
 import { updateContactStatus } from 'redux/contacts/operations';
+import {
+  ButtonsContainer,
+  Container,
+  ManipulationButtons,
+} from './ContactDetails.styled';
 
 const { idle, pending, resolved, rejected } = FetchStatuses;
 

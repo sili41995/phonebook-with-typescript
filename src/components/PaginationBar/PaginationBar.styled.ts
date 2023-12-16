@@ -28,10 +28,11 @@ export const Button = styled.button`
   padding: ${({ theme }) => theme.spacing(2)};
   background-color: transparent;
   border-color: transparent;
-  border-radius: ${({ theme }) => theme.borderRadius.primaryBorderRadius}px;
+  border-radius: ${({ theme }) =>
+    `${theme.borderRadius.primaryBorderRadius}px`};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Jua;
-  font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.secondaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &.active {

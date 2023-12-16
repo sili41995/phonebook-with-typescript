@@ -1,12 +1,8 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
-import Input from 'components/Input';
-import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
-import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { InputTypes } from 'constants/index';
-import GoBackLink from 'components/GoBackLink';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import {
   filterEmptyFields,
@@ -18,8 +14,12 @@ import {
 import { IContact } from 'types/types';
 import { addContact } from 'redux/contacts/operations';
 import ContactFormInputs from 'components/ContactFormInputs';
+import ModalForm from 'components/ModalForm';
+import Input from 'components/Input';
+import GoBackLink from 'components/GoBackLink';
 import AcceptBtn from 'components/AcceptBtn';
 import image from 'images/default-profile-avatar.png';
+import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);

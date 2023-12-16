@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import Input from 'components/Input';
 import {
   FaUser,
   FaPhoneAlt,
@@ -10,6 +9,7 @@ import {
   FaCheck,
 } from 'react-icons/fa';
 import { IconSizes, InputTypes, regExp } from 'constants/index';
+import Input from 'components/Input';
 import { toasts } from 'utils';
 import { IProps } from './ContactFormInputs.types';
 import { CheckboxTitle, InputWrap } from './ContactFormInputs.styled';
@@ -18,7 +18,8 @@ const ContactFormInputs: FC<IProps> = ({
   register,
   errors,
   isSubmitting,
-  onCheckboxChange,checked,
+  onCheckboxChange,
+  checked,
   contact = {},
 }) => {
   const {

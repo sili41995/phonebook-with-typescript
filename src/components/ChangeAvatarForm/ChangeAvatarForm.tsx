@@ -1,16 +1,15 @@
-import Input from 'components/Input';
-import { IconBtnType, IconSizes, InputTypes } from 'constants/index';
-import { useAppSelector } from 'hooks/redux';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { SlPaperClip } from 'react-icons/sl';
+import { SlPaperClip, SlBan } from 'react-icons/sl';
+import { IconBtnType, IconSizes, InputTypes } from 'constants/index';
+import { useAppSelector } from 'hooks/redux';
 import { selectIsLoading } from 'redux/auth/selectors';
 import { IAvatar } from 'types/types';
-import { ButtonsContainer, Form } from './ChangeAvatarForm.styled';
 import AcceptBtn from 'components/AcceptBtn';
 import IconButton from 'components/IconButton';
-import { FaTimes } from 'react-icons/fa';
+import Input from 'components/Input';
 import { IProps } from './ChangeAvatarForm.types';
+import { ButtonsContainer, Form } from './ChangeAvatarForm.styled';
 
 const ChangeAvatarForm: FC<IProps> = ({
   avatar,
@@ -29,7 +28,7 @@ const ChangeAvatarForm: FC<IProps> = ({
           <IconButton
             btnType={IconBtnType.cancel}
             onBtnClick={onCancelBtnClick}
-            icon={<FaTimes size={IconSizes.primaryIconSize} />}
+            icon={<SlBan size={IconSizes.primaryIconSize} />}
           />
         </ButtonsContainer>
       ) : (

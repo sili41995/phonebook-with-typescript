@@ -26,7 +26,7 @@ export const Image = styled.img`
 export const Name = styled.p`
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Jua;
-  font-size: ${({ theme }) => theme.fontSize.titleFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.titleFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   ${({ theme }) => theme.trimText}
 `;
@@ -35,7 +35,7 @@ export const FullName = styled.p`
   margin-top: ${({ theme }) => theme.spacing(2)};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Jua;
-  font-size: ${({ theme }) => theme.fontSize.subtitleFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.subtitleFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   text-align: center;
   ${({ theme }) => theme.trimText}
@@ -44,7 +44,7 @@ export const FullName = styled.p`
 export const Email = styled.p`
   color: ${({ theme }) => theme.colors.secondaryFontColor};
   font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.secondaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   text-align: center;
   ${({ theme }) => theme.trimText}
@@ -62,7 +62,7 @@ export const ContactInfo = styled.div`
   gap: ${({ theme }) => theme.spacing(3)};
   color: ${({ theme }) => theme.colors.secondaryFontColor};
   font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.primaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   &:not(:last-child) {
   }

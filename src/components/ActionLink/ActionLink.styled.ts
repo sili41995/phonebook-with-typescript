@@ -9,7 +9,8 @@ export const Link = styled.a`
   width: 44px;
   height: 36px;
   background-color: ${({ btnType }: IStyledProps) => setButtonColor(btnType)};
-  border-radius: ${({ theme }) => theme.borderRadius.secondaryBorderRadius}px;
+  border-radius: ${({ theme }) =>
+    `${theme.borderRadius.secondaryBorderRadius}px`};
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &:hover,
   &:focus {

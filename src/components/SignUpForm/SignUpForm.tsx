@@ -10,16 +10,15 @@ import {
   FaEnvelope,
 } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Message, Title, Image } from './SignUpForm.styled';
 import {
   filterEmptyFields,
   getProfileFormData,
   onChangeAvatar,
   toasts,
 } from 'utils';
-import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';
 import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
+import AuthFormMessage from 'components/AuthFormMessage';
 import { signUpUser } from 'redux/auth/operations';
 import { useAppDispatch } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
@@ -31,6 +30,7 @@ import {
   InputTypes,
 } from 'constants/index';
 import image from 'images/default-profile-avatar.png';
+import { Form, Message, Title, Image } from './SignUpForm.styled';
 
 const SignUpForm = () => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);

@@ -4,7 +4,7 @@ const setBtnDisplayProp = ({
   step,
 }: {
   [key: string]: number | undefined;
-}) => {
+}): string | undefined => {
   if (currentPage && page) {
     return page - Number(step) > currentPage ||
       page + Number(step) < currentPage

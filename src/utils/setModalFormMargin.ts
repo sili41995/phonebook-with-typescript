@@ -6,7 +6,7 @@ const setModalFormMargin = (formType: FormTypes | undefined): string => {
       return `${theme.spacing(10)} auto`;
 
     default:
-      return '';
+      return '0';
   }
 };
 

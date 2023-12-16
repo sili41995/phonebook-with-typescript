@@ -21,7 +21,7 @@ export const Button = styled.button`
     `${theme.borderRadius.secondaryBorderRadius}px`};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.primaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &:hover,

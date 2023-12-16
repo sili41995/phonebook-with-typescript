@@ -1,5 +1,15 @@
 import { ChangeEvent, FC, Suspense, useRef, useState } from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import { NavLink, Outlet } from 'react-router-dom';
 import { IProps } from './ContactProfile.types';
+import Loader from 'components/Loader';
+import EditContactForm from 'components/EditContactForm';
+import ChangeAvatarForm from 'components/ChangeAvatarForm';
+import { PagePaths } from 'constants/index';
+import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
+import { IAvatar } from 'types/types';
+import { useAppDispatch } from 'hooks/redux';
+import { updateContactAvatar } from 'redux/contacts/operations';
 import {
   ContactDesc,
   ContactName,
@@ -10,16 +20,6 @@ import {
   NavList,
   ImageContainer,
 } from './ContactProfile.styled';
-import { NavLink, Outlet } from 'react-router-dom';
-import Loader from 'components/Loader';
-import { PagePaths } from 'constants/index';
-import EditContactForm from 'components/EditContactForm';
-import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
-import { SubmitHandler } from 'react-hook-form';
-import { IAvatar } from 'types/types';
-import ChangeAvatarForm from 'components/ChangeAvatarForm';
-import { useAppDispatch } from 'hooks/redux';
-import { updateContactAvatar } from 'redux/contacts/operations';
 
 const ContactProfile: FC<IProps> = ({
   contact,
