@@ -1,6 +1,14 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
 import 'react-toastify/dist/ReactToastify.css';
+import { IconSizes, Messages } from 'constants/index';
+import { IProps } from './UserProfile.types';
+import ChangeAvatarForm from 'components/ChangeAvatarForm';
+import { SubmitHandler } from 'react-hook-form';
+import { IAvatar } from 'types/types';
+import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
+import { useAppDispatch } from 'hooks/redux';
+import { updateUserAvatar } from 'redux/auth/operations';
 import {
   UserInfo,
   Email,
@@ -13,14 +21,6 @@ import {
   UserProfileContainer,
   ImageContainer,
 } from './UserProfile.styled';
-import { IconSizes } from 'constants/index';
-import { IProps } from './UserProfile.types';
-import ChangeAvatarForm from 'components/ChangeAvatarForm';
-import { SubmitHandler } from 'react-hook-form';
-import { IAvatar } from 'types/types';
-import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
-import { useAppDispatch } from 'hooks/redux';
-import { updateUserAvatar } from 'redux/auth/operations';
 
 const UserProfile: FC<IProps> = ({ user }) => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
@@ -52,7 +52,7 @@ const UserProfile: FC<IProps> = ({ user }) => {
     dispatch(updateUserAvatar(userFormData))
       .unwrap()
       .then(() => {
-        toasts.successToast('Avatar updated successfully');
+        toasts.successToast(Messages.updateAvatar);
         setUserAvatar(null);
       })
       .catch((error) => {

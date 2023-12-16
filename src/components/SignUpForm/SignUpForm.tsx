@@ -28,6 +28,7 @@ import {
   FormTypes,
   IconSizes,
   InputTypes,
+  Messages,
 } from 'constants/index';
 import image from 'images/default-profile-avatar.png';
 import { Form, Message, Title, Image } from './SignUpForm.styled';
@@ -77,19 +78,16 @@ const SignUpForm = () => {
     errors.email &&
       toasts.errorToast(
         errors.email.type === 'required'
-          ? 'Email is required'
-          : 'Email must be letters, digits, dot and @'
+          ? Messages.emailReqErr
+          : Messages.emailRegExpErr
       );
     errors.password &&
       toasts.errorToast(
         errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 6 characters'
+          ? Messages.passwordReqErr
+          : Messages.passwordMinLengthErr
       );
-    errors.phone &&
-      toasts.errorToast(
-        'Phone number must be digits and can start with character +'
-      );
+    errors.phone && toasts.errorToast(Messages.phoneRegExpErr);
     errors.dateOfBirth &&
       toasts.errorToast('Date of birth must be in DD-MM-YYYY format');
   }, [errors, isSubmitting]);
@@ -97,7 +95,7 @@ const SignUpForm = () => {
   return (
     <>
       <Title>sign up</Title>
-      <Message>Welcome to Phonebook!</Message>
+      <Message>{Messages.greetings}!</Message>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           settings={{ ...register('avatar') }}

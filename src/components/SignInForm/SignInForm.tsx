@@ -11,6 +11,7 @@ import { signInUser } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';
 import { ICredentials } from 'types/types';
 import {
+  Messages,
   FormTypes,
   IconBtnType,
   IconSizes,
@@ -43,7 +44,9 @@ const SignInForm = () => {
       <FaEye size={IconSizes.secondaryIconSize} />
     ));
   const signUpPageLink = `/${PagePaths.signUpPath}`;
-  const greetings = `Welcome to Phonebook${user.name ? `, ${user.name}` : ''}!`;
+  const greetings = `${Messages.greetings}${
+    user.name ? `, ${user.name}` : ''
+  }!`;
 
   const toggleIsShowPassword = () => {
     setIsShowPassword((prevState) => !prevState);
@@ -71,14 +74,14 @@ const SignInForm = () => {
     errors.email &&
       toasts.errorToast(
         errors.email.type === 'required'
-          ? 'Email is required'
-          : 'Email must be letters, digits, dot and @'
+          ? Messages.emailReqErr
+          : Messages.emailRegExpErr
       );
     errors.password &&
       toasts.errorToast(
         errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 6 characters'
+          ? Messages.passwordReqErr
+          : Messages.passwordMinLengthErr
       );
   }, [isSubmitting, errors]);
 

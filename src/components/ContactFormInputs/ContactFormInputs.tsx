@@ -8,7 +8,7 @@ import {
   FaIdCardAlt,
   FaCheck,
 } from 'react-icons/fa';
-import { IconSizes, InputTypes, regExp } from 'constants/index';
+import { Messages, IconSizes, InputTypes, regExp } from 'constants/index';
 import Input from 'components/Input';
 import { toasts } from 'utils';
 import { IProps } from './ContactFormInputs.types';
@@ -32,15 +32,14 @@ const ContactFormInputs: FC<IProps> = ({
   } = contact;
 
   useEffect(() => {
-    errors.name && toasts.errorToast('First name is required');
+    errors.name && toasts.errorToast(Messages.firstNameReqErr);
     errors.phone &&
       toasts.errorToast(
         errors.phone.type === 'required'
           ? 'Phone is required'
-          : 'Phone number must be digits and can start with character +'
+          : Messages.phoneRegExpErr
       );
-    errors.email &&
-      toasts.errorToast('Email must be letters, digits, dot and @');
+    errors.email && toasts.errorToast(Messages.emailRegExpErr);
   }, [errors, isSubmitting]);
 
   return (

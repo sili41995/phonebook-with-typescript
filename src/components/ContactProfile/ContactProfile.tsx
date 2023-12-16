@@ -5,7 +5,7 @@ import { IProps } from './ContactProfile.types';
 import Loader from 'components/Loader';
 import EditContactForm from 'components/EditContactForm';
 import ChangeAvatarForm from 'components/ChangeAvatarForm';
-import { PagePaths } from 'constants/index';
+import { Messages, PagePaths } from 'constants/index';
 import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
 import { IAvatar } from 'types/types';
 import { useAppDispatch } from 'hooks/redux';
@@ -53,7 +53,7 @@ const ContactProfile: FC<IProps> = ({
     dispatch(updateContactAvatar({ data: contactFormData, id }))
       .unwrap()
       .then(() => {
-        toasts.successToast('Avatar updated successfully');
+        toasts.successToast(Messages.updateAvatar);
         setContactAvatar(null);
       })
       .catch((error) => {
