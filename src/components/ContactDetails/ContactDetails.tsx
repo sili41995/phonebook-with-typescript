@@ -122,16 +122,12 @@ const ContactDetails = () => {
                 <IconButton
                   disabled={isLoading}
                   btnType={IconBtnType.favorite}
-                  width={44}
-                  height={35}
                   onBtnClick={onFavoriteBtnClick}
                   icon={favoriteBtnIcon}
                 />
                 <IconButton
                   disabled={isLoading}
                   btnType={IconBtnType.delete}
-                  width={44}
-                  height={35}
                   onBtnClick={onDelBtnClick}
                   icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
                 />
@@ -139,8 +135,6 @@ const ContactDetails = () => {
             )}
             <IconButton
               btnType={IconBtnType.edit}
-              width={44}
-              height={35}
               onBtnClick={onEditBtnClick}
               icon={<AiOutlineEdit size={IconSizes.primaryIconSize} />}
             />

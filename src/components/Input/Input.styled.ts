@@ -62,7 +62,7 @@ export const Label = styled.label`
     border: 1px solid;
     border-color: ${({ formType, checked }) =>
       checked ? 'transparent' : setInputBorderColor(formType)};
-    border-radius: ${({ formType }) => setInputBorderRadius(formType)}px;
+    border-radius: ${({ formType }) => setInputBorderRadius(formType)};
     background-color: ${({ theme, checked }) =>
       checked ? theme.colors.otherColor : 'transparent'};
     color: ${({ theme, checked }) =>

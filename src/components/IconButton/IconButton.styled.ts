@@ -17,6 +17,7 @@ export const Button = styled.button`
   border-color: transparent;
   border-radius: ${({ theme }) =>
     `${theme.borderRadius.secondaryBorderRadius}px`};
+  transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &:hover,
   &:focus {
     box-shadow: ${({ theme, inputWrap }) =>
@@ -39,7 +40,5 @@ export const Button = styled.button`
 //   font-family: Inter;
 //   font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
 //   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
-//   text-decoration: none;
-//   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
 //   z-index: 10;
 // `;
