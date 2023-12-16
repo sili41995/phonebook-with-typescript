@@ -1,9 +1,12 @@
-import { IProfile } from 'types/types';
+interface IFuncProps {
+  [key: string]: string | boolean | undefined | FileList;
+  avatar: FileList | string;
+}
 
-const getProfileFormData = (profile: IProfile): FormData => {
+const getProfileFormData = (profile: IFuncProps): FormData => {
   const formData = new FormData();
 
-  if (profile.avatar.length) {
+  if (profile.avatar?.length) {
     formData.append('avatar', profile.avatar[0]);
   }
 

@@ -1,6 +1,5 @@
 import { useMemo, FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import PaginationBar from 'components/PaginationBar';
 import { IProps } from './ContactsContainer.types';
 import { SearchParamsKeys } from 'constants/index';
 import { useAppSelector } from 'hooks/redux';
@@ -10,9 +9,10 @@ import {
   getVisibleContacts,
   sortContactsByName,
 } from 'utils';
-import { Container } from './ContactsContainer.styled';
 import ContactsList from 'components/ContactsList';
+import PaginationBar from 'components/PaginationBar';
 import DefaultMessage from 'components/DefaultMessage';
+import { Container } from './ContactsContainer.styled';
 
 const { FILTER_SP_KEY, SORT_SP_KEY, PAGE_SP_KEY } = SearchParamsKeys;
 
@@ -21,6 +21,7 @@ const ContactsContainer: FC<IProps> = ({ quantity }) => {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get(FILTER_SP_KEY) ?? '';
   const sortType = searchParams.get(SORT_SP_KEY) ?? '';
+
   const currentPage = Number(searchParams.get(PAGE_SP_KEY) ?? 1);
   const isValidPage = currentPage > 0;
 
@@ -35,8 +36,8 @@ const ContactsContainer: FC<IProps> = ({ quantity }) => {
     currentPage,
   });
 
-  const isShouldRenderList = isValidPage && Boolean(filteredContacts.length);
   const renderContacts = filter ? filteredContacts : visibleContacts;
+  const isShouldRenderList = isValidPage && Boolean(renderContacts.length);
 
   return (
     <Container>

@@ -7,9 +7,10 @@ export const Link = styled.a`
   justify-content: center;
   align-items: center;
   width: 44px;
-  height: 35px;
+  height: 36px;
   background-color: ${({ btnType }: IStyledProps) => setButtonColor(btnType)};
-  border-radius: ${({ theme }) => theme.borderRadius.secondaryBorderRadius}px;
+  border-radius: ${({ theme }) =>
+    `${theme.borderRadius.secondaryBorderRadius}px`};
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &:hover,
   &:focus {

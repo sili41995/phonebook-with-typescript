@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 export const Button = styled.button`
-  display: block;
   min-width: 170px;
   height: 60px;
   padding-left: ${({ theme }) => theme.spacing(8)};
@@ -9,11 +8,12 @@ export const Button = styled.button`
   align-self: center;
   background-color: ${({ theme }) => theme.colors.primaryColor};
   border-color: transparent;
-  border-radius: ${({ theme }) => theme.borderRadius.primaryBorderRadius}px;
-  color: #fff;
+  border-radius: ${({ theme }) =>
+    `${theme.borderRadius.primaryBorderRadius}px`};
+  color: ${({ theme }) => theme.colors.whiteColor};
   text-align: center;
   font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.primaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
   line-height: 1.5;
   letter-spacing: 0.64px;

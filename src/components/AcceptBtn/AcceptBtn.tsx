@@ -8,10 +8,9 @@ const AcceptBtn: FC<IProps> = ({ disabled = false }) => (
   <IconButton
     disabled={disabled}
     btnType={IconBtnType.accept}
-    width={44}
-    height={35}
     type={BtnType.submit}
     icon={<FaCheck size={IconSizes.primaryIconSize} />}
+    height={36}
   />
 );
 

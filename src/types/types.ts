@@ -93,4 +93,10 @@ export interface IContactStatus {
   favorite: boolean;
 }
 
+export interface IAvatar {
+  [key: string]: FileList | string | undefined;
+  _id?: string;
+  avatar: FileList | string;
+}
+
 export type Message = string;

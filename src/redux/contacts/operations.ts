@@ -1,6 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import contactsServiceApi from 'service/contactsServiceApi';
-import { IContact, IContactStatus, IFetchContactsRes } from 'types/types';
+import {
+  IAvatar,
+  IContact,
+  IContactStatus,
+  IFetchContactsRes,
+} from 'types/types';
 
 export const fetchContacts = createAsyncThunk<
   IFetchContactsRes,
@@ -92,6 +97,24 @@ export const updateContactStatus = createAsyncThunk<
   async (data, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
       const response = await contactsServiceApi.updateContactStatus(data);
+      return response;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateContactAvatar = createAsyncThunk<
+  IAvatar,
+  { data: FormData; id: string },
+  { rejectValue: string }
+>(
+  'contacts/updateContactAvatar',
+  async (data, { rejectWithValue }: { rejectWithValue: Function }) => {
+    try {
+      const response = await contactsServiceApi.updateContactAvatar(data);
       return response;
     } catch (error) {
       if (error instanceof Error) {

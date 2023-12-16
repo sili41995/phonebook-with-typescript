@@ -1,3 +1,4 @@
+import { MouseEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   AiFillStar,
@@ -5,30 +6,29 @@ import {
   AiOutlineEdit,
   AiOutlineStar,
 } from 'react-icons/ai';
-import {
-  ButtonsContainer,
-  Container,
-  ManipulationButtons,
-} from './ContactDetails.styled';
 import DefaultMessage from 'components/DefaultMessage';
+import ContactProfile from 'components/ContactProfile';
+import GoBackLink from 'components/GoBackLink';
+import IconButton from 'components/IconButton';
+import Loader from 'components/Loader';
 import {
   FetchStatuses,
   IconBtnType,
   IconSizes,
   PagePaths,
 } from 'constants/index';
-import { MouseEvent, useEffect, useState } from 'react';
 import { IContact } from 'types/types';
 import contactsServiceApi from 'service/contactsServiceApi';
 import { makeBlur, toasts } from 'utils';
-import ContactProfile from 'components/ContactProfile';
-import Loader from 'components/Loader';
-import GoBackLink from 'components/GoBackLink';
-import IconButton from 'components/IconButton';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { selectIsLoading } from 'redux/contacts/selectors';
 import useDeleteContact from 'hooks/useDeleteContact';
+import { selectIsLoading } from 'redux/contacts/selectors';
 import { updateContactStatus } from 'redux/contacts/operations';
+import {
+  ButtonsContainer,
+  Container,
+  ManipulationButtons,
+} from './ContactDetails.styled';
 
 const { idle, pending, resolved, rejected } = FetchStatuses;
 
@@ -87,22 +87,26 @@ const ContactDetails = () => {
   const onFavoriteBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
     makeBlur(e.currentTarget);
 
-    if (contact?._id) {
-      const { favorite, _id: id } = contact;
-      const data = { favorite: !favorite };
-      dispatch(updateContactStatus({ data, id }))
-        .unwrap()
-        .then(() => {
-          toasts.successToast('Contact status updated successfully');
-          setContact(
-            (prevState) =>
-              ({ ...prevState, favorite: !prevState?.favorite } as IContact)
-          );
-        })
-        .catch((error) => {
-          toasts.errorToast(error);
-        });
-    }
+    if (!contact?._id) return;
+
+    const { favorite, _id: id } = contact;
+    const data = { favorite: !favorite };
+    dispatch(updateContactStatus({ data, id }))
+      .unwrap()
+      .then(() => {
+        toasts.successToast('Contact status updated successfully');
+        setContact(
+          (prevState) =>
+            ({ ...prevState, favorite: !prevState?.favorite } as IContact)
+        );
+      })
+      .catch((error) => {
+        toasts.errorToast(error);
+      });
+  };
+
+  const updateContact = (data: IContact): void => {
+    setContact(data);
   };
 
   return isLoadingContact ? (
@@ -110,7 +114,7 @@ const ContactDetails = () => {
   ) : (
     <Container>
       <ButtonsContainer>
-        <GoBackLink />
+        <GoBackLink height={36} />
         {isLoadedContact && (
           <ManipulationButtons>
             {!editContact && (
@@ -118,16 +122,12 @@ const ContactDetails = () => {
                 <IconButton
                   disabled={isLoading}
                   btnType={IconBtnType.favorite}
-                  width={44}
-                  height={35}
                   onBtnClick={onFavoriteBtnClick}
                   icon={favoriteBtnIcon}
                 />
                 <IconButton
                   disabled={isLoading}
                   btnType={IconBtnType.delete}
-                  width={44}
-                  height={35}
                   onBtnClick={onDelBtnClick}
                   icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
                 />
@@ -135,8 +135,6 @@ const ContactDetails = () => {
             )}
             <IconButton
               btnType={IconBtnType.edit}
-              width={44}
-              height={35}
               onBtnClick={onEditBtnClick}
               icon={<AiOutlineEdit size={IconSizes.primaryIconSize} />}
             />
@@ -148,6 +146,7 @@ const ContactDetails = () => {
           contact={contact}
           editContact={editContact}
           onEditBtnClick={onEditBtnClick}
+          setContact={updateContact}
         />
       )}
       {isFetchError && <DefaultMessage message="Contact is absent" />}

@@ -1,7 +1,5 @@
 import About from 'components/About';
 
-const AboutPage = () => {
-  return <About />;
-};
+const AboutPage = () => <About />;
 
 export default AboutPage;

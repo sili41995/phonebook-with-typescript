@@ -6,7 +6,7 @@ const updateSortSearchParams = (
   searchParams: URLSearchParams,
   setSearchParams: (arg: URLSearchParams) => void,
   key: SearchParamsKeys
-) => {
+): void => {
   const sortSearchParam = searchParams.get(key);
   const descSortType = sortSearchParam === DESC_SORT_TYPE;
   const updateSortValue = descSortType ? ASC_SORT_TYPE : DESC_SORT_TYPE;

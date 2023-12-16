@@ -10,16 +10,15 @@ import {
   FaEnvelope,
 } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Message, Title } from './SignUpForm.styled';
 import {
   filterEmptyFields,
   getProfileFormData,
   onChangeAvatar,
   toasts,
 } from 'utils';
-import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';
 import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
+import AuthFormMessage from 'components/AuthFormMessage';
 import { signUpUser } from 'redux/auth/operations';
 import { useAppDispatch } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
@@ -29,7 +28,10 @@ import {
   FormTypes,
   IconSizes,
   InputTypes,
+  Messages,
 } from 'constants/index';
+import image from 'images/default-profile-avatar.png';
+import { Form, Message, Title, Image } from './SignUpForm.styled';
 
 const SignUpForm = () => {
   const [userAvatar, setUserAvatar] = useState<FileList | null>(null);
@@ -76,19 +78,16 @@ const SignUpForm = () => {
     errors.email &&
       toasts.errorToast(
         errors.email.type === 'required'
-          ? 'Email is required'
-          : 'Email must be letters, digits, dot and @'
+          ? Messages.emailReqErr
+          : Messages.emailRegExpErr
       );
     errors.password &&
       toasts.errorToast(
         errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 6 characters'
+          ? Messages.passwordReqErr
+          : Messages.passwordMinLengthErr
       );
-    errors.phone &&
-      toasts.errorToast(
-        'Phone number must be digits and can start with character +'
-      );
+    errors.phone && toasts.errorToast(Messages.phoneRegExpErr);
     errors.dateOfBirth &&
       toasts.errorToast('Date of birth must be in DD-MM-YYYY format');
   }, [errors, isSubmitting]);
@@ -96,14 +95,16 @@ const SignUpForm = () => {
   return (
     <>
       <Title>sign up</Title>
-      <Message>Welcome to Phonebook!</Message>
+      <Message>{Messages.greetings}!</Message>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           settings={{ ...register('avatar') }}
           accept="image/png, image/jpeg, image/jpg"
           onChange={onChangeInput}
           type={InputTypes.file}
-          imageRef={userAvatarRef}
+          altElem={
+            <Image src={image} alt="profile avatar" ref={userAvatarRef} />
+          }
         />
         <Input
           settings={{ ...register('name', { required: true }) }}

@@ -4,26 +4,26 @@ import { IStyledProps } from './IconButton.types';
 
 export const Button = styled.button`
   position: ${({ position }: IStyledProps) => position};
-  top: ${({ top }) => top && (top === 'center' ? '50%' : `${top}px`)};
-  right: ${({ right }) => right}px;
-  transform: translateY(${({ top }) => (top === 'center' ? '-50%' : false)});
+  z-index: 10;
+  top: ${({ top }) => (top === 'center' ? '50%' : `${top}px`)};
+  right: ${({ right }) => `${right}px`};
+  transform: translateY(${({ top }) => (top === 'center' ? '-50%' : '')});
   display: flex;
+  gap: ${({ theme }) => `${theme.primaryGap}px`};
   justify-content: center;
   align-items: center;
-  gap: ${({ theme }) => theme.primaryGap}px;
-  min-width: ${({ width }) => width}px;
-  height: ${({ height }) => height}px;
+  min-width: ${({ width }) => `${width}px`};
+  height: ${({ height }) => (height ? `${height}px` : '')};
   padding: ${({ theme }) => theme.spacing()};
-  border-radius: ${({ theme }) => theme.borderRadius.secondaryBorderRadius}px;
-  border-color: transparent;
   background-color: ${({ btnType }) => setButtonColor(btnType)};
+  border-color: transparent;
+  border-radius: ${({ theme }) =>
+    `${theme.borderRadius.secondaryBorderRadius}px`};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Inter;
-  font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.primaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
-  text-decoration: none;
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
-  z-index: 10;
   &:hover,
   &:focus {
     box-shadow: ${({ theme, inputWrap }) =>

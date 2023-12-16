@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
-  gap: ${({ theme }) => theme.primaryGap}px;
 `;
 
 export const List = styled.ul`
@@ -23,15 +22,14 @@ export const ListItem = styled.li`
     font-family: Inter;
     font-size: ${({ theme }) => theme.fontSize.primaryFontSize}px;
     font-weight: ${({ theme }) => theme.fontWeight.primaryFontWeight};
-    text-decoration: none;
     text-align: center;
-    transition: color,
+    transition: color ${({ theme }) => theme.transitionDurationAndFunc},
       background-color ${({ theme }) => theme.transitionDurationAndFunc};
     &:hover,
     &:focus,
     &.active {
       color: ${({ theme }) => theme.colors.otherColor};
-      background-color: #fff;
+      background-color: ${({ theme }) => theme.colors.whiteColor};
     }
   }
 `;

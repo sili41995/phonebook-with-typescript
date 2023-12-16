@@ -1,13 +1,17 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => `${theme.primaryGap}px`};
+  align-items: center;
   flex-grow: 1;
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.spacing(10)};
 `;
 
 export const ManipulationButtons = styled.div`

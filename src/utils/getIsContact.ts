@@ -5,7 +5,7 @@ interface IFuncProps {
   contacts: IContact[];
 }
 
-const getIsContact = ({ newContactName, contacts }: IFuncProps) =>
+const getIsContact = ({ newContactName, contacts }: IFuncProps): boolean =>
   contacts.some(({ name }) => name === newContactName);
 
 export default getIsContact;

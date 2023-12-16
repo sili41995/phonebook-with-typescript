@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Message, Title, Image } from './SignInForm.styled';
-import defaultAvatar from 'images/default-signin-avatar.png';
 import { toasts } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
+import Input from 'components/Input';
 import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
-import { signInUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { signInUser } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';
 import { ICredentials } from 'types/types';
 import {
+  Messages,
   FormTypes,
   IconBtnType,
   IconSizes,
   InputTypes,
   PagePaths,
 } from 'constants/index';
-import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
-import Input from 'components/Input';
+import defaultAvatar from 'images/default-signin-avatar.png';
+import { Form, Message, Title, Image } from './SignInForm.styled';
 
 const SignInForm = () => {
   const user = useAppSelector(selectUser);
@@ -43,7 +44,9 @@ const SignInForm = () => {
       <FaEye size={IconSizes.secondaryIconSize} />
     ));
   const signUpPageLink = `/${PagePaths.signUpPath}`;
-  const greetings = `Welcome to Phonebook${user.name ? `, ${user.name}` : ''}!`;
+  const greetings = `${Messages.greetings}${
+    user.name ? `, ${user.name}` : ''
+  }!`;
 
   const toggleIsShowPassword = () => {
     setIsShowPassword((prevState) => !prevState);
@@ -71,14 +74,14 @@ const SignInForm = () => {
     errors.email &&
       toasts.errorToast(
         errors.email.type === 'required'
-          ? 'Email is required'
-          : 'Email must be letters, digits, dot and @'
+          ? Messages.emailReqErr
+          : Messages.emailRegExpErr
       );
     errors.password &&
       toasts.errorToast(
         errors.password.type === 'required'
-          ? 'Password is required'
-          : 'Password minimum length is 6 characters'
+          ? Messages.passwordReqErr
+          : Messages.passwordMinLengthErr
       );
   }, [isSubmitting, errors]);
 
@@ -88,7 +91,7 @@ const SignInForm = () => {
 
   return (
     <>
-      <Title>log in</Title>
+      <Title>sign in</Title>
       <Message>{greetings}</Message>
       <Image src={user.avatar ?? defaultAvatar} alt="user avatar" />
       <Form onSubmit={handleSubmit(onSubmit)}>

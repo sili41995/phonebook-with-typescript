@@ -1,12 +1,8 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
-import Input from 'components/Input';
-import { ButtonsContainer, Form, Title } from './AddContactForm.styled';
-import ModalForm from 'components/ModalForm';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { InputTypes } from 'constants/index';
-import GoBackLink from 'components/GoBackLink';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import {
   filterEmptyFields,
@@ -18,13 +14,19 @@ import {
 import { IContact } from 'types/types';
 import { addContact } from 'redux/contacts/operations';
 import ContactFormInputs from 'components/ContactFormInputs';
+import ModalForm from 'components/ModalForm';
+import Input from 'components/Input';
+import GoBackLink from 'components/GoBackLink';
 import AcceptBtn from 'components/AcceptBtn';
+import image from 'images/default-profile-avatar.png';
+import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
   const contacts = useAppSelector(selectContacts);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
+  const [checked, setChecked] = useState<boolean>(false);
   const {
     register,
     formState: { errors, isSubmitting },
@@ -33,7 +35,7 @@ const AddContactForm: FC = () => {
   } = useForm<IContact>();
   const dispatch = useAppDispatch();
 
-  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
       return;
     }
@@ -62,11 +64,18 @@ const AddContactForm: FC = () => {
       .unwrap()
       .then(() => {
         toasts.successToast('Contact added successfully');
+        if (contactAvatarRef.current) {
+          contactAvatarRef.current.src = image;
+        }
         reset();
       })
       .catch((error) => {
         toasts.errorToast(error);
       });
+  };
+
+  const onCheckboxChange = () => {
+    setChecked((prevState) => !prevState);
   };
 
   return (
@@ -76,14 +85,18 @@ const AddContactForm: FC = () => {
         <Input
           settings={{ ...register('avatar') }}
           accept="image/png, image/jpeg, image/jpg"
-          onChange={onChangeInput}
+          onChange={onChangeFile}
           type={InputTypes.file}
-          imageRef={contactAvatarRef}
+          altElem={
+            <Image src={image} alt="profile avatar" ref={contactAvatarRef} />
+          }
         />
         <ContactFormInputs
           register={register}
           errors={errors}
           isSubmitting={isSubmitting}
+          onCheckboxChange={onCheckboxChange}
+          checked={checked}
         />
         <ButtonsContainer>
           <AcceptBtn disabled={isLoading} />

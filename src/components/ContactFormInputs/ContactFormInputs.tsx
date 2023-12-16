@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import Input from 'components/Input';
 import {
   FaUser,
   FaPhoneAlt,
@@ -7,15 +6,20 @@ import {
   FaInfo,
   FaTelegramPlane,
   FaIdCardAlt,
+  FaCheck,
 } from 'react-icons/fa';
-import { IconSizes, InputTypes, regExp } from 'constants/index';
+import { Messages, IconSizes, InputTypes, regExp } from 'constants/index';
+import Input from 'components/Input';
 import { toasts } from 'utils';
 import { IProps } from './ContactFormInputs.types';
+import { CheckboxTitle, InputWrap } from './ContactFormInputs.styled';
 
 const ContactFormInputs: FC<IProps> = ({
   register,
   errors,
   isSubmitting,
+  onCheckboxChange,
+  checked,
   contact = {},
 }) => {
   const {
@@ -28,15 +32,14 @@ const ContactFormInputs: FC<IProps> = ({
   } = contact;
 
   useEffect(() => {
-    errors.name && toasts.errorToast('First name is required');
+    errors.name && toasts.errorToast(Messages.firstNameReqErr);
     errors.phone &&
       toasts.errorToast(
         errors.phone.type === 'required'
           ? 'Phone is required'
-          : 'Phone number must be digits and can start with character +'
+          : Messages.phoneRegExpErr
       );
-    errors.email &&
-      toasts.errorToast('Email must be letters, digits, dot and @');
+    errors.email && toasts.errorToast(Messages.emailRegExpErr);
   }, [errors, isSubmitting]);
 
   return (
@@ -76,7 +79,7 @@ const ContactFormInputs: FC<IProps> = ({
         settings={{
           ...register('role'),
         }}
-        type={InputTypes.email}
+        type={InputTypes.text}
         placeholder="Role"
         icon={<FaIdCardAlt size={IconSizes.defaultIconSize} />}
         defaultValue={role}
@@ -86,7 +89,7 @@ const ContactFormInputs: FC<IProps> = ({
         settings={{
           ...register('tgUsername'),
         }}
-        type={InputTypes.email}
+        type={InputTypes.text}
         placeholder="Telegram username"
         icon={<FaTelegramPlane size={IconSizes.defaultIconSize} />}
         defaultValue={tgUsername}
@@ -96,12 +99,22 @@ const ContactFormInputs: FC<IProps> = ({
         settings={{
           ...register('description'),
         }}
-        type={InputTypes.email}
+        type={InputTypes.text}
         placeholder="About contact"
         icon={<FaInfo size={IconSizes.defaultIconSize} />}
         defaultValue={description}
         inputWrap
       />
+      <InputWrap>
+        <CheckboxTitle>Favorite contact</CheckboxTitle>
+        <Input
+          settings={{ ...register('favorite') }}
+          checked={checked}
+          onChange={onCheckboxChange}
+          type={InputTypes.checkbox}
+          altElem={<FaCheck size={IconSizes.primaryIconSize} />}
+        />
+      </InputWrap>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactElement, RefObject } from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { FormTypes, InputTypes, IconBtnType } from 'constants/index';
 
 export interface IProps {
@@ -12,13 +12,15 @@ export interface IProps {
   btnType?: IconBtnType;
   btnIcon?: ReactElement | boolean;
   accept?: string;
-  imageRef?: RefObject<HTMLImageElement>;
+  altElem?: ReactElement;
   value?: string;
   defaultValue?: string;
+  checked?: boolean;
   action?: () => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IStyledProps {
   formType?: FormTypes;
+  checked?: boolean;
 }

@@ -1,6 +1,12 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
-import { refreshUser, signInUser, signOutUser, signUpUser } from './operations';
+import {
+  refreshUser,
+  signInUser,
+  signOutUser,
+  signUpUser,
+  updateUserAvatar,
+} from './operations';
 import { IAuthState } from 'types/types';
 
 const authState: IAuthState = initialState.auth;
@@ -44,13 +50,25 @@ const authSlice = createSlice({
         isLoggedIn: true,
         isRefreshing: false,
       }))
+      .addCase(updateUserAvatar.fulfilled, (state, { payload }) => ({
+        ...state,
+        user: {
+          ...state.user,
+          avatar: payload.avatar as string,
+        },
+      }))
       .addCase(refreshUser.rejected, (state) => ({
         ...state,
         isLoading: false,
         isRefreshing: false,
       }))
       .addMatcher(
-        isAnyOf(signUpUser.pending, signInUser.pending, signOutUser.pending),
+        isAnyOf(
+          signUpUser.pending,
+          signInUser.pending,
+          signOutUser.pending,
+          updateUserAvatar.pending
+        ),
         (state) => ({
           ...state,
           isLoading: true,
@@ -62,7 +80,8 @@ const authSlice = createSlice({
           signUpUser.rejected,
           signInUser.rejected,
           signOutUser.rejected,
-          refreshUser.rejected
+          refreshUser.rejected,
+          updateUserAvatar.rejected
         ),
         (state, { payload }) => ({
           ...state,

@@ -6,7 +6,6 @@ import {
   FaSistrix,
   FaTimes,
 } from 'react-icons/fa';
-import { FilterContainer } from './Filter.styled';
 import { makeBlur, updateSortSearchParams } from 'utils';
 import IconButton from 'components/IconButton';
 import Input from 'components/Input';
@@ -18,6 +17,7 @@ import {
   SearchParamsKeys,
   SortTypes,
 } from 'constants/index';
+import { FilterContainer } from './Filter.styled';
 
 const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
 const { DESC_SORT_TYPE } = SortTypes;
@@ -83,13 +83,11 @@ const Filter = () => {
       )}
       <IconButton
         btnType={IconBtnType.filter}
-        width={44}
         onBtnClick={onFilterBtnClick}
         icon={<FaSistrix size={IconSizes.otherIconSize} />}
       />
       <IconButton
         btnType={IconBtnType.filter}
-        width={44}
         onBtnClick={onSortBtnClick}
         icon={sortBtnIcon}
       />

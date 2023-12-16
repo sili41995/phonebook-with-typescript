@@ -5,5 +5,5 @@ export const Container = styled.div`
   flex-shrink: 0;
   width: 650px;
   flex-direction: column;
-  gap: ${({ theme }) => theme.primaryGap}px;
+  gap: ${({ theme }) => `${theme.primaryGap}px`};
 `;

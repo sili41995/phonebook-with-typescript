@@ -14,7 +14,7 @@ export const Item = styled.li`
 
 export const TemplateItem = styled.li`
   & button {
-    cursor: auto;
+    cursor: default;
     &:hover,
     &:focus {
       box-shadow: none;
@@ -25,13 +25,14 @@ export const TemplateItem = styled.li`
 export const Button = styled.button`
   min-width: 30px;
   height: 40px;
+  padding: ${({ theme }) => theme.spacing(2)};
   background-color: transparent;
   border-color: transparent;
-  border-radius: ${({ theme }) => theme.borderRadius.primaryBorderRadius}px;
-  padding: ${({ theme }) => theme.spacing(2)};
+  border-radius: ${({ theme }) =>
+    `${theme.borderRadius.primaryBorderRadius}px`};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Jua;
-  font-size: ${({ theme }) => theme.fontSize.secondaryFontSize}px;
+  font-size: ${({ theme }) => `${theme.fontSize.secondaryFontSize}px`};
   font-weight: ${({ theme }) => theme.fontWeight.otherFontWeight};
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &.active {

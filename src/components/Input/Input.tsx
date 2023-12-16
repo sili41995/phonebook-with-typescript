@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { Container, Image, Label, StyledInput } from './Input.styled';
 import IconButton from 'components/IconButton';
 import { IProps } from './Input.types';
 import { Positions, InputTypes } from 'constants/index';
-import image from 'images/default-signup-avatar.png';
+import { Container, Label, StyledInput } from './Input.styled';
 
 const Input: FC<IProps> = ({
   settings,
@@ -12,16 +11,19 @@ const Input: FC<IProps> = ({
   btnIcon,
   btnType,
   type,
-  imageRef,
   icon,
+  altElem,
+  checked,
   ...otherProps
 }) => {
-  const input = <StyledInput type={type} {...settings} {...otherProps} />;
+  const input = (
+    <StyledInput type={type} checked={checked} {...settings} {...otherProps} />
+  );
 
-  if (type === InputTypes.file) {
+  if (type === InputTypes.file || type === InputTypes.checkbox) {
     return (
-      <Label>
-        <Image src={image} alt="user avatar" ref={imageRef} />
+      <Label checked={checked}>
+        {altElem}
         {input}
       </Label>
     );
@@ -37,10 +39,8 @@ const Input: FC<IProps> = ({
           btnType={btnType}
           position={Positions.absolute}
           top="center"
-          right={0}
-          height={35}
-          width={44}
           icon={btnIcon}
+          height={36}
           inputWrap
         />
       )}
