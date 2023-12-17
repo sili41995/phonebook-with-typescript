@@ -1,15 +1,14 @@
 import { toast } from 'react-toastify';
-import { Message } from 'types/types';
 
-const errorToast = (message: Message): void => {
+const errorToast = (message: string): void => {
   toast.error(message);
 };
 
-const successToast = (message: Message): void => {
+const successToast = (message: string): void => {
   toast.success(message);
 };
 
-const warnToast = (message: Message): void => {
+const warnToast = (message: string): void => {
   toast.warn(message);
 };
 

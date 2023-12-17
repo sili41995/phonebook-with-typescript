@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import initialState from 'redux/initialState';
 import contactsServiceApi from 'service/contactsServiceApi';
 import {
-  IInitialState,
+  IState,
   ISignInRes,
   ICredentials,
   ICurrentUser,
@@ -90,7 +90,7 @@ export const refreshUser = createAsyncThunk<
       getState,
     }: { rejectWithValue: Function; getState: Function }
   ) => {
-    const state = getState() as IInitialState;
+    const state = getState() as IState;
     const { token } = state.auth;
     try {
       contactsServiceApi.token = token;

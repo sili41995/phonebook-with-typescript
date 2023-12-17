@@ -84,7 +84,7 @@ export interface IContactsState {
   error: string | null;
 }
 
-export interface IInitialState {
+export interface IState {
   contacts: IContactsState;
   auth: IAuthState;
 }
@@ -98,5 +98,3 @@ export interface IAvatar {
   _id?: string;
   avatar: FileList | string;
 }
-
-export type Message = string;

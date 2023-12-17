@@ -1,12 +1,11 @@
-import { IInitialState } from 'types/types';
+import { IState } from 'types/types';
 
-export const selectToken = (state: IInitialState) => state.auth.token;
+export const selectToken = (state: IState) => state.auth.token;
 
-export const selectUser = (state: IInitialState) => state.auth.user;
+export const selectUser = (state: IState) => state.auth.user;
 
-export const selectIsLoggedIn = (state: IInitialState) => state.auth.isLoggedIn;
+export const selectIsLoggedIn = (state: IState) => state.auth.isLoggedIn;
 
-export const selectIsRefreshing = (state: IInitialState) =>
-  state.auth.isRefreshing;
+export const selectIsRefreshing = (state: IState) => state.auth.isRefreshing;
 
-export const selectIsLoading = (state: IInitialState) => state.auth.isLoading;
+export const selectIsLoading = (state: IState) => state.auth.isLoading;

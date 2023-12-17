@@ -1,6 +1,6 @@
-import { IInitialState } from 'types/types';
+import { IState } from 'types/types';
 
-const initialState: IInitialState = {
+const initialState: IState = {
   contacts: {
     items: [],
     count: null,
