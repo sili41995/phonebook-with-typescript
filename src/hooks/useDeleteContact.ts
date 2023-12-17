@@ -9,7 +9,7 @@ const useDeleteContact = () => {
   const [contactId, setContactId] = useState<string | null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
   const redirectPath = `/${PagePaths.contactsPath + search}`;
 
   useEffect(() => {
@@ -17,14 +17,16 @@ const useDeleteContact = () => {
       dispatch(deleteContact(contactId))
         .unwrap()
         .then(() => {
-          navigate(redirectPath);
+          if (pathname.includes(contactId)) {
+            navigate(redirectPath);
+          }
           toasts.successToast('Contact successfully removed');
         })
         .catch(() => {
           toasts.errorToast('Deleting a contact failed');
         });
     }
-  }, [contactId, dispatch, navigate, redirectPath]);
+  }, [contactId, dispatch, navigate, pathname, redirectPath]);
 
   return setContactId;
 };
