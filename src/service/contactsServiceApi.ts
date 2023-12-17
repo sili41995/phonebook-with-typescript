@@ -137,8 +137,15 @@ class ContactsServiceApi {
       });
   }
 
-  fetchContactById(id: string): Promise<IContact> {
+  fetchContactById({
+    signal,
+    id,
+  }: {
+    signal: AbortSignal;
+    id: string;
+  }): Promise<IContact> {
     const options = {
+      signal,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -149,6 +156,7 @@ class ContactsServiceApi {
     return fetch(`${this.BASE_URL}/contacts/${id}`, options)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.message) {
           throw Error(data.message);
         }

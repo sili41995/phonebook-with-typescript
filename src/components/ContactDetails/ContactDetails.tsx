@@ -56,14 +56,19 @@ const ContactDetails = () => {
   }, [id]);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const getContact = async (id: string) => {
       setFetchContactStatus(pending);
       try {
-        const contact = await contactsServiceApi.fetchContactById(id);
+        const contact = await contactsServiceApi.fetchContactById({
+          id,
+          signal: controller.signal,
+        });
         setContact(contact);
         setFetchContactStatus(resolved);
       } catch (error) {
-        if (error instanceof Error) {
+        if (error instanceof Error && error.name !== 'AbortError') {
           toasts.errorToast(error.message);
           setFetchContactStatus(rejected);
         }
@@ -71,6 +76,10 @@ const ContactDetails = () => {
     };
 
     id && getContact(id);
+
+    return () => {
+      controller.abort();
+    };
   }, [id]);
 
   const onDelBtnClick = () => {
