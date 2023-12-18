@@ -12,7 +12,7 @@ const PublicLinks = () => {
         <NavLink to={signUpPagePath}>Sign up</NavLink>
       </ListItem>
       <ListItem>
-        <NavLink to={signInPagePath}>Log in</NavLink>
+        <NavLink to={signInPagePath}>Sign in</NavLink>
       </ListItem>
     </List>
   );
