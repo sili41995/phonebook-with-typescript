@@ -17,7 +17,7 @@ import {
   toasts,
 } from 'utils';
 import Input from 'components/Input';
-import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
+import AuthFormBtn from 'components/AuthFormBtn';
 import AuthFormMessage from 'components/AuthFormMessage';
 import { signUpUser } from 'redux/auth/operations';
 import { useAppDispatch } from 'hooks/redux';

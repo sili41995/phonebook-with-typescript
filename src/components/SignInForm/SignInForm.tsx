@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toasts } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';
-import AuthFormBtn from 'components/AuthFormBtn/AuthFormBtn';
+import AuthFormBtn from 'components/AuthFormBtn';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { signInUser } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';

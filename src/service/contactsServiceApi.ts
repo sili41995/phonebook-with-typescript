@@ -156,7 +156,6 @@ class ContactsServiceApi {
     return fetch(`${this.BASE_URL}/contacts/${id}`, options)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.message) {
           throw Error(data.message);
         }
