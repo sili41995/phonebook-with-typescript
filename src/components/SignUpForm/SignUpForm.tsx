@@ -20,7 +20,8 @@ import Input from 'components/Input';
 import AuthFormBtn from 'components/AuthFormBtn';
 import AuthFormMessage from 'components/AuthFormMessage';
 import { signUpUser } from 'redux/auth/operations';
-import { useAppDispatch } from 'hooks/redux';
+import { selectIsLoading } from 'redux/auth/selectors';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ISignUpCredentials } from 'types/types';
 import {
   PagePaths,
@@ -44,6 +45,7 @@ const SignUpForm = () => {
   } = useForm<ISignUpCredentials>();
   const signInPageLink = `/${PagePaths.signInPath}`;
   const userAvatarRef = useRef<HTMLImageElement>(null);
+  const isLoading=useAppSelector(selectIsLoading)
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
@@ -178,7 +180,7 @@ const SignUpForm = () => {
           pageLink={signInPageLink}
           message="if you have an account"
         />
-        <AuthFormBtn title="Enlist" />
+        <AuthFormBtn title="Enlist" disabled={isLoading} />
       </Form>
     </>
   );

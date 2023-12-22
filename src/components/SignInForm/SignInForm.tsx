@@ -8,7 +8,7 @@ import Input from 'components/Input';
 import AuthFormBtn from 'components/AuthFormBtn';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { signInUser } from 'redux/auth/operations';
-import { selectUser } from 'redux/auth/selectors';
+import { selectIsLoading, selectUser } from 'redux/auth/selectors';
 import { ICredentials } from 'types/types';
 import {
   Messages,
@@ -26,6 +26,8 @@ const SignInForm = () => {
   const [credentials, setCredentials] = useState<ICredentials | null>(null);
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsLoading);
+
   const {
     register,
     formState: { errors, isSubmitting },
@@ -122,7 +124,7 @@ const SignInForm = () => {
           pageLink={signUpPageLink}
           message="if you don't have an account yet"
         />
-        <AuthFormBtn title="Sign in" />
+        <AuthFormBtn title="Sign in" disabled={isLoading} />
       </Form>
     </>
   );
