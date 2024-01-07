@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { setButtonColor, setIconFill, setIconHoverEffect } from 'utils';
 import { IStyledProps } from './IconButton.types';
 
-export const Button = styled.button`
-  position: ${({ position }: IStyledProps) => position};
+export const Button = styled.button<IStyledProps>`
+  position: ${({ position }) => position};
   z-index: 10;
   top: ${({ top }) => (top === 'center' ? '50%' : `${top}px`)};
   right: ${({ right }) => `${right}px`};
@@ -35,7 +35,7 @@ export const Button = styled.button`
   }
   & svg:hover,
   & svg:focus {
-    color: ${({ btnType, inputWrap }: IStyledProps) =>
+    color: ${({ btnType, inputWrap }) =>
       inputWrap && setIconHoverEffect(btnType)};
   }
 `;

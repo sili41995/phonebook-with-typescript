@@ -9,10 +9,9 @@ export const Header = styled.header`
   background-color: ${({ theme }) => theme.colors.otherColor};
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   width: 1200px;
-  display: ${({ isContactsPage }: IStyledProps) =>
-    isContactsPage ? 'flex' : 'block'};
+  display: ${({ isContactsPage }) => (isContactsPage ? 'flex' : 'block')};
   gap: ${({ isContactsPage, theme }) =>
     isContactsPage ? `${theme.primaryGap}px` : 0};
   padding-left: ${({ theme }) => `${theme.padding.paddingContainer}px`};

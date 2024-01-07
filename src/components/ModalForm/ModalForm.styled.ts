@@ -9,9 +9,9 @@ import {
   setModalFormWidth,
 } from 'utils';
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   display: flex;
-  width: ${({ formType }: IStyledProps) => setModalFormWidth(formType)};
+  width: ${({ formType }) => setModalFormWidth(formType)};
   flex-direction: column;
   gap: ${({ theme }) => `${theme.primaryGap}px`};
   padding: ${({ formType }) => setModalFormPadding(formType)};

@@ -24,9 +24,9 @@ export const Container = styled.div`
   }
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<IStyledProps>`
   width: 100%;
-  max-width: ${({ formType }: IStyledProps) => setInputMaxWidth(formType)};
+  max-width: ${({ formType }) => setInputMaxWidth(formType)};
   height: ${({ formType }) => setInputHeight(formType)};
   background-color: transparent;
   border: 1px solid ${({ formType }) => setInputBorderColor(formType)};
@@ -49,7 +49,7 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<IStyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,7 @@ export const Label = styled.label`
     transform: scale(0);
   }
   &:has([type='checkbox']) svg {
-    width: ${({ formType }: IStyledProps) => setInputHeight(formType)};
+    width: ${({ formType }) => setInputHeight(formType)};
     height: 100%;
     padding: ${({ theme }) => theme.spacing(2)};
     border: 1px solid;

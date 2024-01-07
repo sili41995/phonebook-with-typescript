@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { IStyledProps } from './GoBackLink.types';
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<IStyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${({ height }: IStyledProps) => (height ? `${height}px` : '')};
+  height: ${({ height }) => (height ? `${height}px` : '')};
   padding: ${({ theme }) => theme.spacing()};
   background-color: ${({ theme }) => theme.colors.btnBackgroundColor};
   border-radius: ${({ theme }) =>
