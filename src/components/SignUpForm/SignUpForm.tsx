@@ -45,7 +45,7 @@ const SignUpForm = () => {
   } = useForm<ISignUpCredentials>();
   const signInPageLink = `/${PagePaths.signInPath}`;
   const userAvatarRef = useRef<HTMLImageElement>(null);
-  const isLoading=useAppSelector(selectIsLoading)
+  const isLoading = useAppSelector(selectIsLoading);
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
@@ -105,7 +105,13 @@ const SignUpForm = () => {
           onChange={onChangeInput}
           type={InputTypes.file}
           altElem={
-            <Image src={image} alt="profile avatar" ref={userAvatarRef} />
+            <Image
+              src={image}
+              alt="profile avatar"
+              width="150"
+              height="150"
+              ref={userAvatarRef}
+            />
           }
         />
         <Input

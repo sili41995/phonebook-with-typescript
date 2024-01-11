@@ -74,6 +74,8 @@ const ContactProfile: FC<IProps> = ({
         <Image
           src={avatar as string}
           alt={`${name} photo`}
+          width="200"
+          height="200"
           ref={contactAvatarRef}
         />
         <ChangeAvatarForm

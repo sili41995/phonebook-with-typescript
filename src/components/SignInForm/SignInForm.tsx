@@ -95,7 +95,12 @@ const SignInForm = () => {
     <>
       <Title>sign in</Title>
       <Message>{greetings}</Message>
-      <Image src={user.avatar ?? defaultAvatar} alt="user avatar" />
+      <Image
+        src={user.avatar ?? defaultAvatar}
+        alt="user avatar"
+        width="150"
+        height="150"
+      />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           settings={{ ...register('email', { required: true }) }}

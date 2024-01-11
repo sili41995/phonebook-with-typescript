@@ -16,7 +16,9 @@ export const Form = styled.form`
   }
 `;
 
-export const ButtonsContainer = styled.div`
+export const ButtonsList = styled.ul`
   display: flex;
   gap: ${({ theme }) => theme.spacing()};
 `;
+
+export const Item = styled.li``;

@@ -72,7 +72,13 @@ const UserProfile: FC<IProps> = ({ user }) => {
       <Name>{name}</Name>
       <UserData>
         <ImageContainer>
-          <Image src={avatar} alt="user avatar" ref={userAvatarRef} />
+          <Image
+            src={avatar}
+            alt="user avatar"
+            width="150"
+            height="150"
+            ref={userAvatarRef}
+          />
           <ChangeAvatarForm
             avatar={userAvatar}
             handleFormSubmit={handleFormSubmit}

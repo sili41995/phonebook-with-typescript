@@ -22,8 +22,6 @@ export const Form = styled.form`
 `;
 
 export const Image = styled.img`
-  width: 150px;
-  height: 150px;
   align-self: center;
   border-radius: 50%;
 `;

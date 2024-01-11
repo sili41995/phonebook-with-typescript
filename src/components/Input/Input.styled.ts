@@ -12,7 +12,7 @@ import {
 } from 'utils';
 import { IStyledProps } from './Input.types';
 
-export const Container = styled.div`
+export const Container = styled.span`
   position: relative;
   & > svg {
     position: absolute;

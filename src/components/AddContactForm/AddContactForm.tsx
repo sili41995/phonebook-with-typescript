@@ -19,7 +19,7 @@ import Input from 'components/Input';
 import GoBackLink from 'components/GoBackLink';
 import AcceptBtn from 'components/AcceptBtn';
 import image from 'images/default-profile-avatar.png';
-import { ButtonsContainer, Form, Title, Image } from './AddContactForm.styled';
+import { ButtonsList, Item, Form, Title, Image } from './AddContactForm.styled';
 
 const AddContactForm: FC = () => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
@@ -88,7 +88,13 @@ const AddContactForm: FC = () => {
           onChange={onChangeFile}
           type={InputTypes.file}
           altElem={
-            <Image src={image} alt="profile avatar" ref={contactAvatarRef} />
+            <Image
+              src={image}
+              alt="profile avatar"
+              width="150"
+              height="150"
+              ref={contactAvatarRef}
+            />
           }
         />
         <ContactFormInputs
@@ -98,10 +104,14 @@ const AddContactForm: FC = () => {
           onCheckboxChange={onCheckboxChange}
           checked={checked}
         />
-        <ButtonsContainer>
-          <AcceptBtn disabled={isLoading} />
-          <GoBackLink />
-        </ButtonsContainer>
+        <ButtonsList>
+          <Item>
+            <AcceptBtn disabled={isLoading} />
+          </Item>
+          <Item>
+            <GoBackLink />
+          </Item>
+        </ButtonsList>
       </Form>
     </ModalForm>
   );

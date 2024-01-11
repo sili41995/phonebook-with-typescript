@@ -13,7 +13,7 @@ export const Button = styled.button<IStyledProps>`
   justify-content: center;
   align-items: center;
   min-width: ${({ width }) => `${width}px`};
-  height: ${({ height }) => (height ? `${height}px` : '')};
+  height: ${({ height }) => (height ? `${height}px` : '100%')};
   padding: ${({ theme }) => theme.spacing()};
   background-color: ${({ btnType }) => setButtonColor(btnType)};
   border-color: transparent;

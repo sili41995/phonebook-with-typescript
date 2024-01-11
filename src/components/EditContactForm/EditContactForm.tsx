@@ -14,7 +14,7 @@ import ModalForm from 'components/ModalForm';
 import AcceptBtn from 'components/AcceptBtn';
 import { IconBtnType, IconSizes, PagePaths } from 'constants/index';
 import { toasts } from 'utils';
-import { ButtonsContainer, Form, Title } from './EditContactForm.styled';
+import { ButtonsList, Item, Form, Title } from './EditContactForm.styled';
 
 const EditContactForm = ({
   onEditBtnClick,
@@ -63,14 +63,18 @@ const EditContactForm = ({
           checked={checked}
           {...otherProps}
         />
-        <ButtonsContainer>
-          <AcceptBtn disabled={isLoading} />
-          <IconButton
-            btnType={IconBtnType.cancel}
-            onBtnClick={onEditBtnClick}
-            icon={<FaTimes size={IconSizes.primaryIconSize} />}
-          />
-        </ButtonsContainer>
+        <ButtonsList>
+          <Item>
+            <AcceptBtn disabled={isLoading} />
+          </Item>
+          <Item>
+            <IconButton
+              btnType={IconBtnType.cancel}
+              onBtnClick={onEditBtnClick}
+              icon={<FaTimes size={IconSizes.primaryIconSize} />}
+            />
+          </Item>
+        </ButtonsList>
       </Form>
     </ModalForm>
   );

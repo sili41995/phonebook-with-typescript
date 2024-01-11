@@ -9,7 +9,7 @@ import AcceptBtn from 'components/AcceptBtn';
 import IconButton from 'components/IconButton';
 import Input from 'components/Input';
 import { IProps } from './ChangeAvatarForm.types';
-import { ButtonsContainer, Form } from './ChangeAvatarForm.styled';
+import { ButtonsList, Item, Form } from './ChangeAvatarForm.styled';
 
 const ChangeAvatarForm: FC<IProps> = ({
   avatar,
@@ -23,14 +23,18 @@ const ChangeAvatarForm: FC<IProps> = ({
   return (
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
       {avatar?.length ? (
-        <ButtonsContainer>
-          <AcceptBtn disabled={isLoading} />
-          <IconButton
-            btnType={IconBtnType.cancel}
-            onBtnClick={onCancelBtnClick}
-            icon={<SlBan size={IconSizes.primaryIconSize} />}
-          />
-        </ButtonsContainer>
+        <ButtonsList>
+          <Item>
+            <AcceptBtn disabled={isLoading} />
+          </Item>
+          <Item>
+            <IconButton
+              btnType={IconBtnType.cancel}
+              onBtnClick={onCancelBtnClick}
+              icon={<SlBan size={IconSizes.primaryIconSize} />}
+            />
+          </Item>
+        </ButtonsList>
       ) : (
         <Input
           settings={{ ...register('avatar') }}

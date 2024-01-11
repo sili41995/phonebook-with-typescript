@@ -33,7 +33,7 @@ const ContactsListItem = ({ contact }: IProps) => {
     <Item>
       <LinkWithQuery to={contactPath}>
         <ImageContainer>
-          <Image src={avatar as string} alt={name} />
+          <Image src={avatar as string} alt={name} width="70" height="70" />
           {favorite && <AiFillStar size={IconSizes.primaryIconSize} />}
         </ImageContainer>
         <ContactInfo>

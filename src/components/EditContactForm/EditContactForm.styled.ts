@@ -14,8 +14,10 @@ export const Form = styled.form`
   gap: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const ButtonsContainer = styled.div`
+export const ButtonsList = styled.ul`
   display: flex;
   gap: ${({ theme }) => theme.spacing(10)};
   justify-content: center;
 `;
+
+export const Item = styled.li``;

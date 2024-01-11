@@ -17,7 +17,7 @@ import {
   SearchParamsKeys,
   SortTypes,
 } from 'constants/index';
-import { FilterContainer } from './Filter.styled';
+import { FilterContainer, ButtonsList, Item } from './Filter.styled';
 
 const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
 const { DESC_SORT_TYPE } = SortTypes;
@@ -81,16 +81,22 @@ const Filter = () => {
           action={onClearFilterBtnClick}
         />
       )}
-      <IconButton
-        btnType={IconBtnType.filter}
-        onBtnClick={onFilterBtnClick}
-        icon={<FaSistrix size={IconSizes.otherIconSize} />}
-      />
-      <IconButton
-        btnType={IconBtnType.filter}
-        onBtnClick={onSortBtnClick}
-        icon={sortBtnIcon}
-      />
+      <ButtonsList>
+        <Item>
+          <IconButton
+            btnType={IconBtnType.filter}
+            onBtnClick={onFilterBtnClick}
+            icon={<FaSistrix size={IconSizes.otherIconSize} />}
+          />
+        </Item>
+        <Item>
+          <IconButton
+            btnType={IconBtnType.filter}
+            onBtnClick={onSortBtnClick}
+            icon={sortBtnIcon}
+          />
+        </Item>
+      </ButtonsList>
     </FilterContainer>
   );
 };
