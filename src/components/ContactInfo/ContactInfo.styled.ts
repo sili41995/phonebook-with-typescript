@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
+export const List = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(10)};
 `;
 
-export const Field = styled.div`
+export const Item = styled.li`
   display: flex;
   justify-content: space-between;
 `;

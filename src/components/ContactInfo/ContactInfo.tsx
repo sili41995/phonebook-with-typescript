@@ -4,13 +4,7 @@ import { IContact } from 'types/types';
 import ActionLink from 'components/ActionLink';
 import { IconBtnType, IconSizes } from 'constants/index';
 import { getPhoneNumber, getTelegramLink } from 'utils';
-import {
-  Title,
-  Description,
-  Container,
-  Field,
-  Info,
-} from './ContactInfo.styled';
+import { Title, Description, List, Item, Info } from './ContactInfo.styled';
 
 const ContactInfo = () => {
   const contact: IContact = useOutletContext();
@@ -19,8 +13,8 @@ const ContactInfo = () => {
   const telegramLink = getTelegramLink(tgUsername);
 
   return (
-    <Container>
-      <Field>
+    <List>
+      <Item>
         <Info>
           <Title>Phone number</Title>
           <Description>{phone}</Description>
@@ -30,9 +24,9 @@ const ContactInfo = () => {
           btnType={IconBtnType.phone}
           icon={<FaPhoneAlt size={IconSizes.otherIconSize} />}
         />
-      </Field>
+      </Item>
       {email && (
-        <Field>
+        <Item>
           <Info>
             <Title>Email Address</Title>
             <Description>{email}</Description>
@@ -42,10 +36,10 @@ const ContactInfo = () => {
             btnType={IconBtnType.message}
             icon={<FaEnvelope size={IconSizes.otherIconSize} />}
           />
-        </Field>
+        </Item>
       )}
       {tgUsername && (
-        <Field>
+        <Item>
           <Info>
             <Title>Username on Telegram</Title>
             <Description>{tgUsername}</Description>
@@ -55,9 +49,9 @@ const ContactInfo = () => {
             btnType={IconBtnType.chat}
             icon={<FaRegComment size={IconSizes.otherIconSize} />}
           />
-        </Field>
+        </Item>
       )}
-    </Container>
+    </List>
   );
 };
 

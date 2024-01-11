@@ -10,12 +10,12 @@ import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
 import { useAppDispatch } from 'hooks/redux';
 import { updateUserAvatar } from 'redux/auth/operations';
 import {
-  UserInfo,
+  InfoList,
   Email,
   FullName,
   Image,
   Name,
-  ContactInfo,
+  InfoItem,
   UserData,
   ContactInfoIconWrap,
   UserProfileContainer,
@@ -84,32 +84,32 @@ const UserProfile: FC<IProps> = ({ user }) => {
         <Email>{email}</Email>
       </UserData>
       {(phone || dateOfBirth || location) && (
-        <UserInfo>
+        <InfoList>
           {dateOfBirth && (
-            <ContactInfo>
+            <InfoItem>
               <ContactInfoIconWrap>
                 <SlEvent size={IconSizes.secondaryIconSize} />
               </ContactInfoIconWrap>
               <p>{dateOfBirth}</p>
-            </ContactInfo>
+            </InfoItem>
           )}
           {phone && (
-            <ContactInfo>
+            <InfoItem>
               <ContactInfoIconWrap>
                 <SlPhone size={IconSizes.secondaryIconSize} />
               </ContactInfoIconWrap>
               <p>{phone}</p>
-            </ContactInfo>
+            </InfoItem>
           )}
           {location && (
-            <ContactInfo>
+            <InfoItem>
               <ContactInfoIconWrap>
                 <SlLocationPin size={IconSizes.secondaryIconSize} />
               </ContactInfoIconWrap>
               <p>{location}</p>
-            </ContactInfo>
+            </InfoItem>
           )}
-        </UserInfo>
+        </InfoList>
       )}
     </UserProfileContainer>
   );

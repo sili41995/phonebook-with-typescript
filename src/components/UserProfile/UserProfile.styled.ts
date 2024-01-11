@@ -50,13 +50,13 @@ export const Email = styled.p`
   ${({ theme }) => theme.trimText}
 `;
 
-export const UserInfo = styled.div`
+export const InfoList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(6)};
 `;
 
-export const ContactInfo = styled.div`
+export const InfoItem = styled.li`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(3)};

@@ -14,7 +14,9 @@ export const ButtonsContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const ManipulationButtons = styled.div`
+export const ButtonsList = styled.ul`
   display: flex;
   gap: ${({ theme }) => theme.spacing(3)};
 `;
+
+export const Item = styled.li``;

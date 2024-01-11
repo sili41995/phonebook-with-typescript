@@ -27,7 +27,8 @@ import { updateContactStatus } from 'redux/contacts/operations';
 import {
   ButtonsContainer,
   Container,
-  ManipulationButtons,
+  ButtonsList,
+  Item,
 } from './ContactDetails.styled';
 
 const { idle, pending, resolved, rejected } = FetchStatuses;
@@ -125,29 +126,35 @@ const ContactDetails = () => {
       <ButtonsContainer>
         <GoBackLink height={36} />
         {isLoadedContact && (
-          <ManipulationButtons>
+          <ButtonsList>
             {!editContact && (
               <>
-                <IconButton
-                  disabled={isLoading}
-                  btnType={IconBtnType.favorite}
-                  onBtnClick={onFavoriteBtnClick}
-                  icon={favoriteBtnIcon}
-                />
-                <IconButton
-                  disabled={isLoading}
-                  btnType={IconBtnType.delete}
-                  onBtnClick={onDelBtnClick}
-                  icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
-                />
+                <Item>
+                  <IconButton
+                    disabled={isLoading}
+                    btnType={IconBtnType.favorite}
+                    onBtnClick={onFavoriteBtnClick}
+                    icon={favoriteBtnIcon}
+                  />
+                </Item>
+                <Item>
+                  <IconButton
+                    disabled={isLoading}
+                    btnType={IconBtnType.delete}
+                    onBtnClick={onDelBtnClick}
+                    icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
+                  />
+                </Item>
               </>
             )}
-            <IconButton
-              btnType={IconBtnType.edit}
-              onBtnClick={onEditBtnClick}
-              icon={<AiOutlineEdit size={IconSizes.primaryIconSize} />}
-            />
-          </ManipulationButtons>
+            <Item>
+              <IconButton
+                btnType={IconBtnType.edit}
+                onBtnClick={onEditBtnClick}
+                icon={<AiOutlineEdit size={IconSizes.primaryIconSize} />}
+              />
+            </Item>
+          </ButtonsList>
         )}
       </ButtonsContainer>
       {isLoadedContact && (
