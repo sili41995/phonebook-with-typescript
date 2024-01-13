@@ -18,7 +18,7 @@ import {
   InfoItem,
   UserData,
   ContactInfoIconWrap,
-  UserProfileContainer,
+  Container,
   ImageContainer,
 } from './UserProfile.styled';
 
@@ -27,7 +27,7 @@ const UserProfile: FC<IProps> = ({ user }) => {
   const userAvatarRef = useRef<HTMLImageElement>(null);
   const dispatch = useAppDispatch();
 
-  if (!user) return <UserProfileContainer />;
+  if (!user) return <Container />;
 
   const { name, avatar, email, dateOfBirth, phone, location, lastName } = user;
   const fullName = lastName ? `${name} ${lastName}` : name;
@@ -68,7 +68,7 @@ const UserProfile: FC<IProps> = ({ user }) => {
   };
 
   return (
-    <UserProfileContainer>
+    <Container>
       <Name>{name}</Name>
       <UserData>
         <ImageContainer>
@@ -117,7 +117,7 @@ const UserProfile: FC<IProps> = ({ user }) => {
           )}
         </InfoList>
       )}
-    </UserProfileContainer>
+    </Container>
   );
 };
 

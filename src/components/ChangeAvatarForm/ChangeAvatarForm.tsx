@@ -47,6 +47,7 @@ const ChangeAvatarForm: FC<IProps> = ({
           accept="image/png, image/jpeg, image/jpg"
           onChange={onChangeInput}
           type={InputTypes.file}
+          aria-label={AriaLabels.avatar}
           altElem={<SlPaperClip size={IconSizes.primaryIconSize} />}
         />
       )}

@@ -10,6 +10,7 @@ import { makeBlur, updateSortSearchParams } from 'utils';
 import IconButton from 'components/IconButton';
 import Input from 'components/Input';
 import {
+  AriaLabels,
   FormTypes,
   IconBtnType,
   IconSizes,
@@ -86,6 +87,7 @@ const Filter = () => {
           <IconButton
             btnType={IconBtnType.filter}
             onBtnClick={onFilterBtnClick}
+            aria-label={AriaLabels.filter}
             icon={<FaSistrix size={IconSizes.otherIconSize} />}
           />
         </Item>
@@ -93,6 +95,7 @@ const Filter = () => {
           <IconButton
             btnType={IconBtnType.filter}
             onBtnClick={onSortBtnClick}
+            aria-label={AriaLabels.sort}
             icon={sortBtnIcon}
           />
         </Item>

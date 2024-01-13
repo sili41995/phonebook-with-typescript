@@ -5,7 +5,7 @@ import { selectIsLoading } from 'redux/contacts/selectors';
 import useDeleteContact from 'hooks/useDeleteContact';
 import { useAppSelector } from 'hooks/redux';
 import { IProps } from './ContactsListItem.types';
-import { IconSizes, PagePaths, Positions } from 'constants/index';
+import { AriaLabels, IconSizes, PagePaths, Positions } from 'constants/index';
 import { IconBtnType } from 'constants/index';
 import {
   Email,
@@ -50,6 +50,7 @@ const ContactsListItem = ({ contact }: IProps) => {
         disabled={isLoading}
         btnType={IconBtnType.deleteTransparent}
         onBtnClick={handleDelBtnClick}
+        aria-label={AriaLabels.delete}
         icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
         height={36}
       />

@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 import { FaEnvelope, FaPhoneAlt, FaRegComment } from 'react-icons/fa';
 import { IContact } from 'types/types';
 import ActionLink from 'components/ActionLink';
-import { IconBtnType, IconSizes } from 'constants/index';
+import { AriaLabels, IconBtnType, IconSizes } from 'constants/index';
 import { getPhoneNumber, getTelegramLink } from 'utils';
 import { Title, Description, List, Item, Info } from './ContactInfo.styled';
 
@@ -22,6 +22,7 @@ const ContactInfo = () => {
         <ActionLink
           link={`tel:${phoneNumber}`}
           btnType={IconBtnType.phone}
+          aria-label={AriaLabels.call}
           icon={<FaPhoneAlt size={IconSizes.otherIconSize} />}
         />
       </Item>
@@ -34,6 +35,7 @@ const ContactInfo = () => {
           <ActionLink
             link={`mailto:${email}`}
             btnType={IconBtnType.message}
+            aria-label={AriaLabels.sendEmail}
             icon={<FaEnvelope size={IconSizes.otherIconSize} />}
           />
         </Item>
@@ -47,6 +49,7 @@ const ContactInfo = () => {
           <ActionLink
             link={`tg://resolve?domain=${telegramLink}`}
             btnType={IconBtnType.chat}
+            aria-label={AriaLabels.tgAccount}
             icon={<FaRegComment size={IconSizes.otherIconSize} />}
           />
         </Item>

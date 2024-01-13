@@ -2,7 +2,7 @@ import { FC, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { IProps } from './PaginationBar.types';
 import { getPageNumbers, getPaginationBarSettings, makeBlur } from 'utils';
-import { SearchParamsKeys } from 'constants/index';
+import { AriaLabels, SearchParamsKeys } from 'constants/index';
 import { Button, Item, List, TemplateItem } from './PaginationBar.styled';
 
 const { PAGE_SP_KEY } = SearchParamsKeys;
@@ -78,6 +78,7 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
           >
             <Button
               className={number === currentPage ? 'active' : ''}
+              aria-label={`${AriaLabels.pageBtn} ${number}`}
               onClick={(e) => {
                 onPageBtnClick({ e, page: number });
               }}

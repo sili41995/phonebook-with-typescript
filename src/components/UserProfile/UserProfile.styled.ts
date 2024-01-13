@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const UserProfileContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 230px;

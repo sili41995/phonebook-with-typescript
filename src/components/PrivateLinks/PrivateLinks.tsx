@@ -44,7 +44,7 @@ const PrivateLinks = () => {
         btnType={IconBtnType.logout}
         onBtnClick={onLogoutBtnClick}
         icon={<SlLogout size={IconSizes.otherIconSize} />}
-        title="Logout"
+        title="Signout"
       />
     </LinkContainer>
   );

@@ -12,7 +12,7 @@ import IconButton from 'components/IconButton';
 import ContactFormInputs from 'components/ContactFormInputs';
 import ModalForm from 'components/ModalForm';
 import AcceptBtn from 'components/AcceptBtn';
-import { IconBtnType, IconSizes, PagePaths } from 'constants/index';
+import { AriaLabels, IconBtnType, IconSizes, PagePaths } from 'constants/index';
 import { toasts } from 'utils';
 import { ButtonsList, Item, Form, Title } from './EditContactForm.styled';
 
@@ -71,6 +71,7 @@ const EditContactForm = ({
             <IconButton
               btnType={IconBtnType.cancel}
               onBtnClick={onEditBtnClick}
+              aria-label={AriaLabels.cancel}
               icon={<FaTimes size={IconSizes.primaryIconSize} />}
             />
           </Item>
