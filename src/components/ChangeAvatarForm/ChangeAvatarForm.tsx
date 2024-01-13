@@ -1,7 +1,12 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { SlPaperClip, SlBan } from 'react-icons/sl';
-import { IconBtnType, IconSizes, InputTypes } from 'constants/index';
+import {
+  AriaLabels,
+  IconBtnType,
+  IconSizes,
+  InputTypes,
+} from 'constants/index';
 import { useAppSelector } from 'hooks/redux';
 import { selectIsLoading } from 'redux/auth/selectors';
 import { IAvatar } from 'types/types';
@@ -31,6 +36,7 @@ const ChangeAvatarForm: FC<IProps> = ({
             <IconButton
               btnType={IconBtnType.cancel}
               onBtnClick={onCancelBtnClick}
+              aria-label={AriaLabels.cancel}
               icon={<SlBan size={IconSizes.primaryIconSize} />}
             />
           </Item>

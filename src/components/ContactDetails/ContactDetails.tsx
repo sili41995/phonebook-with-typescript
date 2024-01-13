@@ -12,6 +12,7 @@ import GoBackLink from 'components/GoBackLink';
 import IconButton from 'components/IconButton';
 import Loader from 'components/Loader';
 import {
+  AriaLabels,
   FetchStatuses,
   IconBtnType,
   IconSizes,
@@ -133,6 +134,7 @@ const ContactDetails = () => {
                   <IconButton
                     disabled={isLoading}
                     btnType={IconBtnType.favorite}
+                    aria-label={AriaLabels.favorite}
                     onBtnClick={onFavoriteBtnClick}
                     icon={favoriteBtnIcon}
                   />
@@ -141,6 +143,7 @@ const ContactDetails = () => {
                   <IconButton
                     disabled={isLoading}
                     btnType={IconBtnType.delete}
+                    aria-label={AriaLabels.delete}
                     onBtnClick={onDelBtnClick}
                     icon={<AiOutlineDelete size={IconSizes.primaryIconSize} />}
                   />
@@ -150,6 +153,7 @@ const ContactDetails = () => {
             <Item>
               <IconButton
                 btnType={IconBtnType.edit}
+                aria-label={AriaLabels.edit}
                 onBtnClick={onEditBtnClick}
                 icon={<AiOutlineEdit size={IconSizes.primaryIconSize} />}
               />
