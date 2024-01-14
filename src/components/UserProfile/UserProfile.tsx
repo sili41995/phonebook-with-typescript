@@ -3,23 +3,21 @@ import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
 import 'react-toastify/dist/ReactToastify.css';
 import { IconSizes, Messages } from 'constants/index';
 import { IProps } from './UserProfile.types';
-import ChangeAvatarForm from 'components/ChangeAvatarForm';
 import { SubmitHandler } from 'react-hook-form';
 import { IAvatar } from 'types/types';
 import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
+import ImageContainer from 'components/ImageContainer';
 import { useAppDispatch } from 'hooks/redux';
 import { updateUserAvatar } from 'redux/auth/operations';
 import {
   InfoList,
   Email,
   FullName,
-  Image,
   Name,
   InfoItem,
   UserData,
   ContactInfoIconWrap,
   Container,
-  ImageContainer,
 } from './UserProfile.styled';
 
 const UserProfile: FC<IProps> = ({ user }) => {
@@ -71,21 +69,15 @@ const UserProfile: FC<IProps> = ({ user }) => {
     <Container>
       <Name>{name}</Name>
       <UserData>
-        <ImageContainer>
-          <Image
-            src={avatar}
-            alt="user avatar"
-            width="150"
-            height="150"
-            ref={userAvatarRef}
-          />
-          <ChangeAvatarForm
-            avatar={userAvatar}
-            handleFormSubmit={handleFormSubmit}
-            onChangeInput={onChangeInput}
-            onCancelBtnClick={onCancelBtnClick}
-          />
-        </ImageContainer>
+        <ImageContainer
+          avatar={avatar as string}
+          avatarRef={userAvatarRef}
+          updateAvatar={userAvatar}
+          handleFormSubmit={handleFormSubmit}
+          onChangeInput={onChangeInput}
+          onCancelBtnClick={onCancelBtnClick}
+          imgSize="150"
+        />
         <FullName>{fullName}</FullName>
         <Email>{email}</Email>
       </UserData>

@@ -3,8 +3,8 @@ import { SubmitHandler } from 'react-hook-form';
 import { NavLink, Outlet } from 'react-router-dom';
 import { IProps } from './ContactProfile.types';
 import Loader from 'components/Loader';
+import ImageContainer from 'components/ImageContainer';
 import EditContactForm from 'components/EditContactForm';
-import ChangeAvatarForm from 'components/ChangeAvatarForm';
 import { Messages, PagePaths } from 'constants/index';
 import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
 import { IAvatar } from 'types/types';
@@ -14,11 +14,9 @@ import {
   ContactDesc,
   ContactName,
   ContactTitle,
-  Image,
   ListItem,
   NavBar,
   NavList,
-  ImageContainer,
 } from './ContactProfile.styled';
 
 const ContactProfile: FC<IProps> = ({
@@ -70,21 +68,15 @@ const ContactProfile: FC<IProps> = ({
 
   return (
     <>
-      <ImageContainer>
-        <Image
-          src={avatar as string}
-          alt={`${name} photo`}
-          width="200"
-          height="200"
-          ref={contactAvatarRef}
-        />
-        <ChangeAvatarForm
-          avatar={contactAvatar}
-          handleFormSubmit={handleFormSubmit}
-          onChangeInput={onChangeInput}
-          onCancelBtnClick={onCancelBtnClick}
-        />
-      </ImageContainer>
+      <ImageContainer
+        avatar={avatar as string}
+        avatarRef={contactAvatarRef}
+        updateAvatar={contactAvatar}
+        handleFormSubmit={handleFormSubmit}
+        onChangeInput={onChangeInput}
+        onCancelBtnClick={onCancelBtnClick}
+        imgSize="200"
+      />
       {editContact ? (
         <EditContactForm {...otherProps} contact={contact} />
       ) : (

@@ -1,14 +1,5 @@
 import styled from '@emotion/styled';
 
-export const ImageContainer = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-export const Image = styled.img`
-  border-radius: 30%;
-`;
-
 export const ContactTitle = styled.div`
   display: flex;
   flex-direction: column;

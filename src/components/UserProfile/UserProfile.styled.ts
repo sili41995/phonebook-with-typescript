@@ -12,15 +12,6 @@ export const UserData = styled.div`
   text-align: center;
 `;
 
-export const ImageContainer = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-export const Image = styled.img`
-  border-radius: 30%;
-`;
-
 export const Name = styled.p`
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Jua;
