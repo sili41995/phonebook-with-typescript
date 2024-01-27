@@ -1,3 +1,5 @@
+import { SetURLSearchParams } from 'react-router-dom';
+
 export type ProfileEntry = [string, string | boolean | FileList];
 
 export interface IProfile {
@@ -97,4 +99,15 @@ export interface IAvatar {
   [key: string]: FileList | string | undefined;
   _id?: string;
   avatar: FileList | string;
+}
+
+export interface IUpdateSearchParamsProps {
+  key: string;
+  value?: string;
+}
+
+export interface IUseSetSearchParams {
+  updateSearchParams: ({ key, value }: IUpdateSearchParamsProps) => void;
+  searchParams: URLSearchParams;
+  setSearchParams: SetURLSearchParams;
 }

@@ -1,12 +1,11 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import {
   FaSortAlphaDown,
   FaSortAlphaUp,
   FaSistrix,
   FaTimes,
 } from 'react-icons/fa';
-import { makeBlur, updateSortSearchParams } from 'utils';
+import { makeBlur } from 'utils';
 import IconButton from 'components/IconButton';
 import Input from 'components/Input';
 import {
@@ -19,19 +18,21 @@ import {
   SortTypes,
 } from 'constants/index';
 import { FilterContainer, ButtonsList, Item } from './Filter.styled';
+import useSetSearchParams from 'hooks/useSetSearchParams';
 
 const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
-const { DESC_SORT_TYPE } = SortTypes;
+const { DESC_SORT_TYPE, ASC_SORT_TYPE } = SortTypes;
 
 const Filter = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { searchParams, updateSearchParams, setSearchParams } =
+    useSetSearchParams();
   const filter = searchParams.get(FILTER_SP_KEY) ?? '';
   const [showFilter, setShowFilter] = useState<boolean>(() => Boolean(filter));
-  const deskSortType = searchParams.get(SORT_SP_KEY) === DESC_SORT_TYPE;
+  const descSortType = searchParams.get(SORT_SP_KEY) === DESC_SORT_TYPE;
   const clearFilterBtnIcon = Boolean(filter) && (
     <FaTimes size={IconSizes.primaryIconSize} />
   );
-  const sortBtnIcon = deskSortType ? (
+  const sortBtnIcon = descSortType ? (
     <FaSortAlphaDown size={IconSizes.primaryIconSize} />
   ) : (
     <FaSortAlphaUp size={IconSizes.primaryIconSize} />
@@ -46,15 +47,13 @@ const Filter = () => {
 
   const onSortBtnClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     makeBlur(currentTarget);
-    updateSortSearchParams(searchParams, setSearchParams, SORT_SP_KEY);
+    const value = descSortType ? ASC_SORT_TYPE : DESC_SORT_TYPE;
+    updateSearchParams({ key: SORT_SP_KEY, value });
   };
 
   const onFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    value
-      ? searchParams.set(FILTER_SP_KEY, value)
-      : searchParams.delete(FILTER_SP_KEY);
-    setSearchParams(searchParams);
+    updateSearchParams({ key: FILTER_SP_KEY, value });
   };
 
   const onFilterBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -63,8 +62,7 @@ const Filter = () => {
   };
 
   const onClearFilterBtnClick = () => {
-    searchParams.delete(FILTER_SP_KEY);
-    setSearchParams(searchParams);
+    updateSearchParams({ key: FILTER_SP_KEY });
   };
 
   return (

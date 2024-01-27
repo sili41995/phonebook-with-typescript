@@ -15,7 +15,6 @@ export { default as setInputMaxWidth } from './setInputMaxWidth';
 export { default as setInputPadding } from './setInputPadding';
 export { default as sortContactsByName } from './sortContactsByName';
 export { default as toasts } from './toasts';
-export { default as updateSortSearchParams } from './updateSortSearchParams';
 export { default as setIconHoverEffect } from './setIconHoverEffect';
 export { default as filterEmptyFields } from './filterEmptyFields';
 export { default as getProfileFormData } from './getProfileFormData';
