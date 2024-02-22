@@ -3,7 +3,7 @@ export { default as FormTypes } from './formTypes';
 export { default as IconBtnType } from './iconBtnType';
 export { default as IconSizes } from './iconSizes';
 export { default as InputTypes } from './inputTypes';
-export { default as PagePaths } from './pagPaths';
+export { default as PagePaths } from './pagePaths';
 export { default as Positions } from './positions';
 export { default as regExp } from './regExp';
 export { default as theme } from './theme';
