@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaTimes } from 'react-icons/fa';
-import 'react-toastify/dist/ReactToastify.css';
 import { selectIsLoading } from 'redux/contacts/selectors';
 import { updateContact } from 'redux/contacts/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';

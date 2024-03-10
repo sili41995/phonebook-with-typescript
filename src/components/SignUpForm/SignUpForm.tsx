@@ -9,7 +9,6 @@ import {
   FaPhoneAlt,
   FaEnvelope,
 } from 'react-icons/fa';
-import 'react-toastify/dist/ReactToastify.css';
 import {
   filterEmptyFields,
   getProfileFormData,

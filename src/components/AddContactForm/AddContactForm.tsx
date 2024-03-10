@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import 'react-toastify/dist/ReactToastify.css';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { InputTypes } from 'constants/index';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';

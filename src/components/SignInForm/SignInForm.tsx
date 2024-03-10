@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
-import 'react-toastify/dist/ReactToastify.css';
 import { toasts } from 'utils';
 import AuthFormMessage from 'components/AuthFormMessage';
 import Input from 'components/Input';

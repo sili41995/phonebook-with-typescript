@@ -1,7 +1,6 @@
 import { MouseEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SlLogout, SlPlus } from 'react-icons/sl';
-import 'react-toastify/dist/ReactToastify.css';
 import IconButton from 'components/IconButton';
 import Filter from 'components/Filter';
 import LinkWithQuery from 'components/LinkWithQuery';

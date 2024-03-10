@@ -3,8 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import PublicRoute from 'components/PublicRoute';
 import Loader from 'components/Loader';
 import SharedLayout from 'components/SharedLayout';
-import GlobalStyles from 'components/GlobalStyles';
-import Toast from 'components/Toast';
 import { selectIsRefreshing, selectToken } from 'redux/auth/selectors';
 import { refreshUser } from 'redux/auth/operations';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
@@ -48,43 +46,39 @@ const App = () => {
   return isRefreshing ? (
     <Loader />
   ) : (
-    <>
-      <Routes>
-        <Route path={homePath} element={<SharedLayout />}>
-          <Route
-            index
-            element={<PublicRoute restricted element={<SignInPage />} />}
-          />
-          <Route
-            path={signInPath}
-            element={<PublicRoute restricted element={<SignInPage />} />}
-          />
-          <Route
-            path={signUpPath}
-            element={<PublicRoute restricted element={<SignUpPage />} />}
-          />
-          <Route
-            path={aboutPath}
-            element={<PublicRoute element={<AboutPage />} />}
-          />
-          <Route
-            path={contactsPath}
-            element={<PrivateRoute element={<ContactsPage />} />}
-          >
-            <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
-              <Route path={contactPath} element={<ContactInfo />} />
-              <Route path={aboutPath} element={<ContactDescription />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-
-            <Route path={newContactPath} element={<AddContactForm />} />
+    <Routes>
+      <Route path={homePath} element={<SharedLayout />}>
+        <Route
+          index
+          element={<PublicRoute restricted element={<SignInPage />} />}
+        />
+        <Route
+          path={signInPath}
+          element={<PublicRoute restricted element={<SignInPage />} />}
+        />
+        <Route
+          path={signUpPath}
+          element={<PublicRoute restricted element={<SignUpPage />} />}
+        />
+        <Route
+          path={aboutPath}
+          element={<PublicRoute element={<AboutPage />} />}
+        />
+        <Route
+          path={contactsPath}
+          element={<PrivateRoute element={<ContactsPage />} />}
+        >
+          <Route path={`:${dynamicParam}`} element={<ContactDetails />}>
+            <Route path={contactPath} element={<ContactInfo />} />
+            <Route path={aboutPath} element={<ContactDescription />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
+
+          <Route path={newContactPath} element={<AddContactForm />} />
         </Route>
-      </Routes>
-      <Toast />
-      <GlobalStyles />
-    </>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 };
 

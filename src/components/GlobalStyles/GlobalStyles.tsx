@@ -1,5 +1,6 @@
 import { Global, css } from '@emotion/react';
 import 'modern-normalize';
+import 'react-toastify/dist/ReactToastify.css';
 import { juaRegular, interMedium, interSemiBold } from 'fonts';
 
 const GlobalStyles = () => (
