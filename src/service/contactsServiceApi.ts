@@ -11,7 +11,7 @@ import {
 } from 'types/types';
 
 class ContactsServiceApi {
-  private BASE_URL = 'https://contacts-rest-api-dvg7.onrender.com/api';
+  private BASE_URL = 'https://contacts-rest-api-ts.onrender.com/api';
   private TOKEN = initialState.auth.token;
 
   get token() {

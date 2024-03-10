@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
 import 'react-toastify/dist/ReactToastify.css';
 import { IconSizes, Messages } from 'constants/index';
@@ -25,10 +25,10 @@ const UserProfile: FC<IProps> = ({ user }) => {
   const userAvatarRef = useRef<HTMLImageElement>(null);
   const dispatch = useAppDispatch();
 
-  if (!user) return <Container />;
-
-  const { name, avatar, email, dateOfBirth, phone, location, lastName } = user;
+  const { name, avatar, email, phone, location, lastName, dateOfBirth } = user;
   const fullName = lastName ? `${name} ${lastName}` : name;
+  const userDateOfBirth =
+    dateOfBirth && new Date(dateOfBirth).toLocaleDateString();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {
@@ -88,7 +88,7 @@ const UserProfile: FC<IProps> = ({ user }) => {
               <ContactInfoIconWrap>
                 <SlEvent size={IconSizes.secondaryIconSize} />
               </ContactInfoIconWrap>
-              <p>{dateOfBirth}</p>
+              <p>{userDateOfBirth}</p>
             </InfoItem>
           )}
           {phone && (

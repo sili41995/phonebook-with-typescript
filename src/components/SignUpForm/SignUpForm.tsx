@@ -62,6 +62,7 @@ const SignUpForm = () => {
     }
 
     const userData = filterEmptyFields<ISignUpCredentials>(data);
+    console.log('🚀 ~ SignUpForm ~ userData:', userData);
     const userFormData = getProfileFormData(userData);
 
     dispatch(signUpUser(userFormData))
@@ -90,8 +91,6 @@ const SignUpForm = () => {
           : Messages.passwordMinLengthErr
       );
     errors.phone && toasts.errorToast(Messages.phoneRegExpErr);
-    errors.dateOfBirth &&
-      toasts.errorToast('Date of birth must be in DD-MM-YYYY format');
   }, [errors, isSubmitting]);
 
   return (
@@ -173,9 +172,9 @@ const SignUpForm = () => {
         />
         <Input
           settings={{
-            ...register('dateOfBirth', { pattern: regExp.dateOfBirthRegEx }),
+            ...register('dateOfBirth'),
           }}
-          type={InputTypes.text}
+          type={InputTypes.date}
           placeholder="Date of birth"
           icon={<FaRegCalendarCheck size={IconSizes.secondaryIconSize} />}
           formType={FormTypes.authForm}
