@@ -6,7 +6,7 @@ export const StyledLink = styled(Link)<IStyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${({ height }) => (height ? `${height}px` : '')};
+  height: ${({ height }) => (height ? `${height}px` : '100%')};
   padding: ${({ theme }) => theme.spacing()};
   background-color: ${({ theme }) => theme.colors.btnBackgroundColor};
   border-radius: ${({ theme }) =>
