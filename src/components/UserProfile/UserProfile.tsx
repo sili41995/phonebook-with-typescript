@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
 import 'react-toastify/dist/ReactToastify.css';
 import { IconSizes, Messages } from 'constants/index';
