@@ -61,7 +61,6 @@ const SignUpForm = () => {
     }
 
     const userData = filterEmptyFields<ISignUpCredentials>(data);
-    console.log('🚀 ~ SignUpForm ~ userData:', userData);
     const userFormData = getProfileFormData(userData);
 
     dispatch(signUpUser(userFormData))
